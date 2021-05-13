@@ -1,0 +1,19 @@
+@charset "UTF-8";
+.screen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--horizontal-space);
+  padding-bottom: 25px;
+  margin-bottom: 15px;
+}
+.screen-header__title {
+  font-size: 32px;
+  font-weight: 600;
+}
+.screen-header__beMentor {
+  padding-left: 50%;
+}
+.screen-header__login {
+  padding-right: 2%;
+}

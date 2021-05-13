@@ -1,0 +1,9 @@
+@charset "UTF-8";
+.brief-content {
+  position: absolute;
+  top: 500px;
+  left: 120px;
+}
+h2 {
+  font-size: 40px;
+}
