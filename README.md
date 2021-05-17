@@ -18,9 +18,9 @@ Jdk -> 11 ver.
 
 #### 📌  Server Page 수정사항 !! 항상 확인하기
 ``` xml
-<!-- MVC : DBCP2-->
+<!-- MentoringDB : DBCP2-->
 <Resource
-    name = "jdbc/mvc"
+    name = "jdbc/mentoringdb"
     auth = "Container"
     type = "javax.sql.DataSource"
     maxTotal = "8"
@@ -29,7 +29,7 @@ Jdk -> 11 ver.
     username = "root"
     password = "qwer1234"
     driverClassName = "com.mysql.cj.jdbc.Driver"
-    url = "jdbc:mysql://127.0.0.1/mvc?serverTimezone=Asia/Seoul&amp;characterEncoding=utf8&amp;useSSL=false"
+    url = "jdbc:mysql://127.0.0.1/mentoringDB?serverTimezone=Asia/Seoul&amp;characterEncoding=utf8&amp;useSSL=false"
 >
 
 </Resource>
