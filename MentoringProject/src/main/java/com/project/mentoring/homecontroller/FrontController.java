@@ -89,6 +89,7 @@ public class FrontController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "adminUserListShowPage.jsp";
 			break;
+			
 		case("/adminMajorListShowPage.do"):
 			command = new AdminPageMajorListShowCommand();
 			command.execute(request, response);
@@ -154,9 +155,17 @@ public class FrontController extends HttpServlet {
 			break;
 		
 		case("/userSignUpPage.do"):
-			command = new UserSignUpPageInsertCommand();
-			command.execute(request,response);
-			viewPage = "homePage.jsp";
+			intCommand = new UserSignUpPageInsertCommand();
+			int signUpResult = intCommand.execute(request,response);
+			
+			if(signUpResult == 1) {
+				
+				viewPage = "homePage.jsp";
+				
+			}else {
+				viewPage = "userSignUpPage.jsp";
+			}
+			
 			break;
 			
 		// -- mentorPage 의 *.do

@@ -8,7 +8,7 @@
 </head>
 	<script>
 	function goPopup(){
-		var pop = window.open("/MentorProject/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+		var pop = window.open("/MentoringProject/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	}
 	function jusoCallBack(roadFullAddr){
 		var addressEI = document.querySelector("#address");
@@ -56,7 +56,7 @@
 			<tr>
 					<td>도로명주소</td>
 					<td><input type="button" onClick="goPopup();" value="주소 검색"/></td>
-					<td><input type="text"  size="50"  name="mentoraddress" id="address"> <!-- readonly="readonly" --></td>
+					<td><input type="text"  size="50"  name="mentoraddress" id="address" readonly="readonly"></td>
 			</tr>
 			
 			<tr>

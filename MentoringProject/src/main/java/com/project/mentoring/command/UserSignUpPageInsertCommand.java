@@ -5,10 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.project.mentoring.dao.UserSignUpDao;
 
-public class UserSignUpPageInsertCommand implements Command {
+public class UserSignUpPageInsertCommand implements IntCommand {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	public int execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		String userId = request.getParameter("userid");
 		String userPw = request.getParameter("userpw");
@@ -27,10 +27,10 @@ public class UserSignUpPageInsertCommand implements Command {
 		
 		UserSignUpDao userSignUpdao = new UserSignUpDao();
 		
-		userSignUpdao.userSignUp(userId, userPw, userName, userEmail, userPhone);
+		int userSignUpResult = userSignUpdao.userSignUp(userId, userPw, userName, userEmail, userPhone);
 		
 		
-		
+		return userSignUpResult;
 		
 
 	}

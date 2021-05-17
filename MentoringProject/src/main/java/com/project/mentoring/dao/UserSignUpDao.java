@@ -20,7 +20,7 @@ public class UserSignUpDao {
 		}
 	}
 	
-	public void userSignUp(String userId, String userPw, String userName, String userEmail,String userPhone ) {
+	public int userSignUp(String userId, String userPw, String userName, String userEmail,String userPhone ) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
@@ -38,7 +38,7 @@ public class UserSignUpDao {
 			
 			preparedStatement.executeUpdate();
 			
-			
+			return 1;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -52,7 +52,7 @@ public class UserSignUpDao {
 			
 		}
 		
-		
+		return 0;
 	}
 	
 }
