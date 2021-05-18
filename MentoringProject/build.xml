@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="MentoringProject">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../../../../Applications/Eclipse.app/Contents/Eclipse/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="11"/>
+    <property name="source" value="11"/>
+    <path id="Web App Libraries.libraryclasspath"/>
+    <path id="EAR Libraries.libraryclasspath"/>
+    <path id="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath">
+        <pathelement location="../../../../../usr/local/Tomcat/lib/annotations-api.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/catalina-ant.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/catalina-ha.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/catalina-storeconfig.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/catalina-tribes.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/catalina.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/cos.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/ecj-4.6.3.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/el-api.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/jasper-el.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/jasper.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/jaspic-api.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/jsp-api.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/mysql-connector-java-8.0.23.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/servlet-api.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/taglibs-standard-impl-1.2.5.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/taglibs-standard-spec-1.2.5.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-api.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-coyote.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-dbcp.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-i18n-de.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-i18n-es.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-i18n-fr.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-i18n-ja.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-i18n-ko.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-i18n-ru.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-i18n-zh-CN.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-jdbc.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-jni.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-util-scan.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-util.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/tomcat-websocket.jar"/>
+        <pathelement location="../../../../../usr/local/Tomcat/lib/websocket-api.jar"/>
+    </path>
+    <path id="MentoringProject.classpath">
+        <pathelement location="build/classes"/>
+        <path refid="Web App Libraries.libraryclasspath"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+        <path refid="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath"/>
+    </path>
+    <path id="run.Tomcat.1.classpath">
+        <path refid="MentoringProject.classpath"/>
+        <path refid="Web App Libraries.libraryclasspath"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+        <path refid="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="build/classes"/>
+        <copy includeemptydirs="false" todir="build/classes">
+            <fileset dir="src/main/java">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="build/classes"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src/main/java"/>
+            <classpath refid="MentoringProject.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="Tomcat.1">
+        <java classname="org.apache.catalina.startup.Tomcat$1" failonerror="true" fork="yes">
+            <classpath refid="run.Tomcat.1.classpath"/>
+        </java>
+    </target>
+</project>
