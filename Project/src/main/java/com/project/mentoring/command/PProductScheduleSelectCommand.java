@@ -9,16 +9,15 @@ import com.project.mentoring.dao.PDao;
 import com.project.mentoring.dto.PDto;
 import com.project.mentoring.dto.ShareVar;
 
-public class PAppointmentCommand implements PCommand {
+public class PProductScheduleSelectCommand implements PCommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		int productpk = Integer.parseInt(request.getParameter("productpk"));
-		ShareVar.productpk = productpk;
-		//System.out.println(ShareVar.productpk);
+		ShareVar.schedulepk = Integer.parseInt(request.getParameter("schedulepk"));
+		System.out.println(ShareVar.schedulepk);
 		PDao dao = new PDao();
-		PDto dto = dao.PAppointment(productpk);
+		PDto dto = dao.beforepayment(ShareVar.schedulepk);
 		
 		request.setAttribute("Appointment", dto);
 	}

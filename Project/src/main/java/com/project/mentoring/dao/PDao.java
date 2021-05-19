@@ -76,9 +76,8 @@ public class PDao {
 	}
 	
 	
-	public PDto PAppointment(String productpk) {
+	public PDto PAppointment(int productpk) {
 		PDto dto = null;
-		int prpk = Integer.parseInt(productpk);
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -95,7 +94,7 @@ public class PDao {
 					+ "where m.outdate is null and productpk = ?";
 
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, prpk);
+			preparedStatement.setInt(1, productpk);
 			resultSet = preparedStatement.executeQuery();
 
 			if(resultSet.next()) {
@@ -127,7 +126,7 @@ public class PDao {
 	}
 
 
-	public PDto PPayment(String schedulepk) {
+	public PDto PPayment(int paymentpk) {
 		PDto dto = null;
 		
 		Connection connection = null;
@@ -145,7 +144,7 @@ public class PDao {
 					+ "inner join schedule as s on s.product_productpk = p.productpk \n"
 					+ "where s.schedulepk = ?";
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, Integer.parseInt(schedulepk));
+			preparedStatement.setInt(1, paymentpk);
 			resultSet = preparedStatement.executeQuery();
 			
 			if(resultSet.next()) {
@@ -391,12 +390,11 @@ public class PDao {
 			while(resultSet.next()) {
 				int pk=resultSet.getInt(1);
 				Date startday =resultSet.getDate(2);
-				int count =resultSet.getInt(3);
-				int starttime =resultSet.getInt(4);
-				int endtime =resultSet.getInt(5);
+				int starttime =resultSet.getInt(3);
+				int endtime =resultSet.getInt(4);
 
 				
-				dto=new PDto(pk, startday, count, starttime, endtime);
+				dto=new PDto(pk, startday, starttime, endtime);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -451,7 +449,7 @@ public class PDao {
 		//-------^delete
 		try {
 			connection=dataSource.getConnection();
-			String query="select schedulepk, if(CURDATE()-startday>0, 0, startday) startday, starttime, endtime from schedule where product_productpk = ?";
+			String query="select schedulepk, if(CURDATE()-startday>0, 0, startday) startday, starttime, endtime, totalprice from schedule where product_productpk = ?";
 			preparedStatement=connection.prepareStatement(query);
 			preparedStatement.setInt(1, pk);
 			resultSet=preparedStatement.executeQuery();
@@ -460,7 +458,8 @@ public class PDao {
 					Date startday=resultSet.getDate("startday");
 					int starttime=resultSet.getInt("starttime");
 					int endtime=resultSet.getInt("endtime");
-					PDto dto=new PDto(schedulepk, startday, starttime, endtime);
+					int totalprice=resultSet.getInt("totalprice");
+					PDto dto=new PDto(schedulepk, startday, starttime, endtime, totalprice);
 					dtos.add(dto);
 					System.out.println(startday);
 				}
@@ -479,5 +478,69 @@ public class PDao {
 		
 		return dtos;
 	}
+	/**
+	 * 
 	
+	  * @Method Name : beforepayment
+	
+	  * @작성일 : 2021. 5. 20.
+	
+	  * @작성자 : biso
+	
+	  * @변경이력 : 
+	
+	  * @Method 설명 : payment 진행 전 정보 페이지 view
+	
+	  * @param productpk
+	  * @return
+	 */
+	public PDto beforepayment(int schedulepk) {
+		PDto dto = null;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String query = "select u.username, mj.majorname, s.submajorname, m.mentorgender, m.mentoraddress, m.mentorbirth from schedule as s "
+					+ "inner join product as p on p.productpk = s.product_productpk "
+					+ "inner join mentor as m on m.mentorpk = p.mentor_mentorpk "
+					+ "inner join submajor as s on s.submajorpk = p.submajor_submajorpk "
+				    + "inner join major as mj on mj.majorpk=s.major_majorpk "
+					+ "inner join user as u on u.userpk = m.user_userpk "
+					+ "where m.outdate is null and s.schedulepk = ?";
+
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, schedulepk);
+			resultSet = preparedStatement.executeQuery();
+
+			if(resultSet.next()) {
+				String username = resultSet.getString("username");
+				System.out.println(username);
+				String majorname = resultSet.getString("majorname");
+				String submajorname = resultSet.getString("submajorname");
+				String mentorgender = resultSet.getString("mentorgender");
+				String mentoraddress = resultSet.getString("mentoraddress");
+				Date mentorbirth = resultSet.getDate("mentorbirth");
+			
+				dto = new PDto(username, majorname, submajorname, mentorgender, mentoraddress, mentorbirth); // bean 식으로 한줄로 만들기
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				
+				if(resultSet != null) resultSet.close(); 
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return dto;
+		
+	}
 }//----------------

@@ -22,7 +22,7 @@
 		<tr>
 			<td>${dto.majorname }</td>
 			<td>${dto.submajorname }</td>
-			<td><a href="/Project/mentorproductpage.do?productpk=${dto.productpk }">${dto.username }</a></td>
+			<td><a href="/Project/appointment.do?productpk=${dto.productpk }">${dto.username }</a></td>
 			<td>${dto.productpk }</td>
 			
 			

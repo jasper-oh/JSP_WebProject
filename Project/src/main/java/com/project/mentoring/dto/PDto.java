@@ -17,7 +17,7 @@ public class PDto {
 	Date startday;
 	int schedulepk;
 	String endday;
-	int count;
+	int totalprice;
 	String title;
 	String introduce;
 	int price;
@@ -70,13 +70,13 @@ public class PDto {
 
 
 
-public PDto(int schedulepk, Date startday, int count, int starttime, int endtime) {
+public PDto(int schedulepk, Date startday, int starttime, int endtime, int totalprice) {
 		super();
 		this.schedulepk = schedulepk;
 		this.startday = startday;
 		this.starttime = starttime;
 		this.endtime = endtime;
-		this.count = count;
+		this.totalprice = totalprice;
 	}
 
 
@@ -204,14 +204,6 @@ public void setEndday(String endday) {
 	this.endday = endday;
 }
 
-public int getCount() {
-	return count;
-}
-
-public void setCount(int count) {
-	this.count = count;
-}
-
 public String getTitle() {
 	return title;
 }
@@ -242,6 +234,14 @@ public int getMentor_mentorpk() {
 
 public void setMentor_mentorpk(int mentor_mentorpk) {
 	this.mentor_mentorpk = mentor_mentorpk;
+}
+
+public int getTotalprice() {
+	return totalprice;
+}
+
+public void setTotalprice(int totalprice) {
+	this.totalprice = totalprice;
 }
 	
 	

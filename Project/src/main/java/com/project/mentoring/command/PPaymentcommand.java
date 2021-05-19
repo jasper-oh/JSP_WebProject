@@ -1,5 +1,4 @@
 package com.project.mentoring.command;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,10 +11,11 @@ public class PPaymentcommand implements PCommand {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		
-		String schedulepk = request.getParameter("schedulepk");
 		
+		int paymentpk = Integer.parseInt(request.getParameter("orderId"));
+		System.out.println(paymentpk);
 		PDao dao = new PDao();
-		PDto dto = dao.PPayment(schedulepk);
+		PDto dto = dao.PPayment(paymentpk);
 		
 		request.setAttribute("Payment", dto);
 

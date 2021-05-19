@@ -15,7 +15,8 @@ import com.project.mentoring.command.PCommand;
 import com.project.mentoring.command.PMentorProductListCommand;
 import com.project.mentoring.command.PMentorProductPageCommand;
 import com.project.mentoring.command.PPaymentcommand;
-import com.project.mentoring.command.PProductSchedulSelectCommand;
+import com.project.mentoring.command.PProductSchedulViewCommand;
+import com.project.mentoring.command.PProductScheduleSelectCommand;
 import com.project.mentoring.command.PProductSelectCommand;
 
 
@@ -94,15 +95,21 @@ public class PFrontController extends HttpServlet {
 				break;
 			case("/paymentscheduleselect.do"):
 				System.out.println("예약하기 클릭 calendarview");
-				command = new PProductSchedulSelectCommand();
+				command = new PProductSchedulViewCommand();
 				command.execute(request, response);
 				viewPage = "paymentscheduleselect.jsp";
 				break;
-			case("/payment.do"):
-				System.out.println("payment page");
+			case("/paymentdatatview.do"):
+				System.out.println("payment 전 정보 view");
+				command = new PProductScheduleSelectCommand();
+				command.execute(request, response);
+				viewPage = "paymentdataview.jsp";
+				break;
+			case("/paymentsuccess.do"):
+				System.out.println("payment db insert process");
 				command = new PPaymentcommand();
 				command.execute(request, response);
-				viewPage = "payment.jsp";
+				viewPage = "paymentsuccess.jsp";
 				break;
 
 		}

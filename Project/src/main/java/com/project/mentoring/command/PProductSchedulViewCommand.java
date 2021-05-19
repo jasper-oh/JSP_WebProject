@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.project.mentoring.dao.PDao;
 import com.project.mentoring.dto.PDto;
 
-public class PProductSchedulSelectCommand implements PCommand {
+public class PProductSchedulViewCommand implements PCommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {

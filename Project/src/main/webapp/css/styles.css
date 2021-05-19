@@ -1,0 +1,16 @@
+@import "reset.css";
+@import "components/homePageHeader.css";
+@import "components/homePageSearchBox.css";
+@import "components/homePageMain.css";
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  color: #2e363e;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
