@@ -24,7 +24,7 @@ text-align:center;
 		<tr>
 		<td colspan="8"></td>
 		<td>
-		<input type="radio" name="booking" value="null" onclick="getClick(event)" th:checked="${empty param.booking ? 'checked' : ''}">
+		전부보기<input type="radio" name="booking" value="null" onclick="getClick(event)" th:checked="${empty param.booking ? 'checked' : ''}">
 		</td>
 		<td>
 		예약대기<input type="radio" name="booking" value="wait" onclick="getClick(event)" th:checked="${param.booking eq 'wait' ? 'checked' : ''}">
