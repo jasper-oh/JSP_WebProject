@@ -19,7 +19,7 @@ public class PProductScheduleSelectCommand implements PCommand {
 		PDao dao = new PDao();
 		PDto dto = dao.beforepayment(ShareVar.schedulepk);
 		
-		request.setAttribute("Appointment", dto);
+		request.setAttribute("Paymentdata", dto);
 	}
 
 }

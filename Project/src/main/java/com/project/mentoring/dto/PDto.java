@@ -27,6 +27,19 @@ public class PDto {
 		
 	}
 
+	public PDto(String username, String majorname, String submajorname, int starttime, int endtime, Date startday,
+			int totalprice, String title) {
+		super();
+		this.username = username;
+		this.majorname = majorname;
+		this.submajorname = submajorname;
+		this.starttime = starttime;
+		this.endtime = endtime;
+		this.startday = startday;
+		this.totalprice = totalprice;
+		this.title = title;
+	}
+
 	public PDto(String username, String majorname, String submajorname, int productpk) {
 		super();
 		this.username = username;

@@ -504,11 +504,11 @@ public class PDao {
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "select u.username, mj.majorname, s.submajorname, m.mentorgender, m.mentoraddress, m.mentorbirth from schedule as s "
+			String query = "select u.username, mj.majorname, sb.submajorname, p.title, s.startday, s.starttime, s.endtime, s.totalprice from schedule as s "
 					+ "inner join product as p on p.productpk = s.product_productpk "
 					+ "inner join mentor as m on m.mentorpk = p.mentor_mentorpk "
-					+ "inner join submajor as s on s.submajorpk = p.submajor_submajorpk "
-				    + "inner join major as mj on mj.majorpk=s.major_majorpk "
+					+ "inner join submajor as sb on sb.submajorpk = p.submajor_submajorpk "
+				    + "inner join major as mj on mj.majorpk=sb.major_majorpk "
 					+ "inner join user as u on u.userpk = m.user_userpk "
 					+ "where m.outdate is null and s.schedulepk = ?";
 
@@ -518,14 +518,15 @@ public class PDao {
 
 			if(resultSet.next()) {
 				String username = resultSet.getString("username");
-				System.out.println(username);
 				String majorname = resultSet.getString("majorname");
 				String submajorname = resultSet.getString("submajorname");
-				String mentorgender = resultSet.getString("mentorgender");
-				String mentoraddress = resultSet.getString("mentoraddress");
-				Date mentorbirth = resultSet.getDate("mentorbirth");
+				String title = resultSet.getString("title");
+				Date startday = resultSet.getDate("startday");
+				int starttime = resultSet.getInt("starttime");
+				int endtime = resultSet.getInt("endtime");
+				int totalprice = resultSet.getInt("totalprice");
 			
-				dto = new PDto(username, majorname, submajorname, mentorgender, mentoraddress, mentorbirth); // bean 식으로 한줄로 만들기
+				dto = new PDto(username, majorname, submajorname, starttime, endtime, startday, totalprice, title);// bean 식으로 한줄로 만들기
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

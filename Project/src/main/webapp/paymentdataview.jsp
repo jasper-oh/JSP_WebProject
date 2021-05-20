@@ -14,21 +14,21 @@
 <h3>결제 데이터를 확인하세요!</h3>
 	
 <table>
-		
+
 <tr >
-			<th>order id</th><th>id</th>
+			<th>예약날짜</th><th>${Paymentdata.startday }</th>
 </tr>
 <tr >
-			<th>예약날짜</th><th>id</th>
+			<th>금액</th><th>${Paymentdata.title }</th>
 </tr>
 <tr >
-			<th>금액</th><th>id</th>
+			<th>금액</th><th>${Paymentdata.totalprice }</th>
 </tr>
 <tr >
-			<th>전공/부전공</th><th>id</th>
+			<th>전공/부전공</th><th>${Paymentdata.majorname }/${Paymentdata.submajorname }</th>
 </tr>
 <tr >
-			<th>Mentor 이름</th><th>id</th>
+			<th>Mentor 이름</th><th>${Paymentdata.username }</th>
 </tr>
 
 </table>

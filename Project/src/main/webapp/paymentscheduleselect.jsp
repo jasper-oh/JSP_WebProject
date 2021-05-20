@@ -20,24 +20,25 @@
 			<th>날짜</th>
 			<th>시간</th>
 			<th>가격</th>
-			<th>선택</th>
+			<!-- <th>선택</th> -->
 </tr>
-		<tr>
 		<c:forEach var="dto" items="${ScheduleSelect }" varStatus="status" >
+		<tr>
     <td align="center"><input type="text" size="3" value="${status.count }" name="count"/></td>
     <td align="center"><input type="text" size="10" value="${dto.startday }" name="startday"/></td>
     <td align="center">
-    <input type="text" size="3" value="${dto.starttime }" name="starttime"/>~
-    <input type="text" size="3" value="${dto.endtime }" name="endtime"/></td>
+    <a href="/Project/paymentdatatview.do?schedulepk=${dto.schedulepk}">${dto.starttime }~
+    ${dto.endtime }</a>
+    </td>
     <td align="center"><input type="text" size="8" value="${dto.totalprice }" name="totalprice"/></td>
-    <td align="center"><input type="hidden" name=schedulepk value="${dto.schedulepk}"/>
-<input type="radio" name="schedulepk" value="${dto.schedulepk}" ></td>
+    <%-- <td align="center"><input type="hidden" name=schedulepk value="${dto.schedulepk}"/>
+<input type="radio" name="schedulepk" value="${dto.schedulepk}" ></td> --%>
 		
 		</tr>
 	</c:forEach>
 		</table>
-		<input type="submit" value="선택">
-		</form>
+		<!-- <input type="submit" value="선택">
+		</form> -->
 
 </body>
 </html>
