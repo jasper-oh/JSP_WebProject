@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.project.mentoring.command.PScheduleInsertCommand;
+import com.project.mentoring.command.MenteeBookingCancelCommand;
+import com.project.mentoring.command.MenteeBookinglistCommand;
 import com.project.mentoring.command.PAppointmentCommand;
 import com.project.mentoring.command.PCommand;
 import com.project.mentoring.command.PMentorProductListCommand;
@@ -111,7 +113,19 @@ public class PFrontController extends HttpServlet {
 				command.execute(request, response);
 				viewPage = "paymentsuccess.jsp";
 				break;
-
+			case("/menteeBookingList.do"):
+				System.out.println("멘티예약리스트로가기");
+				command = new MenteeBookinglistCommand();
+				command.execute(request, response);
+				viewPage = "menteeBookingList.jsp";
+				break;
+				
+			case("/menteeBookingCancel.do"):
+				System.out.println("멘티가 예약 취소");
+				command = new MenteeBookingCancelCommand();
+				command.execute(request, response);
+				viewPage = "menteeBookingList.do";
+				break;
 		}
 		
 		RequestDispatcher dispatcher=request.getRequestDispatcher(viewPage);

@@ -6,10 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>mentor의 product page</title>
+<style type="text/css">
+	table{border-spacing:10px; }
+</style>
 </head>
 <body>
 		<h3>나의 Product</h3>
-	<table border="1">
+	<table>
 	<form action=""></form>
 		<tr><td>id</td><td colspan="2">${ProductPage.productpk }</td></tr>
 		<tr><td>전공</td><td colspan="2">${ProductPage.majorname }</td></tr>

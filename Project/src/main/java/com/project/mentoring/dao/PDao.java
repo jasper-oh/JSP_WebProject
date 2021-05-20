@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.project.mentoring.dto.MenteeDto;
 import com.project.mentoring.dto.PDto;
 import com.project.mentoring.dto.ShareVar;
 import com.project.mentoring.dto.PDto;
@@ -588,5 +589,133 @@ public class PDao {
 
 		return dto;
 		
+	}
+	/**
+	 * 
+	 * @Method Name : MMenteeBookinglist
+	 * @작성일 : 2021. 5. 20.
+	 * @작성자 : chanhoLee, biso
+	 * @변경이력 : case를 통해 표현할 데이터 변경
+	 * @Method 설명 :
+	 * @return
+	 */
+		public ArrayList<MenteeDto>  MMenteeBookinglist(String booking) {
+			ArrayList<MenteeDto> dtos=new ArrayList<MenteeDto>();
+			System.out.println(booking);
+			Connection connection=null;
+			PreparedStatement preparedStatement=null;
+			ResultSet resultSet=null;
+
+			// int userpk = session.getParameter("USERPK");
+			// 병합시 유저피케이 넣어주기
+			int userpk = 5;
+			
+			try {		
+				connection=dataSource.getConnection();
+				String query = null;
+				switch (booking) {
+				case "wait":
+					query="select mentee.username as menteename, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, py.paymentpk, py.paymentcanceldate, py.paymenttoken, py.paymentpaydate \n"
+							+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
+							+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
+							+ " inner join product as p on s.product_productpk = p.productpk\n"
+							+ " inner join mentor as m on p.mentor_mentorpk = m.mentorpk\n"
+							+ " inner join user as mentoruser on m.user_userpk = mentoruser.userpk\n"
+							+ " inner join submajor as sb on p.submajor_submajorpk = sb.submajorpk\n"
+							+ " inner join major as mj on sb.major_majorpk = mj.majorpk\n"
+							+ " where py.paymentcanceldate is null and py.paymenttoken is null and mentee.userpk = ?";
+					break;
+				case "complite":
+					query="select mentee.username as menteename, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, py.paymentpk, py.paymentcanceldate, py.paymenttoken, py.paymentpaydate \n"
+							+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
+							+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
+							+ " inner join product as p on s.product_productpk = p.productpk\n"
+							+ " inner join mentor as m on p.mentor_mentorpk = m.mentorpk\n"
+							+ " inner join user as mentoruser on m.user_userpk = mentoruser.userpk\n"
+							+ " inner join submajor as sb on p.submajor_submajorpk = sb.submajorpk\n"
+							+ " inner join major as mj on sb.major_majorpk = mj.majorpk\n"
+							+ " where not py.paymenttoken is null and mentee.userpk = ?";
+					break;
+				case "cancel":
+					query="select mentee.username as menteename, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, py.paymentpk, py.paymentcanceldate, py.paymenttoken, py.paymentpaydate\n"
+							+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
+							+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
+							+ " inner join product as p on s.product_productpk = p.productpk\n"
+							+ " inner join mentor as m on p.mentor_mentorpk = m.mentorpk\n"
+							+ " inner join user as mentoruser on m.user_userpk = mentoruser.userpk\n"
+							+ " inner join submajor as sb on p.submajor_submajorpk = sb.submajorpk\n"
+							+ " inner join major as mj on sb.major_majorpk = mj.majorpk\n"
+							+ " where not py.paymentcanceldate is null and mentee.userpk = ?";
+					break;
+				case "null":
+					query="select mentee.username as menteename, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, py.paymentpk, py.paymentcanceldate, py.paymenttoken, py.paymentpaydate\n"
+							+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
+							+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
+							+ " inner join product as p on s.product_productpk = p.productpk\n"
+							+ " inner join mentor as m on p.mentor_mentorpk = m.mentorpk\n"
+							+ " inner join user as mentoruser on m.user_userpk = mentoruser.userpk\n"
+							+ " inner join submajor as sb on p.submajor_submajorpk = sb.submajorpk\n"
+							+ " inner join major as mj on sb.major_majorpk = mj.majorpk\n"
+							+ " where py.paymentcanceldate is null and mentee.userpk = ?";
+					break;
+					
+				default:
+					break;
+				}
+
+				preparedStatement=connection.prepareStatement(query);
+				preparedStatement.setInt(1, 4);  
+				resultSet=preparedStatement.executeQuery();
+					while(resultSet.next()) {		
+						String menteename = resultSet.getString("menteename");
+						String majorname = resultSet.getString("majorname");
+						String submajorname = resultSet.getString("submajorname");
+						Date startday = resultSet.getDate("startday");
+						int starttime = resultSet.getInt("starttime");
+						int endtime = resultSet.getInt("endtime");
+						int paymentpk = resultSet.getInt("paymentpk");
+						String paymenttoken = resultSet.getString("paymenttoken");
+						Timestamp paymentcanceldate = resultSet.getTimestamp("paymentcanceldate");
+						Timestamp paymentpaydate = resultSet.getTimestamp("paymentpaydate");
+					
+						MenteeDto dto=new MenteeDto(menteename, majorname, submajorname, startday, starttime, endtime, paymentpk, paymenttoken, paymentcanceldate, paymentpaydate);		
+						dtos.add(dto);
+					}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(resultSet!=null) resultSet.close();
+					if(preparedStatement!=null) preparedStatement.close();
+					if(connection!=null) connection.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return dtos;
+		}
+	public void MenteeBookingCancel(int paymentpk){
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		try {
+			connection=dataSource.getConnection();
+			
+			String update="update payment set paymentCanceldate = now() where paymentpk = ?";
+			
+			preparedStatement=connection.prepareStatement(update);
+			preparedStatement.setInt(1, paymentpk);  
+			preparedStatement.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
 	}
 }//----------------
