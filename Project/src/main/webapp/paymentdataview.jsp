@@ -32,7 +32,10 @@
 </tr>
 
 </table>
-		
+		<%
+	session.setAttribute("USERNAME","username");
+	
+	%>
 <section>
     <p>----------------------</p>
     <div><label><input type="radio" name="method" value="카드" checked/>신용카드</label></div>
@@ -42,6 +45,9 @@
 </section>
 <script src="https://js.tosspayments.com/v1"></script>
 <script>
+	var totalprice = '<c:out value="${Paymentdata.totalprice }"/>';
+	var title = '<c:out value="${Paymentdata.title }"/>';
+	var username = '<%=session.getAttribute("USERNAME") %>';
     var tossPayments = TossPayments("test_ck_kZLKGPx4M3MLwj1E9yd8BaWypv1o");
     var button = document.getElementById("payment-button");
 
@@ -51,11 +57,11 @@
         var method = document.querySelector('input[name=method]:checked').value; // "카드" 혹은 "가상계좌"
 
         var paymentData = {
-            amount: 19000,
+            amount: totalprice,
             orderId: orderId,
-            orderName: "토스 티셔츠",
-            customerName: "이토페",
-            successUrl: window.location.origin + "/Project/paymentsuccess.jsp",
+            orderName: title,
+            customerName: username,
+            successUrl: window.location.origin + "/Project/paymentsuccess.do",
             failUrl: window.location.origin + "/Project/paymentfail.jsp",
         };
         

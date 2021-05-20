@@ -11,11 +11,8 @@ public class PPaymentcommand implements PCommand {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		
-		
-		int paymentpk = Integer.parseInt(request.getParameter("orderId"));
-		System.out.println(paymentpk);
 		PDao dao = new PDao();
-		PDto dto = dao.PPayment(paymentpk);
+		PDto dto = dao.PPayment();
 		
 		request.setAttribute("Payment", dto);
 

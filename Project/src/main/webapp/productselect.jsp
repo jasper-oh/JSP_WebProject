@@ -30,6 +30,7 @@
 		</c:forEach>
 
 	</table>
+	
 </body>
 
 </body>

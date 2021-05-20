@@ -77,7 +77,7 @@
 			<th>예약날짜</th><th>${Payment.startday}</th>
 </tr>
 <tr >
-			<th>시간</th><th>${Payment.starttime}~${Payment.endday}</th>
+			<th>시간</th><th>${Payment.starttime}~${Payment.endtime}</th>
 </tr>
 <tr >
 			<th>금액</th><th>${Payment.totalprice}</th>

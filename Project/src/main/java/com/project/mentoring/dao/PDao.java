@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.project.mentoring.dto.PDto;
+import com.project.mentoring.dto.ShareVar;
 import com.project.mentoring.dto.PDto;
 
 
@@ -125,8 +126,28 @@ public class PDao {
 		
 	}
 
+/**
+ * 
 
-	public PDto PPayment(int paymentpk) {
+  * @Method Name : PPayment
+
+  * @작성일 : 2021. 5. 20.
+
+  * @작성자 : biso
+
+  * @변경이력 : 
+
+  * @Method 설명 : payment table에 ShareVar.schedulepk/ShareVar.productpk/session.getAttribute("USERID") 입력
+
+  * @param paymentpk
+  * @return
+ */
+	public PDto PPayment() {
+		//MentoringFunction에서 랜덤 id 추출
+		MentoringFunction mentoringFunction = new MentoringFunction();
+		int rdpaymentpk=mentoringFunction.gen();
+		//int userid = session.getAttribute("USERID"); 
+		//병합과정에 추가하기!
 		PDto dto = null;
 		
 		Connection connection = null;
@@ -134,30 +155,54 @@ public class PDao {
 		ResultSet resultSet = null;
 		
 		try {
-			connection = dataSource.getConnection();
-			
-			String query = "select u.username, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime\n"
-					+ "from product as p inner join mentor as m on m.mentorpk = p.mentor_mentorpk \n"
-					+ "inner join submajor as sb on p.submajor_submajorpk = sb.submajorpk \n"
-					+ "inner join major as mj on mj.majorpk=sb.major_majorpk \n"
-					+ "inner join user as u on u.userpk = m.user_userpk\n"
-					+ "inner join schedule as s on s.product_productpk = p.productpk \n"
-					+ "where s.schedulepk = ?";
+			connection=dataSource.getConnection();
+			String query = "insert into payment(user_userpk, schedule_schedulepk, paymentpk, paymentpaydate) "
+					+ "value (?, ?, ?, now())";
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, paymentpk);
+			preparedStatement.setInt(1, 4);
+			preparedStatement.setInt(2, ShareVar.schedulepk);
+			preparedStatement.setInt(3, rdpaymentpk);
+			preparedStatement.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		try {
+			connection=dataSource.getConnection();
+			String query2 = "select * from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk "
+					+ "inner join user as mentee on mentee.userpk = py.user_userpk "
+					+ "inner join product as p on s.product_productpk = p.productpk "
+					+ "inner join mentor as m on p.mentor_mentorpk = m.mentorpk "
+					+ "inner join user as mentoruser on m.user_userpk = mentoruser.userpk "
+					+ "inner join submajor as sb on p.submajor_submajorpk = sb.submajorpk "
+					+ "inner join major as mj on sb.major_majorpk = mj.majorpk "
+					+ "where py.paymentpk = ?";
+
+			preparedStatement = connection.prepareStatement(query2);
+			preparedStatement.setInt(1, rdpaymentpk);
 			resultSet = preparedStatement.executeQuery();
-			
+
 			if(resultSet.next()) {
-				String username = resultSet.getString("username");
-				String majorname = resultSet.getString("majorname");
-				String submajorname = resultSet.getString("submajorname");
+				int paymentpk = resultSet.getInt("paymentpk");
+				int schedulepk = resultSet.getInt("schedule_schedulepk");
+				Date paymentpaydate = resultSet.getDate("paymentpaydate");
 				Date startday = resultSet.getDate("startday");
 				int starttime = resultSet.getInt("starttime");
 				int endtime = resultSet.getInt("endtime");
+				int totalprice = resultSet.getInt("totalprice");
+				String username = resultSet.getString("mentoruser.username");
+				String title = resultSet.getString("title");
+				String majorname = resultSet.getString("majorname");
+				String submajorname = resultSet.getString("submajorname");
 				
-				dto = new PDto(username, majorname, submajorname, startday, starttime,endtime); // bean 식으로 한줄로 만들기
-				
-				
+				dto = new PDto(username, majorname, submajorname, starttime, endtime, startday, schedulepk, totalprice, title, paymentpk, paymentpaydate); // bean 식으로 한줄로 만들기
+	
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -173,7 +218,7 @@ public class PDao {
 		}
 
 		return dto;
-		
+
 	}
 	/**
 	 * 
