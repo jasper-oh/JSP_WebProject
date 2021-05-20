@@ -1,10 +1,22 @@
+<%@page import="com.project.mentoring.dto.AdminMajorListDto"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.project.mentoring.dao.AdminMajorListDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <%
+			
+			AdminMajorListDao adminMajorListDao = new AdminMajorListDao();
+			ArrayList<AdminMajorListDto> adminMajorList = adminMajorListDao.majorList();
+			
+			
+			
+%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TakeYourTime</title>
@@ -29,48 +41,71 @@
             <div class="menu">
                 <ul>
                     <li><a href="userBeMentorPage.jsp">멘토가 되어보세요</a></li>
-                    <li><a href="#">도움말</a></li>
-                    <li><a href="userSignUpPage.jsp">회원가입</a></li>
-                    <li><a href="userLoginPage.jsp">로그인</a></li>
+                    <li><a href="helpPage.jsp">도움말</a></li>
+                    <li><a href="userMyPage.jsp">마이페이지</a></li>
+                    <li><a href="visitorPage.jsp">로그아웃</a></li>
                 </ul>
             </div>
         </nav>
-        <section>
+       <section>
             <div class="search__box">
                 <div class="search__title">당신의 멘토를<br /> 검색해 보세요.</div>
-               	<form action="" method="post">
+               	<form action="userShowSearchListPage.do" method="post">
 	                <table>
 	                    <tr>
 	                        <td colspan="2" class="search__sub__title">위치로 검색하기</td>
 	                    </tr>
 	                    <tr>
-	                        <td colspan="2"><input class="search__input" type="text" placeholder=" 모든 위치"></td>
+	                    	<td colspan="2">
+	                            <select class="search__input" name="mentoraddress">
+	                                <option value="서울특별시">서울특별시</option>
+	                                <option value="경기도">경기도</option>
+	                                <option value="강원도">강원도</option>
+	                                <option value="충청북도">충청북도</option>
+	                                <option value="충청남도">충청남도</option>
+	                                <option value="전라북도">전라북도</option>
+	                                <option value="전라남도">전라남도</option>
+	                                <option value="경상북도">경상북도</option>
+	                                <option value="경상남도">경상남도</option>
+	                                <option value="인천광역시">인천광역시</option>
+	                                <option value="세종특별자치시">세종특별자치시</option>
+	                                <option value="울산광역시">울산광역시</option>
+	                                <option value="대구광역시">대구광역시</option>
+	                                <option value="부산광역시">부산광역시</option>
+	                                <option value="제주특별시">제주특별시</option>
+	                            </select>
+	                        </td>
 	                    </tr>
 	                    <tr>
 	                        <td class="search__sub__title">분야별 검색하기</td>
 	                    </tr>
 	                    <tr>
 	                        <td colspan="2">
-	                            <select class="search__input" >
-	                                <option>프로그래밍</option>
-	                                <option>디자인</option>
-	                                <option>경영/경제</option>
-	                                <option>예술</option>
-	                            </select>
+	                        	<select class="search__input" name="mentorMajor" onchange="handleOnChange(this)">
+							
+									<option value="0" selected="selected">
+												전공을 선택해주세요!
+									</option>
+																	
+									<%for(int i = 0; i < adminMajorList.size() ; i++){ %>
+									<option value="<%out.print(adminMajorList.get(i).getMajorName()); %>">
+											<%out.print(adminMajorList.get(i).getMajorName());%>
+									</option>
+										<%} %>
+						
+								</select>
 	                        </td>
-	                        
 	                    </tr>
 	                    <tr>
-	                        <td colspan="2" class="search__sub__title">이름으로 검색하기</td>
+	                        <td colspan="2" class="search__sub__title">세부분야 검색하기</td>
 	                    </tr>
 	                    <tr>
-	                        <td><input class="search__input"  type="text" /></td>
+	                        <td><input class="search__input"  type="text" name="mentorSubMajor"/></td>
 	                    </tr>
 	                </table>
+	                <div class="search__button"><input class="button" type="submit" value="검색"></div>
                 </form>
-                <div class="search__button"><button>검색</button></div>
             </div>
-	    	
         </section>
     </header>
 
@@ -123,109 +158,65 @@
             <div class="sec__title">멘토 프로필</div>
 
             <div class="home__box">
+                <c:forEach items="${mentorProfile1 }" var="mentorProfile1">
                 <div class="home">
-                    <div class="home__img1"></div>
+                    <div class="home__img1"><img src="${mentorProfile1.mentorImage }" alt="mentorImage"></div>
                     <div class="home__info">
-                        <div class="info1">오두막 · BALIAN BEACH, BALI</div>
-                        <div class="info2">BALIAN TREEHOUSE w beautiful pool</div>
+                        <div class="info1">${mentorProfile1.mentorMajor }</div>
+                        <div class="info2">${mentorProfile1.mentorTitle }</div>
                         <div class="info3">
-                            <span class="star">★★★★★</span>
-                            <span class="count">185</span>
-                            <span class="type">슈퍼호스트</span>
+                            <span class="star">${mentorProfile1.mentorSubMajor }</span>
+                            <span class="count">${mentorProfile1.productPk }</span>
+                            <span class="type">${mentorProfile1.mentorName }</span>
                         </div>
                     </div>
                 </div>
+                </c:forEach>
 
+				<c:forEach items="${mentorProfile2 }" var="mentorProfile2">
                 <div class="home">
-                    <div class="home__img2"></div>
+                    <div class="home__img2"><img src="${mentorProfile2.mentorImage }" alt="mentorImage"></div>
                     <div class="home__info">
-                        <div class="info1">키클라데스 주택 · 이아(OIA)</div>
-                        <div class="info2">Unique Architecture Cave House</div>
+                        <div class="info1">${mentorProfile2.mentorMajor }</div>
+                        <div class="info2">${mentorProfile2.mentorTitle }</div>
                         <div class="info3">
-                            <span class="star">★★★★★</span>
-                            <span class="count">188</span>
-                            <span class="type">슈퍼호스트</span>
+                            <span class="star">${mentorProfile2.mentorSubMajor }</span>
+                            <span class="count">${mentorProfile2.productPk }</span>
+                            <span class="type">${mentorProfile2.mentorName }</span>
                         </div>
                     </div>
                 </div>
+                </c:forEach>
+				
+				<c:forEach items="${mentorProfile3 }" var="mentorProfile3">
+                <div class="home">
+                    <div class="home__img3"><img src="${mentorProfile3.mentorImage }" alt="mentorImage"></div>
+                    <div class="home__info">
+                        <div class="info1">${mentorProfile3.mentorMajor }</div>
+                        <div class="info2">${mentorProfile3.mentorTitle }</div>
+                        <div class="info3">
+                            <span class="star">${mentorProfile3.mentorSubMajor }</span>
+                            <span class="count">${mentorProfile3.productPk }</span>
+                            <span class="type">${mentorProfile3.mentorName }</span>
+                        </div>
+                    </div>
+                </div>
+                </c:forEach>
 
+				<c:forEach items="${mentorProfile4 }" var="mentorProfile4">
                 <div class="home">
-                    <div class="home__img3"></div>
+                    <div class="home__img4"><img src="${mentorProfile4.mentorImage }" alt="mentorImage"></div>
                     <div class="home__info">
-                        <div class="info1">성 · 트웬티나인 팜스(TWENTYNINE PALMS)</div>
-                        <div class="info2">Tile House</div>
+                        <div class="info1">${mentorProfile4.mentorMajor }</div>
+                        <div class="info2">${mentorProfile4.mentorTitle }</div>
                         <div class="info3">
-                            <span class="star">★★★★★</span>
-                            <span class="count">367</span>
-                            <span class="type">슈퍼호스트</span>
+                            <span class="star">${mentorProfile4.mentorSubMajor }</span>
+                            <span class="count">${mentorProfile4.productPk }</span>
+                            <span class="type">${mentorProfile4.mentorName }</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="home">
-                    <div class="home__img4"></div>
-                    <div class="home__info">
-                        <div class="info1">검증됨 · 케이프타운</div>
-                        <div class="info2">Modern, Chic Penthouse with Mountain, City & Sea Views</div>
-                        <div class="info3">
-                            <span class="star">★★★★★</span>
-                            <span class="count">177</span>
-                            <span class="type">슈퍼호스트</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="home">
-                    <div class="home__img5"></div>
-                    <div class="home__info">
-                        <div class="info1">아파트 전체 · 마드리드(MADRID)</div>
-                        <div class="info2">솔광장에 위치한 개인 스튜디오</div>
-                        <div class="info3">
-                            <span class="star">★★★★★</span>
-                            <span class="count">459</span>
-                            <span class="type">슈퍼호스트</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="home">
-                    <div class="home__img6"></div>
-                    <div class="home__info">
-                        <div class="info1">집 전체 · HUMAC</div>
-                        <div class="info2">Vacation house in etno-eco village Humac</div>
-                        <div class="info3">
-                            <span class="star">★★★★★</span>
-                            <span class="count">119</span>
-                            <span class="type">슈퍼호스트</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="home">
-                    <div class="home__img7"></div>
-                    <div class="home__info">
-                        <div class="info1">개인실 · 마라케시</div>
-                        <div class="info2">The Cozy Palace</div>
-                        <div class="info3">
-                            <span class="star">★★★★★</span>
-                            <span class="count">559</span>
-                            <span class="type">슈퍼호스트</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="home">
-                    <div class="home__img8"></div>
-                    <div class="home__info">
-                        <div class="info1">게스트용 별채 전체 · 로스앤젤레스</div>
-                        <div class="info2">Private Pool House with Amazing Views!</div>
-                        <div class="info3">
-                            <span class="star">★★★★★</span>
-                            <span class="count">170</span>
-                            <span class="type">슈퍼호스트</span>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </section> 
     </main>

@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -13,6 +15,8 @@ import javax.servlet.http.Part;
 import javax.sql.*;
 
 import com.project.mentoring.dto.AdminSubMajorListDto;
+import com.project.mentoring.dto.AdminUserListDto;
+import com.project.mentoring.dto.HomePageMentorListDto;
 
 public class MentorProfileDao {
 	
@@ -188,6 +192,65 @@ public class MentorProfileDao {
 		return mentorPk;
 		
 	}
+	
+	public ArrayList<HomePageMentorListDto> getMentorProfileToHomePage(int productPk){
+		ArrayList<HomePageMentorListDto> homePageMentorListDtos = new ArrayList<HomePageMentorListDto>();
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String mentorListQuery1 = "select m.mentorimage, mj.majorname, p.title, s.submajorname, u.username ";
+			String mentorListQuery2 = "from product as p inner join mentor as m on m.mentorpk = p.mentor_mentorpk ";
+			String mentorListQuery3 = "inner join submajor as s on p.submajor_submajorpk = s.submajorpk ";
+			String mentorListQuery4 = "inner join major as mj on mj.majorpk=s.major_majorpk ";
+			String mentorListQuery5 = "inner join user as u on u.userpk = m.user_userpk ";
+			String mentorListQuery6 = "where p.productpk = ? ";
+			prepareStatement = connection.prepareStatement(mentorListQuery1+mentorListQuery2+mentorListQuery3+mentorListQuery4+mentorListQuery5+mentorListQuery6);
+			
+			prepareStatement.setInt(1, productPk);
+			
+			resultSet = prepareStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				
+				
+				String mentorImage = resultSet.getString("mentorimage");
+				String mentorTitle = resultSet.getString("title");
+				String mentorMajor = resultSet.getString("majorname");
+				String mentorSubMajor = resultSet.getString("submajorname");
+				String mentorName = resultSet.getString("username");
+				
+				
+				HomePageMentorListDto homePageMentorListDto = new HomePageMentorListDto(productPk, mentorImage, mentorTitle, mentorMajor, mentorSubMajor, mentorName); 
+				homePageMentorListDtos.add(homePageMentorListDto);				
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+			
+		}finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(prepareStatement != null) prepareStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		
+		return homePageMentorListDtos;
+	}
+	
+	
+	
+	
 	
 
 }//-end Line

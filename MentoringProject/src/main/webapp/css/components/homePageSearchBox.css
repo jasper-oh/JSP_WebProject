@@ -41,7 +41,7 @@ table {
   padding: 20px 0;
 }
 
-.search__button button {
+.button {
   background-color: #ff5a5f;
   color: white;
   width: 70px;
