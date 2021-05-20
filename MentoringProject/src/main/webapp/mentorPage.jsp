@@ -1,5 +1,9 @@
+<%@page import="com.project.mentoring.dto.AdminMajorListDto"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.project.mentoring.dao.AdminMajorListDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +14,12 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="shortcut icon" sizes="76x76" type="image/x-icon"
         href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico">
+<%
+			
+			AdminMajorListDao adminMajorListDao = new AdminMajorListDao();
+			ArrayList<AdminMajorListDto> adminMajorList = adminMajorListDao.majorList();
 
+%>
 </head>
 <body>
     <header>
@@ -26,6 +35,7 @@
             </div>
             <div class="menu">
                 <ul>
+                	<li><a href="userBeMentorPage.jsp">멘토정보 추가등록</a></li>
                     <li><a href="helpPage.jsp">도움말</a></li>
                     <li><a href="mentorMyPage.jsp">마이페이지</a></li>
                     <li><a href="visitorPage.jsp">로그아웃</a></li>
@@ -35,36 +45,61 @@
         <section>
             <div class="search__box">
                 <div class="search__title">당신의 멘토를<br /> 검색해 보세요.</div>
-               	<form action="" method="post">
+               	<form action="userShowSearchListPage.do" method="post">
 	                <table>
 	                    <tr>
 	                        <td colspan="2" class="search__sub__title">위치로 검색하기</td>
 	                    </tr>
 	                    <tr>
-	                        <td colspan="2"><input class="search__input" type="text" placeholder=" 모든 위치"></td>
+	                    	<td colspan="2">
+	                            <select class="search__input" name="mentoraddress">
+	                                <option value="서울특별시">서울특별시</option>
+	                                <option value="경기도">경기도</option>
+	                                <option value="강원도">강원도</option>
+	                                <option value="충청북도">충청북도</option>
+	                                <option value="충청남도">충청남도</option>
+	                                <option value="전라북도">전라북도</option>
+	                                <option value="전라남도">전라남도</option>
+	                                <option value="경상북도">경상북도</option>
+	                                <option value="경상남도">경상남도</option>
+	                                <option value="인천광역시">인천광역시</option>
+	                                <option value="세종특별자치시">세종특별자치시</option>
+	                                <option value="울산광역시">울산광역시</option>
+	                                <option value="대구광역시">대구광역시</option>
+	                                <option value="부산광역시">부산광역시</option>
+	                                <option value="제주특별시">제주특별시</option>
+	                            </select>
+	                        </td>
 	                    </tr>
 	                    <tr>
 	                        <td class="search__sub__title">분야별 검색하기</td>
 	                    </tr>
 	                    <tr>
 	                        <td colspan="2">
-	                            <select class="search__input" >
-	                                <option>프로그래밍</option>
-	                                <option>디자인</option>
-	                                <option>경영/경제</option>
-	                                <option>예술</option>
-	                            </select>
+	                        	<select class="search__input" name="mentorMajor" onchange="handleOnChange(this)">
+							
+									<option value="0" selected="selected">
+												전공을 선택해주세요!
+									</option>
+																	
+									<%for(int i = 0; i < adminMajorList.size() ; i++){ %>
+									<option value="<%out.print(adminMajorList.get(i).getMajorName()); %>">
+											<%out.print(adminMajorList.get(i).getMajorName());%>
+									</option>
+										<%} %>
+						
+								</select>
 	                        </td>
 	                    </tr>
 	                    <tr>
-	                        <td colspan="2" class="search__sub__title">이름으로 검색하기</td>
+	                        <td colspan="2" class="search__sub__title">세부분야 검색하기</td>
 	                    </tr>
 	                    <tr>
-	                        <td><input class="search__input"  type="text" /></td>
+	                        <td><input class="search__input"  type="text" name="mentorSubMajor"/></td>
 	                    </tr>
 	                </table>
+	                <div class="search__button"><input class="button" type="submit" value="검색"></div>
                 </form>
-                <div class="search__button"><button>검색</button></div>
             </div>
         </section>
     </header>

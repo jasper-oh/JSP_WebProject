@@ -10,18 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.project.mentoring.command.AdminPageAnnouncementShowCommand;
 import com.project.mentoring.command.AdminPageMajorInsertCommand;
 import com.project.mentoring.command.AdminPageMajorListShowCommand;
 import com.project.mentoring.command.AdminPageSubMajorInsertCommand;
 import com.project.mentoring.command.AdminPageSubMajorListShowCommand;
 import com.project.mentoring.command.AdminPageUserListShowCommand;
 import com.project.mentoring.command.Command;
+import com.project.mentoring.command.HomePageMentorListShowCommand;
 import com.project.mentoring.command.IntCommand;
 import com.project.mentoring.command.MentorProfileInsertCommand;
 import com.project.mentoring.command.MentorProfileIntroduceInsertCommand;
 import com.project.mentoring.command.MentorProfileSubMajorFindCommand;
 import com.project.mentoring.command.MentorSelectMentorPkCommand;
+import com.project.mentoring.command.UserCheckSelectCommand;
+import com.project.mentoring.command.UserCheckUpdateToMentorCommand;
 import com.project.mentoring.command.UserLoginPageSelectCommand;
+import com.project.mentoring.command.UserSearchPageShowCommand;
 import com.project.mentoring.command.UserSignUpPageInsertCommand;
 import com.project.mentoring.dao.UserLoginDao;
 
@@ -76,6 +81,8 @@ public class FrontController extends HttpServlet {
 		switch(com) {
 		
 		case("/home.do"):
+			command = new HomePageMentorListShowCommand();
+			command.execute(request, response);
 			viewPage = "visitorPage.jsp";
 			break;
 			
@@ -128,15 +135,23 @@ public class FrontController extends HttpServlet {
 				
 			}
 			break;
+		case("/adminAnnouncementPage.do"):
+			command = new AdminPageAnnouncementShowCommand();
+			command.execute(request, response);
+			viewPage="adminAnnouncementPage.jsp";
+			break;
 			
 			
 		// -- userPage 의 *.do
 		case("/userLoginPage.do"):
 			intCommand = new UserLoginPageSelectCommand();
 			
+			
 			int loginResult = intCommand.execute(request, response);
 			
 			if(loginResult == 1) {
+				command = new HomePageMentorListShowCommand();
+				command.execute(request, response);
 				request.setAttribute("loginResult", loginResult);
 				
 				String userId = request.getParameter("userid");
@@ -145,12 +160,31 @@ public class FrontController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("userid", userId);
 				session.setAttribute("userpk", userpk);
-				viewPage = "homePage.jsp";
+				
+				
 				System.out.println("로그인 성공! ");
+				
+				UserCheckSelectCommand userCheckSelectCommand = new UserCheckSelectCommand();
+				int userCheck = userCheckSelectCommand.execute(request, response);
+				// 로그인 성공후 멘토페이지 일반 유저 페이지 이동 여부 결정
+				if(userCheck == 1) {
+					
+					System.out.println("멘토페이지로 이동");
+					viewPage = "mentorPage.jsp";
+				}else {
+					System.out.println("일반 유저 페이지로 이동");
+					viewPage = "homePage.jsp";
+				}
+				
+				
 			}else {
 				request.setAttribute("loginResult", loginResult);
 				viewPage = "visitorPage.jsp";
+				
+				
 				System.out.println("로그인 실패! ");
+				
+				
 			}
 			break;
 		
@@ -160,10 +194,21 @@ public class FrontController extends HttpServlet {
 			
 			if(signUpResult == 1) {
 				
-				viewPage = "homePage.jsp";
+				viewPage = "visitorPage.jsp";
 				
 			}else {
 				viewPage = "userSignUpPage.jsp";
+			}
+			
+			break;
+		case("/userShowSearchListPage.do"):
+			intCommand = new UserSearchPageShowCommand();
+			int searchResult = intCommand.execute(request, response);
+			
+			if(searchResult == 0) {
+				viewPage = "searchPage.jsp";
+			}else {
+				viewPage = "visitorPage.jsp";
 			}
 			
 			break;
@@ -209,16 +254,37 @@ public class FrontController extends HttpServlet {
 			
 			if(mentorProfileIntroduceResult == 1) {
 				System.out.println("상품 정보 등록 성공");
-				viewPage="mentorPage.jsp";
+				viewPage="userBeMentorPage4.jsp";
 			}else {
 				System.out.println("상품 정보 등록 실패");
 				viewPage="userBeMentorPage3.jsp";
 			}
 			
 			break;
+		case("/userCheckUpdate.do"):
+			intCommand = new UserCheckUpdateToMentorCommand();
+		
+			int userCheckUpdateToMentorResult = intCommand.execute(request, response);
+			
+			if(userCheckUpdateToMentorResult == 1) {
+				
+				viewPage="mentorPage.jsp";
+				
+			}else {
+				
+				viewPage="userBeMentorPage4";
+			}
+		 break;
+			
+//		그외의 확인용 jsp .do 완료시에는 지우기
+		case("/sessionCheck.do"):
+			
+			viewPage="sessionCheck.jsp";
 			
 		
 		}
+		
+		
 		
 			RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 			dispatcher.forward(request, response);
