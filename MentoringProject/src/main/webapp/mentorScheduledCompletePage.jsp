@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="css/components/searchResult.css">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-	<h1>멘토의 마이페이지 입니다.</h1>
-	 	<nav>
+
+<header>
+		<nav>
             <div class="logo">
                 <svg viewBox="0 0 1000 1000" role="presentation" aria-hidden="true" focusable="false"
                     style="height: 1em; width: 1em; display: inline-block; fill: currentcolor;">
@@ -20,14 +22,44 @@
                 </svg>
             </div>
             <div class="menu">
-                <ul>
-                    <li><a href="mentorInfoUpdatePage.do">기본 정보수정</a></li>
-                    <li><a href="/MentoringProject/mentorProductList.do">종목조회</a></li>
-                    <li><a href="/MentoringProject/mentorScheduledList.do">예약관리</a></li>
-                   	<li> <a href="정산관리.jsp">정산 관리</a></li>
-					<li><a href="리뷰보기.jsp">리뷰 보기</a></li>
+                <ul>                    
+                    <li><a href="/MentoringProject/mentorScheduledList.do">나에게 들어온 예약</a></li>
+                    <li><a href="/MentoringProject/mentorScheduledCompleteList.do">확정된 예약보기</a></li>
                 </ul>
             </div>
         </nav>
+</header>
+
+
+<main>
+	<section>
+	<h1>예약 확정된 리스트</h1>
+	<div class="main-box">
+	    <h4>당신이 예약 확정한 리스트를 보여줍니다.</h4>
+	    
+	    <div class="buttons">
+	    	  <div class="back-button">
+	        	<a href="/">Go back home</a>
+	      	</div>  
+	    </div>
+    
+	    <section>
+	      <c:forEach items="${scheduledCompletedList }" var="scheduledCompletedList">
+			<div class="job-contain-box">
+		        <h3> 스케쥴 번호 : ${scheduledCompletedList.scheduledPk } </h3>
+		        <h4> 예약자 이름 : ${scheduledCompletedList.userName }</h4>
+		        <span> 예약자 번호 :${scheduledCompletedList.userPhone }</span><br>
+		        <span> 예약된 분야 :${scheduledCompletedList.scheduledMajor } </span><br>
+		        <span>예약된 세부 분야 : ${scheduledCompletedList.scheduledSubMajor }</span><br>
+		        <span>예약된 가격 : ${scheduledCompletedList.scheduledPrice }</span> <br>
+		        <a href="mentorMentoringComplete.jsp" >멘토링 완료</a>
+		        <a href="#" >예약 취소 하기</a>
+		      </div>
+	      </c:forEach>
+	      
+	    </section>
+  </div>
+  </section>
+</main>
 </body>
 </html>

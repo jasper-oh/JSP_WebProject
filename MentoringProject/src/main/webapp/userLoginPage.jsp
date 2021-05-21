@@ -26,7 +26,7 @@
 	                <span>to</span><br>
 	                <span>Take your Time</span>
 	            </div>
-	            <form action="userLoginPage.do" method="post" name="loginForm">
+	            <form action="userLoginPage.do" method="post" name="loginForm" onsubmit="">
 	                <div class="login__form">
 	                <div class="login__row">
 	                    <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
@@ -42,7 +42,8 @@
 	                </div>
 	                <input type="submit" class="login__submit" value="Login"/>
 	                <p class="login__signup">아직 회원이 아니신가요? &nbsp;<a href="userSignUpPage.jsp">회원가입하기</a></p>
-	                <p class="login__signup login__findIdPw">ID / PW 를 잃어버리셨나요? &nbsp;<a> Id / Pw 찾기</a></p>
+	                <p class="login__signup login__findIdPw">ID 를 잃어버리셨나요? &nbsp;<a href="userFindId.jsp"> Id 찾기</a></p>
+	                <p class="login__signup login__findIdPw">PW 를 잃어버리셨나요? &nbsp;<a href="userFindPw.jsp"> PW 찾기</a></p>
 	                </div>
 	            </form>
 	          </div>

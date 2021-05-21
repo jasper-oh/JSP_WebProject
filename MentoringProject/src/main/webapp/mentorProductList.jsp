@@ -1,16 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="css/styles.css">
+
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>mentor의 product list</title>    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" sizes="76x76" type="image/x-icon"
+        href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico">
+         <style type="text/css">
+	    div.body {
+	    	padding: 0px 100px;
+	    }
+    </style>
 </head>
 <body>
-	<h1>멘토의 마이페이지 입니다.</h1>
-	 	<nav>
-            <div class="logo">
+ 		<nav>
+ 			<div class="logo">
                 <svg viewBox="0 0 1000 1000" role="presentation" aria-hidden="true" focusable="false"
                     style="height: 1em; width: 1em; display: inline-block; fill: currentcolor;">
                     <path
@@ -20,14 +30,32 @@
                 </svg>
             </div>
             <div class="menu">
-                <ul>
-                    <li><a href="mentorInfoUpdatePage.do">기본 정보수정</a></li>
-                    <li><a href="/MentoringProject/mentorProductList.do">종목조회</a></li>
-                    <li><a href="/MentoringProject/mentorScheduledList.do">예약관리</a></li>
-                   	<li> <a href="정산관리.jsp">정산 관리</a></li>
-					<li><a href="리뷰보기.jsp">리뷰 보기</a></li>
-                </ul>
             </div>
         </nav>
+        <div class="body">
+		<h3>나의 ProductList</h3>
+	<table border="1">
+		<tr>
+			<th>id</th>
+			<th>전공</th>
+			<th>부전공</th>
+			<th>title</th>
+			<th>가격</th>
+		
+		</tr>
+		<c:forEach items="${ProductList }" var="dto">
+		<tr>
+			<td>${dto.productpk }</td>
+			<td>${dto.majorname }</td>
+			<td>${dto.submajorname }</td>
+			<td><a href="/MentoringProject/mentorProductPage.do?productpk=${dto.productpk }">${dto.title }</a></td>
+			<td>${dto.price }</td>
+			
+			
+		</tr>		
+		</c:forEach>
+
+	</table>
+	</div>
 </body>
 </html>
