@@ -36,6 +36,8 @@
 		
 		</tr>
 	</c:forEach>
+	
+	<tr><td colspan="1"><a href="/Project/appointment.do?productpk=<%=ShareVar.productpk %>">돌아가기</a> </td></tr>
 		</table>
 		<!-- <input type="submit" value="선택">
 		</form> -->

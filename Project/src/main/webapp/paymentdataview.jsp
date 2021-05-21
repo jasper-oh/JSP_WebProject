@@ -42,6 +42,7 @@
     <div><label><input type="radio" name="method" value="가상계좌" checked/>가상계좌</label></div>
     <p>----------------------</p>
   <button id="payment-button" >결제하기</button>
+<a href="/Project/paymentscheduleselect.do?productpk=<%=ShareVar.productpk %>">돌아가기</a>
 </section>
 <script src="https://js.tosspayments.com/v1"></script>
 <script>

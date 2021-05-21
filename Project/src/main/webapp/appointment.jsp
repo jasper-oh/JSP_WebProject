@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,9 @@
     div.body {
     	padding: 0px 100px;
     }
+    tr.space {
+  border-bottom: 10px solid #fff;
+}
     </style>
 </head>
 <body>
@@ -56,10 +60,29 @@
 		<tr>
 			<td>멘토생년월일</td><td>${Appointment.mentorbirth }</td>	
 		</tr>
+		<tr class="space"></tr>
 		<tr>
-		<td colspan="6"><a href="/Project/paymentscheduleselect.do?productpk=<%=request.getParameter("productpk") %>">가능날짜보러가기</a> </td>
+		<td colspan="1"><a href="/Project/paymentscheduleselect.do?productpk=<%=request.getParameter("productpk") %>">가능날짜보러가기</a> </td>
+		
+		<td colspan="1"><a href="/Project/first.do">돌아가기</a> </td> <!-- 검색어 데이터 가져가기 -->
 		</tr>
-
+	</table>
+	
+	<table>
+	<tr>
+		<th style="visibility:hidden"></th><th>이름</th><th>제목</th><th>내용</th><th>점수</th><th>작성일자</th>
+	</tr>
+	<c:forEach items="${ReviewList }" var="dtoR">
+	<tr>
+	<td style="visibility:hidden">${dtoR.reviewpk }</td>
+		    <td>${dtoR.username }</td>
+			<td>${dtoR.reviewtitle }</td>
+			<td>${dtoR.reviewtext }</td>
+			<td>${dtoR.reviewscore }</td>
+			<td><fmt:formatDate value="${dtoR.indate }" pattern="yyyy.MM.dd" /></td>
+	</tr>
+	</c:forEach>
+	<tr></tr>
 	</table>
 </div>
 

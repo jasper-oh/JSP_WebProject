@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.project.mentoring.command.PScheduleInsertCommand;
 import com.project.mentoring.command.MenteeBookingCancelCommand;
 import com.project.mentoring.command.MenteeBookinglistCommand;
+import com.project.mentoring.command.MenteeMentoringListCommand;
+import com.project.mentoring.command.MenteeMentoringReviewCommand;
+import com.project.mentoring.command.MenteeReviewListCommand;
 import com.project.mentoring.command.PAppointmentCommand;
 import com.project.mentoring.command.PCommand;
 import com.project.mentoring.command.PMentorProductListCommand;
@@ -119,13 +122,30 @@ public class PFrontController extends HttpServlet {
 				command.execute(request, response);
 				viewPage = "menteeBookingList.jsp";
 				break;
-				
 			case("/menteeBookingCancel.do"):
 				System.out.println("멘티가 예약 취소");
 				command = new MenteeBookingCancelCommand();
 				command.execute(request, response);
 				viewPage = "menteeBookingList.do";
 				break;
+			case("/menteeMentoringList.do"):
+				System.out.println("멘티예약완료리스트로가기");
+				command = new MenteeMentoringListCommand();
+				command.execute(request, response);
+				viewPage = "menteeMentoringList.jsp";
+				break;	
+			case("/menteeMentoringReview.do"):
+				System.out.println("멘티리뷰작성 가기");
+				command = new MenteeMentoringReviewCommand();
+				command.execute(request, response);
+				viewPage = "menteeReviewList.do";
+				break;	
+			case("/menteeReviewList.do"):
+				System.out.println("멘티리뷰리스트 가기");
+				command = new MenteeReviewListCommand();
+				command.execute(request, response);
+				viewPage = "menteeReviewList.jsp";
+				break;	
 		}
 		
 		RequestDispatcher dispatcher=request.getRequestDispatcher(viewPage);

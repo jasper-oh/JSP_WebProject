@@ -1,22 +1,21 @@
 package com.project.mentoring.command;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.project.mentoring.dao.PDao;
+import com.project.mentoring.dto.MenteeDto;
 
-
-
-public class MenteeBookingCancelCommand implements PCommand {
+public class MenteeReviewListCommand implements PCommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		String paymentpk = request.getParameter("paymentpk");
-		
-		
-		
 		PDao dao = new PDao();
-		dao.MenteeBookingCancel(paymentpk);
+		ArrayList<MenteeDto> dto = dao.MMenteeReviewList();
+		
+		request.setAttribute("MenteeReviewList", dto);
 
 	}
 

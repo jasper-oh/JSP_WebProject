@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.project.mentoring.dto.AppointmentDto;
 import com.project.mentoring.dto.MenteeDto;
 import com.project.mentoring.dto.PDto;
 import com.project.mentoring.dto.ShareVar;
@@ -146,7 +147,7 @@ public class PDao {
 	public PDto PPayment() {
 		//MentoringFunction에서 랜덤 id 추출
 		MentoringFunction mentoringFunction = new MentoringFunction();
-		int rdpaymentpk=mentoringFunction.gen();
+		String strpaymentpk=Integer.toString(mentoringFunction.gen());
 		//int userid = session.getAttribute("USERID"); 
 		//병합과정에 추가하기!
 		PDto dto = null;
@@ -162,7 +163,7 @@ public class PDao {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, 4);
 			preparedStatement.setInt(2, ShareVar.schedulepk);
-			preparedStatement.setInt(3, rdpaymentpk);
+			preparedStatement.setString(3, strpaymentpk);
 			preparedStatement.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -186,11 +187,11 @@ public class PDao {
 					+ "where py.paymentpk = ?";
 
 			preparedStatement = connection.prepareStatement(query2);
-			preparedStatement.setInt(1, rdpaymentpk);
+			preparedStatement.setString(1, strpaymentpk);
 			resultSet = preparedStatement.executeQuery();
 
 			if(resultSet.next()) {
-				int paymentpk = resultSet.getInt("paymentpk");
+				String paymentpk = resultSet.getString("paymentpk");
 				int schedulepk = resultSet.getInt("schedule_schedulepk");
 				Date paymentpaydate = resultSet.getDate("paymentpaydate");
 				Date startday = resultSet.getDate("startday");
@@ -673,7 +674,7 @@ public class PDao {
 						Date startday = resultSet.getDate("startday");
 						int starttime = resultSet.getInt("starttime");
 						int endtime = resultSet.getInt("endtime");
-						int paymentpk = resultSet.getInt("paymentpk");
+						String paymentpk = resultSet.getString("paymentpk");
 						String paymenttoken = resultSet.getString("paymenttoken");
 						Timestamp paymentcanceldate = resultSet.getTimestamp("paymentcanceldate");
 						Timestamp paymentpaydate = resultSet.getTimestamp("paymentpaydate");
@@ -694,7 +695,7 @@ public class PDao {
 			}
 			return dtos;
 		}
-	public void MenteeBookingCancel(int paymentpk){
+	public void MenteeBookingCancel(String paymentpk){
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
@@ -704,7 +705,7 @@ public class PDao {
 			String update="update payment set paymentCanceldate = now() where paymentpk = ?";
 			
 			preparedStatement=connection.prepareStatement(update);
-			preparedStatement.setInt(1, paymentpk);  
+			preparedStatement.setString(1, paymentpk);  
 			preparedStatement.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -718,4 +719,240 @@ public class PDao {
 			
 		}
 	}
+	/**
+	 * 
+	
+	  * @Method Name : ProductReviewList
+	
+	  * @작성일 : 2021. 5. 21.
+	
+	  * @작성자 : biso
+	
+	  * @변경이력 : 
+	
+	  * @Method 설명 : productpage 하단에 review list를 불러옴
+	
+	  * @param productpk
+	  * @return
+	 */
+	public ArrayList<AppointmentDto> ProductReviewList(int productpk) {
+		ArrayList<AppointmentDto> dtos = new ArrayList<AppointmentDto>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String query = "select r.reviewpk, u.username, r.reviewtitle, r.reviewtext, r.reviewscore, r.indate from review as r "
+					+ "inner join user as u on u.userpk = r.user_userpk "
+					+ "inner join payment as py on py.paymentpk = r.payment_paymentpk "
+				    + "inner join schedule as s on s.schedulepk=py.schedule_schedulepk "
+					+ "inner join product as p on p.productpk = s.product_productpk "
+					+ "where r.outdate is null and productpk = ?";
+
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, productpk);
+			resultSet = preparedStatement.executeQuery();
+
+			while(resultSet.next()) {
+				int reviewpk = resultSet.getInt("reviewpk");
+				String username = resultSet.getString("username");
+				String reviewtitle = resultSet.getString("reviewtitle");
+				String reviewtext = resultSet.getString("reviewtext");
+				int reviewscore = resultSet.getInt("reviewscore");
+				Date indate = resultSet.getDate("indate");
+			
+				AppointmentDto dto = new AppointmentDto(reviewpk, username, reviewtitle, reviewtext, reviewscore, indate);
+				dtos.add(dto);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				
+				if(resultSet != null) resultSet.close(); 
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return dtos;
+	}
+	public void MMenteeMentoringReview(int userpk, String reviewtitle, String reviewtext, int reviewscore, String paymentpk) {
+		
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			connection = dataSource.getConnection();
+
+			String query = "insert into review(user_userpk, reviewtitle, reviewtext, reviewscore, payment_paymentpk, indate) values (?,?,?,?,?,now())";
+
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, userpk);
+			preparedStatement.setString(2, reviewtitle);
+			preparedStatement.setString(3, reviewtext);
+			preparedStatement.setInt(4, reviewscore);
+			preparedStatement.setString(5, paymentpk);
+			preparedStatement.executeUpdate();
+
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 
+	
+	  * @Method Name : MMenteeReviewList
+	
+	  * @작성일 : 2021. 5. 21.
+	
+	  * @작성자 :chaho ree
+	
+	  * @변경이력 : 
+	
+	  * @Method 설명 :
+	
+	  * @return
+	 */
+	public ArrayList<MenteeDto>  MMenteeReviewList() {
+		ArrayList<MenteeDto> dtos=new ArrayList<MenteeDto>();
+		System.out.println(1);
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		
+		// int userpk = session.getParameter("USERPK");
+		// 병합시 유저피케이 넣어주기
+		
+		int userpk = 5;
+		
+		System.out.println(2);
+		try {		
+			connection=dataSource.getConnection();
+			String query="select mentoruser.username as mentorname, mj.majorname, p.title , r.reviewtitle, p.productpk\n"
+					+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
+					+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
+					+ " inner join review as r on mentee.userpk = r.user_userpk\n"
+					+ " inner join product as p on s.product_productpk = p.productpk\n"
+					+ " inner join mentor as m on p.mentor_mentorpk = m.mentorpk\n"
+					+ " inner join user as mentoruser on m.user_userpk = mentoruser.userpk\n"
+					+ " inner join submajor as sb on p.submajor_submajorpk = sb.submajorpk\n"
+					+ " inner join major as mj on sb.major_majorpk = mj.majorpk\n"
+					+ " where mentee.userpk = ?";
+			
+			System.out.println(3);
+			preparedStatement=connection.prepareStatement(query);
+			System.out.println(query);
+			preparedStatement.setInt(1, userpk);  
+			resultSet=preparedStatement.executeQuery();
+			while(resultSet.next()) {		
+				String mentorname = resultSet.getString("mentorname");
+				String majorname = resultSet.getString("majorname");
+				String title = resultSet.getString("title");
+				String reviewtitle = resultSet.getString("reviewtitle");
+				String productpk = resultSet.getString("productpk");
+				
+				
+				
+				MenteeDto dto=new MenteeDto(mentorname, majorname, title, reviewtitle, productpk);		
+				dtos.add(dto);
+				
+				System.out.println(dtos);
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(resultSet!=null) resultSet.close();
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}	
+		
+		return dtos;
+	}
+	/**
+	 * 
+	 * @Method Name : MMenteeBookingCompliteList
+	 * @작성일 : 2021. 5. 21.
+	 * @작성자 : chanhoLee
+	 * @변경이력 : 
+	 * @Method 설명 : 멘티 마이페이지의 과거 멘토링 내역
+	 * @return
+	 */
+	public ArrayList<MenteeDto>  MMenteeMentoringList() {
+		ArrayList<MenteeDto> dtos=new ArrayList<MenteeDto>();
+		
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		
+		// int userpk = session.getParameter("USERPK");
+		// 병합시 유저피케이 넣어주기
+		
+		int userpk = 4;
+		
+		try {		
+			connection=dataSource.getConnection();
+			String query="select mentoruser.username as mentorname, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, s.totalprice ,py.paymentpk\n"
+					+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
+					+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
+					+ " inner join product as p on s.product_productpk = p.productpk\n"
+					+ " inner join mentor as m on p.mentor_mentorpk = m.mentorpk\n"
+					+ " inner join user as mentoruser on m.user_userpk = mentoruser.userpk\n"
+					+ " inner join submajor as sb on p.submajor_submajorpk = sb.submajorpk\n"
+					+ " inner join major as mj on sb.major_majorpk = mj.majorpk\n"
+					+ " where py.paymentCanceldate is null and not py.paymenttoken is null and not py.paymentsenddate is null and mentee.userpk = ?";
+			
+			preparedStatement=connection.prepareStatement(query);
+			preparedStatement.setInt(1, userpk);  
+			resultSet=preparedStatement.executeQuery();
+			while(resultSet.next()) {		
+				String menteename = resultSet.getString("mentorname");
+				String majorname = resultSet.getString("majorname");
+				String submajorname = resultSet.getString("submajorname");
+				Date startday = resultSet.getDate("startday");
+				int starttime = resultSet.getInt("starttime");
+				int endtime = resultSet.getInt("endtime");
+				int totalprice = resultSet.getInt("totalprice");
+				String paymentpk = resultSet.getString("paymentpk");
+				
+				
+				MenteeDto dto=new MenteeDto(menteename, majorname, submajorname, startday, starttime, endtime, paymentpk, totalprice);		
+				dtos.add(dto);
+				
+				System.out.println(dtos);
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(resultSet!=null) resultSet.close();
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}	
+		
+		return dtos;
+	}
+	
 }//----------------

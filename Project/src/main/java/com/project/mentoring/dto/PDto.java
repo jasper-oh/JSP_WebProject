@@ -22,7 +22,7 @@ public class PDto {
 	String introduce;
 	int price;
 	int mentor_mentorpk;
-	int paymentpk;
+	String paymentpk;
 	Date paymentpaydate;
 	
 	public PDto() {
@@ -32,7 +32,7 @@ public class PDto {
 	
 
 	public PDto(String username, String majorname, String submajorname, int starttime, int endtime, Date startday,
-			int schedulepk, int totalprice, String title, int paymentpk, Date paymentpaydate) {
+			int schedulepk, int totalprice, String title, String paymentpk, Date paymentpaydate) {
 		super();
 		this.username = username;
 		this.majorname = majorname;
@@ -147,11 +147,11 @@ public String getUsername() {
 	return username;
 }
 
-public int getPaymentpk() {
+public String getPaymentpk() {
 	return paymentpk;
 }
 
-public void setPaymentpk(int paymentpk) {
+public void setPaymentpk(String paymentpk) {
 	this.paymentpk = paymentpk;
 }
 
