@@ -38,7 +38,7 @@
 			<td>${dto.starttime }</td>
 			<td>${dto.endtime }</td>
 			<td>${dto.totalprice }</td>
-			<td><a href="/Project/menteeMentoringReview.jsp?paymentpk=${dto.paymentpk }">리뷰쓰러가기</a></td>
+			<td><a href="/MentoringProject/menteeMentoringReview.jsp?paymentpk=${dto.paymentpk }">리뷰쓰러가기</a></td>
 			
 			
 			

@@ -19,7 +19,7 @@
 			<th>예약날짜</th><th>${Paymentdata.startday }</th>
 </tr>
 <tr >
-			<th>제목</th><th>${Paymentdata.title }</th>
+			<th>금액</th><th>${Paymentdata.title }</th>
 </tr>
 <tr >
 			<th>금액</th><th>${Paymentdata.totalprice }</th>
@@ -42,7 +42,7 @@
     <div><label><input type="radio" name="method" value="가상계좌" checked/>가상계좌</label></div>
     <p>----------------------</p>
   <button id="payment-button" >결제하기</button>
-<a href="/Project/paymentscheduleselect.do?productpk=<%=ShareVar.productpk %>">돌아가기</a>
+<a href="/MentoringProject/paymentScheduleSelect.do?productpk=<%=ShareVar.productpk %>">돌아가기</a>
 </section>
 <script src="https://js.tosspayments.com/v1"></script>
 <script>
@@ -51,21 +51,25 @@
 	var username = '<%=session.getAttribute("USERNAME") %>';
     var tossPayments = TossPayments("test_ck_kZLKGPx4M3MLwj1E9yd8BaWypv1o");
     var button = document.getElementById("payment-button");
+
     var orderId = new Date().getTime();
+
     button.addEventListener("click", function () {
         var method = document.querySelector('input[name=method]:checked').value; // "카드" 혹은 "가상계좌"
+
         var paymentData = {
-            amount: totalprice,
+            amount: 5000,
             orderId: orderId,
             orderName: title,
             customerName: username,
-            successUrl: window.location.origin + "/Project/paymentsuccess.do",
-            failUrl: window.location.origin + "/Project/paymentfail.jsp",
+            successUrl: window.location.origin + "/MentoringProject/paymentSuccess.do",
+            failUrl: window.location.origin + "/MentoringProject/paymentfail.jsp",
         };
         
         if (method === '가상계좌') {
             paymentData.virtualAccountCallbackUrl = window.location.origin + '/jsp-sample/VirtualAccountCallback.jsp'
         }
+
         tossPayments.requestPayment(method, paymentData);
     });
 </script>

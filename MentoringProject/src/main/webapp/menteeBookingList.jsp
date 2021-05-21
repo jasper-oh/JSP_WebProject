@@ -63,7 +63,7 @@ text-align:center;
 			<td><fmt:formatDate value="${dto.paymentcanceldate }" pattern="yyyy.MM.dd HH:mm:ss" /></td>
 			<td>${dto.paymenttoken }</td>
 <td><c:if test="${empty dto.paymentcanceldate }">
-       <a href="/Project/menteeBookingCancel.do?paymentpk=${dto.paymentpk }">예약취소</a>
+       <a href="/MentoringProject/menteeBookingCancel.do?paymentpk=${dto.paymentpk }">예약취소</a>
     </c:if>
 </td> 
 		
@@ -83,5 +83,6 @@ text-align:center;
 function getClick(event) {
 		  location.href="menteeBookingList.do?booking="+event.target.value;;
 	}
+
 </script>
 </html>

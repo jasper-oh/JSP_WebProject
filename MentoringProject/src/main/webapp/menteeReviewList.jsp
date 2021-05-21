@@ -30,7 +30,7 @@
 			<td>${dto.title }</td>
 			<td>${dto.reviewtitle }</td>
 			
-			<td><a href="/Project/appointment.do?productpk=${dto.productpk }">보러가기</a></td>
+			<td><a href="/MentoringProject/appointment.do?productpk=${dto.productpk }">보러가기</a></td>
 			
 			
 			

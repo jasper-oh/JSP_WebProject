@@ -77,7 +77,7 @@
 			<th>예약날짜</th><th>${Payment.startday}</th>
 </tr>
 <tr >
-			<th>시간</th><th>${Payment.starttime}~${Payment.endday}</th>
+			<th>시간</th><th>${Payment.starttime}~${Payment.endtime}</th>
 </tr>
 <tr >
 			<th>금액</th><th>${Payment.totalprice}</th>
@@ -89,7 +89,7 @@
 			<th>Mentor 이름</th><th>${Payment.username}</th>
 </tr>
 <tr >
-			<th>메인으로</th><th>예약리스트 보기</th>
+			<th><a href="/MentoringProject/menteeBookinglist.do">메인으로</a></th><th><a href="/MentoringProject/menteeBookingList.do">예약리스트 보러가기</a></th>
 </tr>
 </table>
         <input type="hidden" value="결과 데이터: <%= jsonObject.toJSONString() %>">
