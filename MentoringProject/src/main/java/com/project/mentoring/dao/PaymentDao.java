@@ -475,6 +475,7 @@ public class PaymentDao {
 		ResultSet resultSet=null;
 		try {
 			connection=dataSource.getConnection();
+			//QUERY 수정
 			String delete="delete from schedule where startday<curdate()";
 			preparedStatement=connection.prepareStatement(delete);
 			preparedStatement.executeUpdate();
