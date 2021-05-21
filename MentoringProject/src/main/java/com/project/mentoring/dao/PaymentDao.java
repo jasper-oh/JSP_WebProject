@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import com.project.mentoring.dto.AppointmentDto;
@@ -142,9 +143,6 @@ public class PaymentDao {
 		//MentoringFunction에서 랜덤 id 추출
 		MentoringFunction mentoringFunction = new MentoringFunction();
 		String strpaymentpk=Integer.toString(mentoringFunction.gen());
-		//int userid = session.getAttribute("USERID"); 
-		//병합과정에 추가하기!
-		//추가 완료
 		PaymentDto dto = null;
 		
 		Connection connection = null;
@@ -343,7 +341,7 @@ public class PaymentDao {
 	  * @param starttime
 	  * @param endtime
 	 */
-	public void creatschedule(String startday, String endday, String starttime, String endtime, int id) {
+	public void creatschedule(String startday, String endday, int starttime, int endtime, int productpk) {
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
@@ -376,11 +374,12 @@ public class PaymentDao {
 		PreparedStatement ps=null;	
 			try {
 				conn=dataSource.getConnection();
-				String query = "INSERT INTO schedule (product_productpk, startday, starttime, endtime) values ("+id+", date_add('"+startday+"',INTERVAL 1 DAY), "+starttime+", "+endtime+") ";
+				String query = "insert into schedule (product_productpk, startday, starttime, endtime, totalprice) values "
+						+ "("+productpk+", DATE_ADD(curdate(), INTERVAL 0 DAY), "+starttime+", "+endtime+", (select price from product where productpk = "+productpk+" )*("+endtime+" - "+starttime+")) ";
 				String a = "";
 				
 				for (int i=1; i<count; i++) {
-					a = a+", ("+id+", date_add('"+startday+"', INTERVAL "+i+" DAY), "+starttime+", "+endtime+") ";
+					a = a+", ("+productpk+", DATE_ADD(curdate(), INTERVAL "+i+" DAY), "+starttime+", "+endtime+", (select price from product where productpk = "+productpk+" )*("+endtime+" - "+starttime+")) ";
 				}
 				ps=conn.prepareStatement(query+a);
 				ps.executeUpdate();

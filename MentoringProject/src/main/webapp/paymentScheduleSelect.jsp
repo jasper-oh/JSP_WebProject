@@ -23,8 +23,8 @@
 			<th>가격</th>
 			<th>선택</th>
 </tr>
-		<tr>
 		<c:forEach var="dto" items="${ScheduleSelect }" varStatus="status" >
+		<tr>
     <td align="center"><input type="text" size="3" value="${status.count }" name="count"/></td>
     <td align="center"><input type="text" size="10" value="${dto.startday }" name="startday"/></td>
     <td align="center">

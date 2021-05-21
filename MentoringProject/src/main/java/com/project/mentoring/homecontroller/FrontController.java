@@ -394,7 +394,7 @@ public class FrontController extends HttpServlet {
 			viewPage="mentorProductList.jsp";
 			break;
 			//
-			
+			//-----------------------
 		case("/mentorProductPage.do"):
 			command=new PMentorProductPageCommand();
 			command.execute(request, response);
@@ -425,7 +425,7 @@ public class FrontController extends HttpServlet {
 			viewPage="/mentorProductPage.do";
 			break;
 			
-			
+		
 		// 예약 관련 한 .do
 		case("/appointment.do"):
 			System.out.println("product 클릭 pageview");
