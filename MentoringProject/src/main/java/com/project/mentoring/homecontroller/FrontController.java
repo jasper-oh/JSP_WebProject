@@ -24,6 +24,9 @@ import com.project.mentoring.command.MenteeBookingCancelCommand;
 import com.project.mentoring.command.MenteeBookinglistCommand;
 import com.project.mentoring.command.MenteeMentoringListCommand;
 import com.project.mentoring.command.MenteeMentoringReviewCommand;
+import com.project.mentoring.command.MenteeReviewDeleteActionCommand;
+import com.project.mentoring.command.MenteeReviewEditActionCommand;
+import com.project.mentoring.command.MenteeReviewEditCommand;
 import com.project.mentoring.command.MenteeReviewListCommand;
 import com.project.mentoring.command.MentorProfileInsertCommand;
 import com.project.mentoring.command.MentorProfileIntroduceInsertCommand;
@@ -486,6 +489,8 @@ public class FrontController extends HttpServlet {
 			
 			//
 			
+			
+			// 문제 생김 -------
 		case("/menteeMentoringReview.do"):
 			System.out.println("멘티리뷰작성 가기");
 			command = new MenteeMentoringReviewCommand();
@@ -503,7 +508,27 @@ public class FrontController extends HttpServlet {
 			break;	
 			
 			//
-		 
+		
+		case("/menteeReviewEdit.do"):
+			System.out.println("선택리뷰수정및삭제페이지로가기");
+		command = new MenteeReviewEditCommand();
+		command.execute(request, response);
+		viewPage = "menteeReviewEditPage.jsp";
+		break;	
+		
+		case("/menteeReviewEditAction.do"):
+			System.out.println("멘티리뷰수정내역업데이트");
+		command = new MenteeReviewEditActionCommand();
+		command.execute(request, response);
+		viewPage = "/menteeReviewList.do";
+		break;	
+		
+		case("/menteeReviewDeleteAction.do"):
+			System.out.println("멘티리뷰삭제");
+		command = new MenteeReviewDeleteActionCommand();
+		command.execute(request, response);
+		viewPage = "/menteeReviewList.do";
+		break;
 			
 //		그외의 확인용 jsp .do 완료시에는 지우기
 		case("/sessionCheck.do"):

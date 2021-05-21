@@ -464,7 +464,6 @@ public class PaymentDao {
 	
 	  * @Method 설명 : user가 product페이지에서 	예약하기를 누르면 
 	  * 해당 메소드로 productpk에 할당된 schedule을 가져옴
-	  * 추가로 today이전 날짜 schedule을 삭제함
 	
 	  * @return
 	 */
@@ -473,26 +472,10 @@ public class PaymentDao {
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
+
 		try {
 			connection=dataSource.getConnection();
-			//QUERY 수정
-			String delete="delete from schedule where startday<curdate()";
-			preparedStatement=connection.prepareStatement(delete);
-			preparedStatement.executeUpdate();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(preparedStatement!=null) preparedStatement.close();
-				if(connection!=null) connection.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-		//-------^delete
-		try {
-			connection=dataSource.getConnection();
-			String query="select schedulepk, if(CURDATE()-startday>0, 0, startday) startday, starttime, endtime, totalprice from schedule where product_productpk = ?";
+			String query="select schedulepk, if(CURDATE()-startday>0, 0, startday) startday, starttime, endtime, totalprice from schedule where startday>curdate() and product_productpk = ?";
 			preparedStatement=connection.prepareStatement(query);
 			preparedStatement.setInt(1, pk);
 			resultSet=preparedStatement.executeQuery();
@@ -613,7 +596,7 @@ public class PaymentDao {
 				String query = null;
 				switch (booking) {
 				case "wait":
-					query="select mentee.username as menteename, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, py.paymentpk, py.paymentcanceldate, py.paymenttoken, py.paymentpaydate \n"
+					query="select mentoruser.username as mentorname, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, py.paymentpk, py.paymentcanceldate, py.paymenttoken, py.paymentpaydate \n"
 							+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
 							+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
 							+ " inner join product as p on s.product_productpk = p.productpk\n"
@@ -624,7 +607,7 @@ public class PaymentDao {
 							+ " where py.paymentcanceldate is null and py.paymenttoken is null and mentee.userpk = ?";
 					break;
 				case "complite":
-					query="select mentee.username as menteename, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, py.paymentpk, py.paymentcanceldate, py.paymenttoken, py.paymentpaydate \n"
+					query="select mentoruser.username as mentorname, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, py.paymentpk, py.paymentcanceldate, py.paymenttoken, py.paymentpaydate \n"
 							+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
 							+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
 							+ " inner join product as p on s.product_productpk = p.productpk\n"
@@ -635,7 +618,7 @@ public class PaymentDao {
 							+ " where not py.paymenttoken is null and mentee.userpk = ?";
 					break;
 				case "cancel":
-					query="select mentee.username as menteename, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, py.paymentpk, py.paymentcanceldate, py.paymenttoken, py.paymentpaydate\n"
+					query="select mentoruser.username as mentorname, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, py.paymentpk, py.paymentcanceldate, py.paymenttoken, py.paymentpaydate\n"
 							+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
 							+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
 							+ " inner join product as p on s.product_productpk = p.productpk\n"
@@ -646,7 +629,7 @@ public class PaymentDao {
 							+ " where not py.paymentcanceldate is null and mentee.userpk = ?";
 					break;
 				case "null":
-					query="select mentee.username as menteename, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, py.paymentpk, py.paymentcanceldate, py.paymenttoken, py.paymentpaydate\n"
+					query="select mentoruser.username as mentorname, mj.majorname, sb.submajorname, s.startday, s.starttime, s.endtime, py.paymentpk, py.paymentcanceldate, py.paymenttoken, py.paymentpaydate\n"
 							+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
 							+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
 							+ " inner join product as p on s.product_productpk = p.productpk\n"
@@ -665,7 +648,7 @@ public class PaymentDao {
 				preparedStatement.setInt(1, userpk);  
 				resultSet=preparedStatement.executeQuery();
 					while(resultSet.next()) {		
-						String menteename = resultSet.getString("menteename");
+						String mentorname = resultSet.getString("mentorname");
 						String majorname = resultSet.getString("majorname");
 						String submajorname = resultSet.getString("submajorname");
 						Date startday = resultSet.getDate("startday");
@@ -676,7 +659,7 @@ public class PaymentDao {
 						Timestamp paymentcanceldate = resultSet.getTimestamp("paymentcanceldate");
 						Timestamp paymentpaydate = resultSet.getTimestamp("paymentpaydate");
 					
-						MenteeDto dto=new MenteeDto(menteename, majorname, submajorname, startday, starttime, endtime, paymentpk, paymenttoken, paymentcanceldate, paymentpaydate);		
+						MenteeDto dto=new MenteeDto(mentorname, majorname, submajorname, startday, starttime, endtime, paymentpk, paymenttoken, paymentcanceldate, paymentpaydate);		
 						dtos.add(dto);
 					}
 			}catch(Exception e) {
@@ -831,13 +814,7 @@ public class PaymentDao {
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
-		
-		// int userpk = session.getParameter("USERPK");
-		// 병합시 유저피케이 넣어주기
-		//완료
-		
-		
-		
+
 		System.out.println(2);
 		try {		
 			connection=dataSource.getConnection();
@@ -850,7 +827,7 @@ public class PaymentDao {
 					+ " inner join user as mentoruser on m.user_userpk = mentoruser.userpk\n"
 					+ " inner join submajor as sb on p.submajor_submajorpk = sb.submajorpk\n"
 					+ " inner join major as mj on sb.major_majorpk = mj.majorpk\n"
-					+ " where mentee.userpk = ?";
+					+ " where r.outdate is null and mentee.userpk = ?";
 			
 			System.out.println(3);
 			preparedStatement=connection.prepareStatement(query);
@@ -933,7 +910,7 @@ public class PaymentDao {
 				String paymentpk = resultSet.getString("paymentpk");
 				
 				
-				MenteeDto dto=new MenteeDto(menteename, majorname, submajorname, startday, starttime, endtime, paymentpk, totalprice);		
+				MenteeDto dto= new MenteeDto(menteename, majorname, submajorname, startday, starttime, endtime, totalprice, paymentpk);		
 				dtos.add(dto);
 				
 				System.out.println(dtos);
@@ -953,5 +930,130 @@ public class PaymentDao {
 		
 		return dtos;
 	}
+	
+	/**
+	 * 
+	 * @Method Name : MMenteeReviewEditPage
+	 * @작성일 : 2021. 5. 21.
+	 * @작성자 : chanhoLee
+	 * @변경이력 : 
+	 * @Method 설명 : 멘티의 리뷰 수정페이지
+	 * @param reviewpk
+	 * @return
+	 */
+	public ArrayList<MenteeDto> MMenteeReviewEditPage(int reviewpk) {
+		ArrayList<MenteeDto> dtos=new ArrayList<MenteeDto>();
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		try {		
+			connection=dataSource.getConnection();
+			String query="select py.paymentpk, r.reviewtitle, r.reviewtext, r.reviewscore\n"
+					+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
+					+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
+					+ " inner join review as r on mentee.userpk = r.user_userpk\n"
+					+ " inner join product as p on s.product_productpk = p.productpk\n"
+					+ " inner join mentor as m on p.mentor_mentorpk = m.mentorpk\n"
+					+ " inner join user as mentoruser on m.user_userpk = mentoruser.userpk\n"
+					+ " inner join submajor as sb on p.submajor_submajorpk = sb.submajorpk\n"
+					+ " inner join major as mj on sb.major_majorpk = mj.majorpk\n"
+					+ " where r.reviewpk = ?";
+			preparedStatement=connection.prepareStatement(query);
+			preparedStatement.setInt(1, reviewpk);  
+			resultSet=preparedStatement.executeQuery();
+			while(resultSet.next()) {		
+				String paymentpk = resultSet.getString("paymentpk");
+				String reviewtitle = resultSet.getString("reviewtitle");
+				String reviewtext = resultSet.getString("reviewtext");				
+				int reviewscore = resultSet.getInt("reviewscore");
+				MenteeDto dto=new MenteeDto(paymentpk, reviewtitle, reviewtext, reviewscore);		
+				dtos.add(dto);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(resultSet!=null) resultSet.close();
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}	
+		return dtos;
+	}
+	/**
+	 * 
+	 * @Method Name : MMenteeReviewEditAction
+	 * @작성일 : 2021. 5. 21.
+	 * @작성자 : chanhoLee
+	 * @변경이력 : 
+	 * @Method 설명 :  멘티가 자신이 남겼던 리뷰를 수정할 때
+	 * @param reviewpk
+	 * @param paymentpk
+	 * @param reviewtitle
+	 * @param revietext
+	 * @param strreviewscore
+	 * @param reviewscore
+	 */
+	public void MMenteeReviewEditAction(int reviewpk, String paymentpk, String reviewtitle, String revietext, String strreviewscore, int reviewscore){
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		try {
+			connection=dataSource.getConnection();
+			String update="update review set reviewtitle = ?, reviewtext = ?, reviewscore = ? where reviewpk = ?";
+			preparedStatement=connection.prepareStatement(update);
+			preparedStatement.setString(1, reviewtitle);  
+			preparedStatement.setString(2, revietext);  
+			preparedStatement.setInt(3, reviewscore);  
+			preparedStatement.setInt(4, reviewpk);  
+			System.out.println(update);
+			preparedStatement.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * 
+	 * @Method Name : MMenteeReviewDeleteAction
+	 * @작성일 : 2021. 5. 21.
+	 * @작성자 : chanhoLee
+	 * @변경이력 : 
+	 * @Method 설명 : 멘티가 자신이 등록한 리뷰를 삭제시 아웃데이트를 업데이트 시켜쥰다
+	 * @param reviewpk
+	 */
+	public void MMenteeReviewDeleteAction(int reviewpk){
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		try {
+			connection=dataSource.getConnection();
+			String update="update review set outdate = now() where reviewpk = ?";
+			preparedStatement=connection.prepareStatement(update);
+			preparedStatement.setInt(1, reviewpk);  
+			System.out.println(update);
+			preparedStatement.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
 	
 }//----------------

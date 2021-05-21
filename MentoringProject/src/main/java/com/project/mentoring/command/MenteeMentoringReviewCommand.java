@@ -19,9 +19,6 @@ public class MenteeMentoringReviewCommand implements Command {
 		
 		System.out.println(paymentpk);
 		
-		// int userpk = session.getParameter("USERPK");
-		// 병합시 유저피케이 넣어주기
-		// 완료
 		HttpSession session = request.getSession();
 		String strUserPk = (String) session.getAttribute("userpk");
 		int userpk = Integer.parseInt(strUserPk);
