@@ -12,6 +12,7 @@
 </head>
 <body>
 <h3>원하는 날짜를 선택하세요</h3>
+<jsp:include page="customCalendar.jsp" flush="true"/>
 	
 <form  action="paymentDatatView.do" method="get">
 	<table>		
