@@ -19,12 +19,31 @@ import com.project.mentoring.command.AdminPageUserListShowCommand;
 import com.project.mentoring.command.Command;
 import com.project.mentoring.command.HomePageMentorListShowCommand;
 import com.project.mentoring.command.IntCommand;
+import com.project.mentoring.command.LogoutCommand;
+import com.project.mentoring.command.MenteeBookingCancelCommand;
+import com.project.mentoring.command.MenteeBookinglistCommand;
+import com.project.mentoring.command.MenteeMentoringListCommand;
+import com.project.mentoring.command.MenteeMentoringReviewCommand;
+import com.project.mentoring.command.MenteeReviewListCommand;
 import com.project.mentoring.command.MentorProfileInsertCommand;
 import com.project.mentoring.command.MentorProfileIntroduceInsertCommand;
 import com.project.mentoring.command.MentorProfileSubMajorFindCommand;
+import com.project.mentoring.command.MentorScheduledCompleteListShowCommand;
+import com.project.mentoring.command.MentorScheduledListShowCommand;
 import com.project.mentoring.command.MentorSelectMentorPkCommand;
+import com.project.mentoring.command.MentorTokenUpdateCommand;
+import com.project.mentoring.command.PAppointmentCommand;
+import com.project.mentoring.command.PMentorProductListCommand;
+import com.project.mentoring.command.PMentorProductPageCommand;
+import com.project.mentoring.command.PPaymentCommand;
+import com.project.mentoring.command.PProductScheduleSelectCommand;
+import com.project.mentoring.command.PProductScheduleViewCommand;
+import com.project.mentoring.command.PScheduleInsertCommand;
 import com.project.mentoring.command.UserCheckSelectCommand;
 import com.project.mentoring.command.UserCheckUpdateToMentorCommand;
+import com.project.mentoring.command.UserFindIdByEmailCommand;
+import com.project.mentoring.command.UserFindIdByPhoneCommand;
+import com.project.mentoring.command.UserFindPwCommand;
 import com.project.mentoring.command.UserLoginPageSelectCommand;
 import com.project.mentoring.command.UserSearchPageShowCommand;
 import com.project.mentoring.command.UserSignUpPageInsertCommand;
@@ -79,6 +98,10 @@ public class FrontController extends HttpServlet {
 		System.out.println(com);
 		
 		switch(com) {
+		
+		case("/logout.do"):
+			command = new LogoutCommand();
+			command.execute(request, response);
 		
 		case("/home.do"):
 			command = new HomePageMentorListShowCommand();
@@ -166,6 +189,7 @@ public class FrontController extends HttpServlet {
 				
 				UserCheckSelectCommand userCheckSelectCommand = new UserCheckSelectCommand();
 				int userCheck = userCheckSelectCommand.execute(request, response);
+				session.setAttribute("userCheck", userCheck);
 				// 로그인 성공후 멘토페이지 일반 유저 페이지 이동 여부 결정
 				if(userCheck == 1) {
 					
@@ -201,13 +225,67 @@ public class FrontController extends HttpServlet {
 			}
 			
 			break;
+			
+		case("/userFindIdByEmail.do"):
+			intCommand = new UserFindIdByEmailCommand();
+			int findIdByEmailResult = intCommand.execute(request, response);
+			
+			if(findIdByEmailResult  == 1) {
+				
+				request.setAttribute("findIdResult", findIdByEmailResult);
+				viewPage="userIdFindResult.jsp";
+				
+			}else {
+				request.setAttribute("findIdResult", findIdByEmailResult);
+				System.out.println("id찾기 오류");
+				viewPage="userFindId.jsp";
+			}	
+			
+			break;
+			
+		case("/userFindIdByPhone.do"):
+			intCommand = new UserFindIdByPhoneCommand();
+		
+			int findIdByPhoneResult = intCommand.execute(request, response);
+			
+			if(findIdByPhoneResult  == 1) {
+				request.setAttribute("findIdResult", findIdByPhoneResult);
+				viewPage="userIdFindResult.jsp";
+				
+			}else {
+				request.setAttribute("findIdResult", findIdByPhoneResult);
+				System.out.println("id찾기 오류");
+				viewPage="userFindId.jsp";
+				
+			}
+			break;
+		case("/userFindPwResult.do"):
+			intCommand = new UserFindPwCommand();
+			int findPwResult = intCommand.execute(request, response);
+			if(findPwResult == 1) {
+				
+				request.setAttribute("findPwResult", findPwResult);
+				viewPage="userFindPwResult.jsp";
+				
+			}else {
+				
+				request.setAttribute("findPwResult", findPwResult);
+				viewPage="userFindPw.jsp";
+			}
+			
+			break;
+			
 		case("/userShowSearchListPage.do"):
 			intCommand = new UserSearchPageShowCommand();
 			int searchResult = intCommand.execute(request, response);
 			
 			if(searchResult == 0) {
+				HttpSession session = request.getSession();
+				request.setAttribute("userCheck", session.getAttribute("userCheck"));
 				viewPage = "searchPage.jsp";
+				
 			}else {
+				
 				viewPage = "visitorPage.jsp";
 			}
 			
@@ -261,6 +339,9 @@ public class FrontController extends HttpServlet {
 			}
 			
 			break;
+			
+		
+		
 		case("/userCheckUpdate.do"):
 			intCommand = new UserCheckUpdateToMentorCommand();
 		
@@ -275,6 +356,154 @@ public class FrontController extends HttpServlet {
 				viewPage="userBeMentorPage4";
 			}
 		 break;
+		 
+		case("/mentorScheduledList.do"):
+			command = new MentorScheduledListShowCommand();
+			command.execute(request, response);
+			viewPage="mentorScheduledList.jsp";
+			break;
+			
+		case("/mentorScheduledCompleteList.do"):
+			System.out.println("업데이트 컨트롤러 들어옴");
+			intCommand = new MentorTokenUpdateCommand();
+			int tokenSendResult = intCommand.execute(request, response);
+			
+			if(tokenSendResult == 1) {
+				command = new MentorScheduledCompleteListShowCommand();
+				command.execute(request, response);
+				viewPage="mentorScheduledCompletePage.jsp";
+				
+			}else {
+				viewPage = "mentorScheduledList.jsp";
+			}
+			break;
+		case("/mentorScheduledCompleteListPage.do"):
+			command = new MentorScheduledCompleteListShowCommand();
+			command.execute(request, response);
+			viewPage="mentorScheduledCompletePage.jsp";
+
+			break;
+		 
+		case("/mentorProductList.do"):
+			System.out.println("멘토 마이페이지 product");
+			command=new PMentorProductListCommand();
+			command.execute(request, response);
+			viewPage="mentorProductList.jsp";
+			break;
+			//
+			
+		case("/mentorProductPage.do"):
+			command=new PMentorProductPageCommand();
+			command.execute(request, response);
+			viewPage="mentorProductPage.jsp";
+			break;
+			// -> 뭔가 구성이 이상해
+			
+		case("/mentorScheduleInsert.do"):
+			System.out.println("멘토 product 페이지");
+			command=new PMentorProductListCommand();
+			command.execute(request, response);
+			viewPage="productInsertSchedule.jsp";
+			break;
+			
+			//
+			
+		case("/insertScheduleView.do"):
+			System.out.println("스케쥴 입력 선택");
+			viewPage="insertScheduleView.jsp";
+			break;
+			
+			//-> 일단 없는 걸로 체크
+			
+		case("/insertScheduleAction.do"):
+			System.out.println("스케쥴 입력");
+			command=new PScheduleInsertCommand();
+			command.execute(request, response);
+			viewPage="/mentorProductPage.do";
+			break;
+			
+			
+		// 예약 관련 한 .do
+		case("/appointment.do"):
+			System.out.println("product 클릭 pageview");
+			command = new PAppointmentCommand();
+			command.execute(request, response);
+			viewPage="appointment.jsp";
+			break;
+			
+			//
+			
+		case("/paymentScheduleSelect.do"):
+			System.out.println("예약하기 클릭 calendarview");
+			command = new PProductScheduleViewCommand();
+			command.execute(request, response);
+			viewPage = "paymentScheduleSelect.jsp";
+			break;
+			
+			//
+			
+		case("/paymentDatatView.do"):
+			System.out.println("payment 전 정보 view");
+			command = new PProductScheduleSelectCommand();
+			command.execute(request, response);
+			viewPage = "paymentDataView.jsp";
+			break;
+			
+			//
+			
+		case("/paymentSuccess.do"):
+			System.out.println("payment db insert process");
+			command = new PPaymentCommand();
+			command.execute(request, response);
+			viewPage = "paymentSuccess.jsp";
+			break;
+			//
+			
+		case("/menteeBookingList.do"):
+			System.out.println("멘티예약리스트로가기");
+			command = new MenteeBookinglistCommand();
+			command.execute(request, response);
+			viewPage = "menteeBookingList.jsp";
+			break;
+			
+			//
+			
+		case("/menteeBookingCancel.do"):
+			System.out.println("멘티가 예약 취소");
+			command = new MenteeBookingCancelCommand();
+			command.execute(request, response);
+			viewPage = "menteeBookingList.do";
+			break;
+			
+			//
+			
+		case("/menteeMentoringList.do"):
+			System.out.println("멘티예약완료리스트로가기");
+			command = new MenteeMentoringListCommand();
+			command.execute(request, response);
+			viewPage = "menteeMentoringList.jsp";
+			break;
+			
+			//
+			
+		case("/menteeMentoringReview.do"):
+			System.out.println("멘티리뷰작성 가기");
+			command = new MenteeMentoringReviewCommand();
+			command.execute(request, response);
+			viewPage = "menteeReviewList.do";
+			break;
+			
+			//
+			
+		case("/menteeReviewList.do"):
+			System.out.println("멘티리뷰리스트 가기");
+			command = new MenteeReviewListCommand();
+			command.execute(request, response);
+			viewPage = "menteeReviewList.jsp";
+			break;	
+			
+			//
+		 
 			
 //		그외의 확인용 jsp .do 완료시에는 지우기
 		case("/sessionCheck.do"):

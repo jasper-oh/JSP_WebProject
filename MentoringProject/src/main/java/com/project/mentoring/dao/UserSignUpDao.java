@@ -55,4 +55,35 @@ public class UserSignUpDao {
 		return 0;
 	}
 	
+	public int idCheck(String id) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String idCheckQuery = "select userpk from user where userid = ?";
+			preparedStatement = connection.prepareStatement(idCheckQuery);
+			preparedStatement.setString(1, id);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				
+				return 1;
+			}
+			
+		}catch(Exception e) {
+			
+		}finally {
+			
+			
+			
+		}
+		
+		
+		return 0;
+	}
+	
 }
