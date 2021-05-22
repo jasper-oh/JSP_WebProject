@@ -61,10 +61,10 @@ public class MenteeDto {
 		this.totalprice = totalprice;
 	}
 	
-	public MenteeDto(String menteename, String majorname, String submajorname, Date startday, int starttime,
+	public MenteeDto(String mentorname, String majorname, String submajorname, Date startday, int starttime,
 			int endtime, int totalprice,String paymentpk) {
 		super();
-		this.menteename = menteename;
+		this.mentorname = mentorname;
 		this.majorname = majorname;
 		this.submajorname = submajorname;
 		this.startday = startday;

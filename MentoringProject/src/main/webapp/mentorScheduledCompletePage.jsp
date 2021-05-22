@@ -52,7 +52,7 @@
 		        <span> 예약된 분야 :${scheduledCompletedList.scheduledMajor } </span><br>
 		        <span>예약된 세부 분야 : ${scheduledCompletedList.scheduledSubMajor }</span><br>
 		        <span>예약된 가격 : ${scheduledCompletedList.scheduledPrice }</span> <br>
-		        <a href="mentorMentoringComplete.jsp" >멘토링 완료</a>
+		        <a href="mentorMentoringComplete.jsp?scheduledpk=${scheduledCompletedList.scheduledPk }" >멘토링 완료</a>
 		        <a href="#" >예약 취소 하기</a>
 		      </div>
 	      </c:forEach>

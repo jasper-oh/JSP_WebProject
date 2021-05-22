@@ -343,7 +343,7 @@ public class PaymentDao {
 	  * @param starttime
 	  * @param endtime
 	 */
-	public void creatschedule(String startday, String endday, String starttime, String endtime, int id) {
+	public void creatschedule(String startday, String endday, String starttime, String endtime, int productpk) {
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
@@ -376,11 +376,12 @@ public class PaymentDao {
 		PreparedStatement ps=null;	
 			try {
 				conn=dataSource.getConnection();
-				String query = "INSERT INTO schedule (product_productpk, startday, starttime, endtime) values ("+id+", date_add('"+startday+"',INTERVAL 1 DAY), "+starttime+", "+endtime+") ";
+				String query = "insert into schedule (product_productpk, startday, starttime, endtime, totalprice) values "
+						+ "("+productpk+", DATE_ADD(curdate(), INTERVAL 0 DAY), "+starttime+", "+endtime+", (select price from product where productpk = "+productpk+" )*("+endtime+" - "+starttime+")) ";
 				String a = "";
 				
 				for (int i=1; i<count; i++) {
-					a = a+", ("+id+", date_add('"+startday+"', INTERVAL "+i+" DAY), "+starttime+", "+endtime+") ";
+					a = a+", ("+productpk+", DATE_ADD(curdate(), INTERVAL "+i+" DAY), "+starttime+", "+endtime+", (select price from product where productpk = "+productpk+" )*("+endtime+" - "+starttime+")) ";
 				}
 				ps=conn.prepareStatement(query+a);
 				ps.executeUpdate();
@@ -901,7 +902,7 @@ public class PaymentDao {
 			preparedStatement.setInt(1, userpk);  
 			resultSet=preparedStatement.executeQuery();
 			while(resultSet.next()) {		
-				String menteename = resultSet.getString("mentorname");
+				String mentorname = resultSet.getString("mentorname");
 				String majorname = resultSet.getString("majorname");
 				String submajorname = resultSet.getString("submajorname");
 				Date startday = resultSet.getDate("startday");
@@ -911,7 +912,7 @@ public class PaymentDao {
 				String paymentpk = resultSet.getString("paymentpk");
 				
 				
-				MenteeDto dto= new MenteeDto(menteename, majorname, submajorname, startday, starttime, endtime, totalprice, paymentpk);		
+				MenteeDto dto= new MenteeDto(mentorname, majorname, submajorname, startday, starttime, endtime, totalprice, paymentpk);		
 				dtos.add(dto);
 				
 				System.out.println(dtos);

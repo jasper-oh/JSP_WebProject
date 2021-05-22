@@ -14,10 +14,10 @@
 	
 	<h4>당신의 멘티에게서 받은 토큰 번호를 입력하면 돈이 바로 송금 됩니다!</h4>
 	
-	<form action="">
+	<form action="/MentoringProject/mentorMentoringCompleteTokenCheck.do" method="post">
 		
-	
-		<input type="text">
+		<input type="text" name="schedulepk" value="<%out.print(request.getParameter("scheduledpk"));%>">
+		<input type="text" name="token">
 		
 		
 		<input type="submit" value="토큰 번호 입력">

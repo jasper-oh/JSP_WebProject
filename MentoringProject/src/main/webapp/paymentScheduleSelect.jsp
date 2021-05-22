@@ -25,12 +25,12 @@
 </tr>
 		<tr>
 		<c:forEach var="dto" items="${ScheduleSelect }" varStatus="status" >
-    <td align="center"><input type="text" size="3" value="${status.count }" name="count"/></td>
-    <td align="center"><input type="text" size="10" value="${dto.startday }" name="startday"/></td>
+    <td align="center"><input type="text" size="3" value="${status.count }" name="count" readonly="readonly"/></td>
+    <td align="center"><input type="text" size="10" value="${dto.startday }" name="startday" readonly="readonly"/></td>
     <td align="center">
-    <input type="text" size="3" value="${dto.starttime }" name="starttime"/>~
-    <input type="text" size="3" value="${dto.endtime }" name="endtime"/></td>
-    <td align="center"><input type="text" size="8" value="${dto.totalprice }" name="totalprice"/></td>
+    <input type="text" size="3" value="${dto.starttime }" name="starttime" readonly="readonly"/>~
+    <input type="text" size="3" value="${dto.endtime }" name="endtime" readonly="readonly"/></td>
+    <td align="center"><input type="text" size="8" value="${dto.totalprice }" name="totalprice" readonly="readonly"/></td>
     <td align="center"><input type="hidden" name=schedulepk value="${dto.schedulepk}"/>
 <input type="radio" name="schedulepk" value="${dto.schedulepk}" ></td>
 		
