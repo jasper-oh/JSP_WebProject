@@ -818,7 +818,7 @@ public class PaymentDao {
 		System.out.println(2);
 		try {		
 			connection=dataSource.getConnection();
-			String query="select mentoruser.username as mentorname, mj.majorname, p.title , r.reviewtitle, p.productpk\n"
+			String query="select mentoruser.username as mentorname, mj.majorname, p.title , r.reviewtitle, p.productpk, r.reviewpk\n"
 					+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
 					+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
 					+ " inner join review as r on mentee.userpk = r.user_userpk\n"
@@ -840,10 +840,11 @@ public class PaymentDao {
 				String title = resultSet.getString("title");
 				String reviewtitle = resultSet.getString("reviewtitle");
 				String productpk = resultSet.getString("productpk");
+				int reviewpk = resultSet.getInt("reviewpk");
 				
 				
 				
-				MenteeDto dto=new MenteeDto(mentorname, majorname, title, reviewtitle, productpk);		
+				MenteeDto dto=new MenteeDto(mentorname, majorname, title, reviewtitle, productpk,reviewpk);		
 				dtos.add(dto);
 				
 				System.out.println(dtos);

@@ -28,6 +28,7 @@
 		    <td>${dto.mentorname }</td>
 			<td>${dto.majorname }</td>
 			<td>${dto.title }</td>
+			
 			<td><a href="/MentoringProject/menteeReviewEdit.do?reviewpk=${dto.reviewpk }">${dto.reviewtitle }</a></td>
 			
 			<td><a href="/MentoringProject/appointment.do?productpk=${dto.productpk }">보러가기</a></td>

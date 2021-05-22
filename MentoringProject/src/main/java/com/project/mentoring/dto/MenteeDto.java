@@ -38,13 +38,14 @@ public class MenteeDto {
 		this.paymentcanceldate = paymentcanceldate;
 		this.paymentpaydate = paymentpaydate;
 	}
-	public MenteeDto(String mentorname, String majorname, String title, String reviewtitle, String productpk) {
+	public MenteeDto(String mentorname, String majorname, String title, String reviewtitle, String productpk,int reviewpk) {
 		super();
 		this.mentorname = mentorname;
 		this.majorname = majorname;
 		this.title = title;
 		this.reviewtitle = reviewtitle;
 		this.productpk = productpk;
+		this.reviewpk = reviewpk;
 	}
 
 	public MenteeDto(String menteename, String majorname, String submajorname, Date startday, int starttime,

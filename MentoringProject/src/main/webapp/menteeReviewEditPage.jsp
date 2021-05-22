@@ -9,8 +9,8 @@
 </head>
 <body>
 		<h1>리뷰수정삭제 페이지</h1>
+	<form action="/MentoringProject/menteeReviewEditAction.do?reviewpk=${param.reviewpk }" method="post">
  	<table border="0">
-	<form action="menteeReviewEditAction.do?reviewpk=${param.reviewpk }" method="post">
 		<c:forEach items="${MenteeReviewList }" var="dto">
 		<tr>
 			<td>결제번호</td>
@@ -22,7 +22,7 @@
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><textarea rows="10" cols="50" name="reviewtext" value = "${dto.reviewtext }">${dto.reviewtext }</textarea></td>
+			<td><textarea rows="10" cols="50" name="reviewtext" >${dto.reviewText }</textarea></td>
 		</tr>
 		<tr>
 			<td>점수</td>		
@@ -34,10 +34,10 @@
 		</tr>
 		<tr>
 			<td><input type="submit" value="수정"></td>
-			<td><a href="/Project/menteeReviewDeleteAction.do?reviewpk=${param.reviewpk }">삭제하기</a></td>
+			<td><a href="/MentoringProject/menteeReviewDeleteAction.do?reviewpk=${param.reviewpk }">삭제하기</a></td>
 		</tr>
 	</c:forEach>
-	</form>
 	</table>
+	</form>
 </body>
 </html>
