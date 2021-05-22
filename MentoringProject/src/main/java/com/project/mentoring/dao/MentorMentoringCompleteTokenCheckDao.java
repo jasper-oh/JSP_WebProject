@@ -58,4 +58,33 @@ public class MentorMentoringCompleteTokenCheckDao {
 		return schedulePk;
 		
 	}
+
+
+	public void updateSendDate(int scheduledPk , String token) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = dataSource.getConnection();
+			String updateSendDateQuery = "update payment set paymentsenddate = now() where schedule_schedulepk = ? and paymenttoken= '"+token+"'";
+			preparedStatement = connection.prepareStatement(updateSendDateQuery);
+			
+			preparedStatement.setInt(1, scheduledPk);
+			preparedStatement.executeUpdate();
+			
+			System.out.println("111111업데이트 완료");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();	
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 }

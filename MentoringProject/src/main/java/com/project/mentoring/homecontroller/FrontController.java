@@ -29,6 +29,7 @@ import com.project.mentoring.command.MenteeReviewEditActionCommand;
 import com.project.mentoring.command.MenteeReviewEditCommand;
 import com.project.mentoring.command.MenteeReviewListCommand;
 import com.project.mentoring.command.MentorMentoringCompleteTokenCheckCommand;
+import com.project.mentoring.command.MentorMentoringCompleteUpdatePaymentSendDateCommand;
 import com.project.mentoring.command.MentorProfileInsertCommand;
 import com.project.mentoring.command.MentorProfileIntroduceInsertCommand;
 import com.project.mentoring.command.MentorProfileSubMajorFindCommand;
@@ -387,7 +388,6 @@ public class FrontController extends HttpServlet {
 			command = new MentorScheduledCompleteListShowCommand();
 			command.execute(request, response);
 			viewPage="mentorScheduledCompletePage.jsp";
-
 			break;
 		 
 		case("/mentorProductList.do"):
@@ -428,11 +428,15 @@ public class FrontController extends HttpServlet {
 			viewPage="/mentorProductPage.do";
 			break;
 			
-		case("mentorMentoringCompleteTokenCheck.do"):
+		case("/mentorMentoringCompleteTokenCheck.do"):
+			System.out.println("토큰 번호 체크 입장");
 			intCommand = new MentorMentoringCompleteTokenCheckCommand();
 			int tokenInsertResult = intCommand.execute(request, response);
 			
 			if(tokenInsertResult == 1) {
+				command = new MentorMentoringCompleteUpdatePaymentSendDateCommand();
+				command.execute(request, response);
+				System.out.println("22SendDateUpdate Complete");
 				System.out.println("토큰 번호 맞다");
 				viewPage="tokenCheckSuccessPaymentSuccessPage.jsp";
 			}else {
