@@ -3,7 +3,7 @@ package com.project.mentoring.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.cj.Session;
+//import com.mysql.cj.Session;
 import com.project.mentoring.dao.MentorProfileDao;
 
 public class MentorProfileIntroduceInsertCommand implements IntCommand {

@@ -31,6 +31,8 @@ import com.project.mentoring.command.MenteeReviewListCommand;
 import com.project.mentoring.command.MentorProfileInsertCommand;
 import com.project.mentoring.command.MentorProfileIntroduceInsertCommand;
 import com.project.mentoring.command.MentorProfileSubMajorFindCommand;
+import com.project.mentoring.command.MentorScheduleDeleteCommand;
+import com.project.mentoring.command.MentorScheduleListViewCommand;
 import com.project.mentoring.command.MentorScheduledCompleteListShowCommand;
 import com.project.mentoring.command.MentorScheduledListShowCommand;
 import com.project.mentoring.command.MentorSelectMentorPkCommand;
@@ -51,6 +53,7 @@ import com.project.mentoring.command.UserLoginPageSelectCommand;
 import com.project.mentoring.command.UserSearchPageShowCommand;
 import com.project.mentoring.command.UserSignUpPageInsertCommand;
 import com.project.mentoring.dao.UserLoginDao;
+
 
 // 기본 마스터
 
@@ -389,43 +392,56 @@ public class FrontController extends HttpServlet {
 
 			break;
 		 
+			//-------------------2021-05-22seolin-------------------
+			//PMentorProductPageCommand 수정
+			//PMentorProductListCommand 수정
+			//mentorProductList.jsp 수정
+			//mentorProductPage.jsp 수정
+			//MetorScheduleActionDao 추가
+			//ScheduleDto 추가
+			//mentorScheduleInsert.do --->삭제해도 될 것 같음!!
 		case("/mentorProductList.do"):
 			System.out.println("멘토 마이페이지 product");
 			command=new PMentorProductListCommand();
 			command.execute(request, response);
 			viewPage="mentorProductList.jsp";
-			break;
-			//
-			
+			break;		
 		case("/mentorProductPage.do"):
 			command=new PMentorProductPageCommand();
 			command.execute(request, response);
 			viewPage="mentorProductPage.jsp";
 			break;
-			// -> 뭔가 구성이 이상해
-			
+			// -> 뭔가 구성이 이상해			
 		case("/mentorScheduleInsert.do"):
 			System.out.println("멘토 product 페이지");
 			command=new PMentorProductListCommand();
 			command.execute(request, response);
-			viewPage="productInsertSchedule.jsp";
+			viewPage="mentorScheduleListView.jsp";
+			break;			
+		case("/mentorScheduleListView.do"):
+			System.out.println("product->schedule");
+			command=new MentorScheduleListViewCommand();
+			command.execute(request, response);
+			viewPage="mentorScheduleListView.jsp";
 			break;
-			
-			//
-			
+		case("/deleteSchedule.do"):
+			System.out.println("schedule->delete");
+			command=new MentorScheduleDeleteCommand();
+			command.execute(request, response);
+			viewPage="mentorScheduleListView.do";
+			break;
 		case("/insertScheduleView.do"):
 			System.out.println("스케쥴 입력 선택");
-			viewPage="insertScheduleView.jsp";
-			break;
-			
+			viewPage="productInsertSchedule.jsp";
+			break;			
 			//-> 일단 없는 걸로 체크
-			
 		case("/insertScheduleAction.do"):
 			System.out.println("스케쥴 입력");
 			command=new PScheduleInsertCommand();
 			command.execute(request, response);
-			viewPage="/mentorProductPage.do";
+			viewPage="/mentorScheduleListView.do";
 			break;
+			//--------------------2021-05-22seolin------------------
 			
 			
 		// 예약 관련 한 .do
