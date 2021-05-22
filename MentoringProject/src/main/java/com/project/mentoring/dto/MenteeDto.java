@@ -13,13 +13,16 @@ public class MenteeDto {
 	int endtime;
 	String paymentpk;
 	String paymenttoken;
-	Timestamp paymentcanceldate;
-	Timestamp paymentpaydate;
-	String mentorname;
 	int totalprice;
 	String reviewtitle;
 	String productpk;
 	String title;
+	int reviewpk;
+	String reviewText;
+	int reviewscore;
+	Timestamp paymentcanceldate;
+	Timestamp paymentpaydate;
+	String mentorname;
 	
 	public MenteeDto(String menteename, String majorname, String submajorname, Date startday, int starttime,
 			int endtime, String paymentpk, String paymenttoken, Timestamp paymentcanceldate, Timestamp paymentpaydate) {
@@ -44,10 +47,6 @@ public class MenteeDto {
 		this.productpk = productpk;
 	}
 
-
-
-
-
 	public MenteeDto(String menteename, String majorname, String submajorname, Date startday, int starttime,
 			int endtime, String paymentpk, int totalprice) {
 		super();
@@ -60,6 +59,21 @@ public class MenteeDto {
 		this.paymentpk = paymentpk;
 		this.totalprice = totalprice;
 	}
+	
+	public MenteeDto(String menteename, String majorname, String submajorname, Date startday, int starttime,
+			int endtime, int totalprice,String paymentpk) {
+		super();
+		this.menteename = menteename;
+		this.majorname = majorname;
+		this.submajorname = submajorname;
+		this.startday = startday;
+		this.starttime = starttime;
+		this.endtime = endtime;
+		this.totalprice = totalprice;
+		this.paymentpk = paymentpk;
+	}
+	
+	
 	public MenteeDto(String menteename, String majorname, String submajorname, Date startday, int starttime,
 			int endtime, String paymentpk, String paymenttoken) {
 		super();
@@ -73,7 +87,14 @@ public class MenteeDto {
 		this.paymenttoken = paymenttoken;
 	}
 
-
+	
+	public MenteeDto(String paymentpk, String reviewtitle, String reviewText, int reviewscore) {
+		super();
+		this.paymentpk = paymentpk;
+		this.reviewtitle = reviewtitle;
+		this.reviewText = reviewText;
+		this.reviewscore = reviewscore;
+	}
 	public String getMentorname() {
 		return mentorname;
 	}
@@ -199,7 +220,24 @@ public class MenteeDto {
 		this.paymentpk = paymentpk;
 	}
 
-
+	public int getReviewpk() {
+		return reviewpk;
+	}
+	public void setReviewpk(int reviewpk) {
+		this.reviewpk = reviewpk;
+	}
+	public String getReviewText() {
+		return reviewText;
+	}
+	public void setReviewText(String reviewText) {
+		this.reviewText = reviewText;
+	}
+	public int getReviewscore() {
+		return reviewscore;
+	}
+	public void setReviewscore(int reviewscore) {
+		this.reviewscore = reviewscore;
+	}
 
 	
 	

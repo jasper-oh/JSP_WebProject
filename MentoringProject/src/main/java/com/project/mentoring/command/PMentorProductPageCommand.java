@@ -1,5 +1,7 @@
 package com.project.mentoring.command;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,10 +14,13 @@ public class PMentorProductPageCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		String strpk = request.getParameter("productpk");	
-		int pk = Integer.parseInt(strpk);	
+		int productpk = Integer.parseInt(strpk);	
 		PaymentDao dao = new PaymentDao();
-		PaymentDto dto = dao.ProductPage(pk);
+		PaymentDto dto = dao.ProductPage(productpk);
 		request.setAttribute("ProductPage", dto);
+		ArrayList<PaymentDto> dtoS = dao.ProductList(productpk);
+		request.setAttribute("ProductList", dtoS);
+		
 
 	}
 

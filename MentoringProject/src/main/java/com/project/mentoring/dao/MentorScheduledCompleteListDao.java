@@ -52,9 +52,9 @@ public class MentorScheduledCompleteListDao {
 			String mentorScheduledListShowQuery7 = "inner join mentor as m on p.mentor_mentorpk = m.mentorpk ";
 			String mentorScheduledListShowQuery8 = "inner join user as mu on mu.userpk = m.user_userpk ";
 			String mentorScheduledListShowQuery9 = "where m.user_userpk = " + userPk;
-			String mentorScheduledListShowQuery10 = " and py.paymentsenddate is null and py.paymenttoken is not null";
-			
-			
+			String mentorScheduledListShowQuery10 = " and py.paymenttoken is not null and py.paymentsenddate is null ";
+			// and py.paymentsenddate is null 과  and not py.paymentsenddate is null 
+		
 			prepareStatement = connection.prepareStatement(mentorScheduledListShowQuery1 + mentorScheduledListShowQuery2 + mentorScheduledListShowQuery3 +mentorScheduledListShowQuery4 +mentorScheduledListShowQuery5 + mentorScheduledListShowQuery6 +mentorScheduledListShowQuery7 + mentorScheduledListShowQuery8 +mentorScheduledListShowQuery9 + mentorScheduledListShowQuery10);
 			resultSet = prepareStatement.executeQuery();
 			

@@ -14,8 +14,8 @@ public class PScheduleInsertCommand implements Command {
 		int id = Integer.parseInt(strid);
 		String startday = request.getParameter("startday");
 		String endday = request.getParameter("endday");
-		String starttime = request.getParameter("starttime");
-		String endtime = request.getParameter("endtime");
+		int starttime = Integer.parseInt(request.getParameter("starttime"));
+		int endtime = Integer.parseInt(request.getParameter("endtime"));
 		PaymentDao dao=new PaymentDao();
 		dao.creatschedule(startday, endday, starttime, endtime, id);
 	}
