@@ -52,6 +52,8 @@ import com.project.mentoring.command.UserSearchPageShowCommand;
 import com.project.mentoring.command.UserSignUpPageInsertCommand;
 import com.project.mentoring.dao.UserLoginDao;
 
+// 기본 마스터
+
 /**
  * Servlet implementation class FrontController
  */
