@@ -28,6 +28,7 @@ import com.project.mentoring.command.MenteeReviewDeleteActionCommand;
 import com.project.mentoring.command.MenteeReviewEditActionCommand;
 import com.project.mentoring.command.MenteeReviewEditCommand;
 import com.project.mentoring.command.MenteeReviewListCommand;
+import com.project.mentoring.command.MentorPayReceiveListCommand;
 import com.project.mentoring.command.MentorProfileInsertCommand;
 import com.project.mentoring.command.MentorProfileIntroduceInsertCommand;
 import com.project.mentoring.command.MentorProfileSubMajorFindCommand;
@@ -386,6 +387,33 @@ public class FrontController extends HttpServlet {
 			viewPage="mentorScheduledCompletePage.jsp";
 
 			break;
+		
+	//-------------     5/23 이찬호 시작   -------------------		
+			/**
+			 *  5/23 일요일
+			 *  정산완료 페이지 작업
+			 *  이찬호
+			 */
+			
+		case("/mentorPayReceiveList.do"):
+			System.out.println("정산완료리스트 띄우기 시작");
+			command = new MentorPayReceiveListCommand();
+			command.execute(request, response);
+			viewPage="mentorPayReceivePage.jsp";
+
+			break;
+			
+			
+			
+			
+			
+			
+			
+			
+		//------------------ 5/23 이찬호 종료 ---------	------
+			
+			
+			
 		 
 		case("/mentorProductList.do"):
 			System.out.println("멘토 마이페이지 product");
@@ -491,6 +519,9 @@ public class FrontController extends HttpServlet {
 			
 			
 			// 문제 생김 -------
+			/**
+			 * 
+			 */
 		case("/menteeMentoringReview.do"):
 			System.out.println("멘티리뷰작성 가기");
 			command = new MenteeMentoringReviewCommand();
