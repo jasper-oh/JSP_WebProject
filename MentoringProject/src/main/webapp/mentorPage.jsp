@@ -35,7 +35,7 @@
             </div>
             <div class="menu">
                 <ul>
-                	<li><a href="userBeMentorPage.jsp">멘토정보 추가등록</a></li>
+                	<li><a href="userBeMentorPage.jsp">포스정보 추가등록</a></li>
                     <li><a href="helpPage.jsp">도움말</a></li>
                     <li><a href="mentorMyPage.jsp">마이페이지</a></li>
                     <li><a href="visitorPage.jsp">로그아웃</a></li>
@@ -44,7 +44,7 @@
         </nav>
         <section>
             <div class="search__box">
-                <div class="search__title">당신의 멘토를<br /> 검색해 보세요.</div>
+                <div class="search__title">당신의 마스터를<br /> 검색해 보세요.</div>
                	<form action="userShowSearchListPage.do" method="post">
 	                <table>
 	                    <tr>
@@ -79,7 +79,7 @@
 	                        	<select class="search__input" name="mentorMajor" onchange="handleOnChange(this)">
 							
 									<option value="0" selected="selected">
-												전공을 선택해주세요!
+												포스를 선택해주세요!
 									</option>
 																	
 									<%for(int i = 0; i < adminMajorList.size() ; i++){ %>
@@ -92,7 +92,7 @@
 	                        </td>
 	                    </tr>
 	                    <tr>
-	                        <td colspan="2" class="search__sub__title">세부분야 검색하기</td>
+	                        <td colspan="2" class="search__sub__title">세부포스 검색하기</td>
 	                    </tr>
 	                    <tr>
 	                        <td><input class="search__input"  type="text" name="mentorSubMajor"/></td>
@@ -131,7 +131,7 @@
             <div class="ad1"></div>
         </section>
         <section>
-            <div class="sec__title">분야별 최고의 멘토</div>
+            <div class="sec__title">분야별 최고의 마스터</div>
             <div class="choo__box">
                 <div class="choo_img1"></div>
                 <div class="choo_img2"></div>
@@ -142,7 +142,7 @@
         </section>
         <section>
             <div class="sec__title2">Take Your Time Premium 을 만나보세요!</div>
-            <div class="sec__content">퀄리티와 실력이 검증된 멘토 PICK!</div>
+            <div class="sec__content">퀄리티와 실력이 검증된 마스터 PICK!</div>
             <div class="ad2"></div>
         </section>
     </main>

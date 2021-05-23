@@ -1,3 +1,4 @@
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@
     <body>
     <h2>스케쥴 데이터를 입력하세요</h2>
     <jsp:include page="customCalendar.jsp" flush="true"/>
-     <form action="insertScheduleAction.do?productpk=<%=request.getParameter("productpk")%>" method="post">
+     <form action="insertScheduleAction.do?" method="get">
       멘토링 가능날짜를 선택하세요
       <table>
 	      <tr> 

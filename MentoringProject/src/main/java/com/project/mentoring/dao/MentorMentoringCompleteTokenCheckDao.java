@@ -72,7 +72,7 @@ public class MentorMentoringCompleteTokenCheckDao {
 			preparedStatement.setInt(1, scheduledPk);
 			preparedStatement.executeUpdate();
 			
-			System.out.println("111111업데이트 완료");
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

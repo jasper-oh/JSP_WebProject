@@ -334,7 +334,7 @@ public class PaymentDao {
 	
 	  * @작성자 : biso
 	
-	  * @변경이력 : 
+	  * @변경이력 : createschedule 이름 변경 && 약간의 오류가 있는 거 같음
 	
 	  * @Method 설명 : mentor가 product에 schedule을 insert
 	
@@ -343,7 +343,7 @@ public class PaymentDao {
 	  * @param starttime
 	  * @param endtime
 	 */
-	public void creatschedule(String startday, String endday, String starttime, String endtime, int productpk) {
+	public void createschedule(String startday, String endday, String starttime, String endtime, int productpk) {
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;

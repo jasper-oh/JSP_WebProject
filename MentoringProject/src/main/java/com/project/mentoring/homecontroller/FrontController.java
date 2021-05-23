@@ -28,11 +28,17 @@ import com.project.mentoring.command.MenteeReviewDeleteActionCommand;
 import com.project.mentoring.command.MenteeReviewEditActionCommand;
 import com.project.mentoring.command.MenteeReviewEditCommand;
 import com.project.mentoring.command.MenteeReviewListCommand;
+import com.project.mentoring.command.MentorInfoShowCommand;
+import com.project.mentoring.command.MentorInfoUpdateCommand;
 import com.project.mentoring.command.MentorMentoringCompleteTokenCheckCommand;
 import com.project.mentoring.command.MentorMentoringCompleteUpdatePaymentSendDateCommand;
+import com.project.mentoring.command.MentorPayReceiveListCommand;
+import com.project.mentoring.command.MentorProductUpdateCommand;
 import com.project.mentoring.command.MentorProfileInsertCommand;
 import com.project.mentoring.command.MentorProfileIntroduceInsertCommand;
 import com.project.mentoring.command.MentorProfileSubMajorFindCommand;
+import com.project.mentoring.command.MentorScheduleDeleteCommand;
+import com.project.mentoring.command.MentorScheduleListViewCommand;
 import com.project.mentoring.command.MentorScheduledCompleteListShowCommand;
 import com.project.mentoring.command.MentorScheduledListShowCommand;
 import com.project.mentoring.command.MentorSelectMentorPkCommand;
@@ -347,6 +353,31 @@ public class FrontController extends HttpServlet {
 			
 			break;
 			
+		// 작업중	
+		case("/mentorInfoUpdatePage.do"):
+			System.out.println("마이페이지 인포 보기 들어옴");
+			command = new MentorInfoShowCommand();
+			command.execute(request, response);
+			viewPage="mentorInfoShowPage.jsp";
+			break;
+			
+			
+		case("/mentorInfoUpdate.do"):
+			System.out.println("정보 업데이트 커맨드 들어옴");
+		    intCommand = new MentorInfoUpdateCommand();
+		    int updateResult = intCommand.execute(request, response);
+		    
+		    if(updateResult == 1) {
+		    	System.out.println("업데이트 성공");
+		    	viewPage="/mentorInfoUpdatePage.do";
+		    	
+		    }else {
+		    	System.out.println("업데이트 실패");
+		    	viewPage="/mentorInfoUpdatePage.do";
+		    }
+		    
+		    		
+		    break;
 		
 		
 		case("/userCheckUpdate.do"):
@@ -390,6 +421,30 @@ public class FrontController extends HttpServlet {
 			viewPage="mentorScheduledCompletePage.jsp";
 			break;
 		 
+ 
+		case("/mentorPayReceiveList.do"):
+			System.out.println("정산완료리스트 띄우기 시작");
+			command = new MentorPayReceiveListCommand();
+			command.execute(request, response);
+			viewPage="mentorPayReceivePage.jsp";
+
+			break;	
+		
+			//-------------------2021-05-22seolin-------------------
+			//PMentorProductPageCommand 수정
+			
+			//PMentorProductListCommand 수정
+			
+			//mentorProductList.jsp 수정
+			
+			//mentorProductPage.jsp 수정
+			
+			//MetorScheduleActionDao 추가
+			
+			//ScheduleDto 추가
+			
+			//mentorScheduleInsert.do --->삭제해도 될 것 같음!!
+			
 		case("/mentorProductList.do"):
 			System.out.println("멘토 마이페이지 product");
 			command=new PMentorProductListCommand();
@@ -403,20 +458,37 @@ public class FrontController extends HttpServlet {
 			command.execute(request, response);
 			viewPage="mentorProductPage.jsp";
 			break;
-			// -> 뭔가 구성이 이상해
-			
-		case("/mentorScheduleInsert.do"):
-			System.out.println("멘토 product 페이지");
-			command=new PMentorProductListCommand();
+		
+		case("/mentorProductUpdate.do"):
+			command = new MentorProductUpdateCommand();
 			command.execute(request, response);
-			viewPage="productInsertSchedule.jsp";
+			viewPage="/mentorProductList.do";
 			break;
 			
+			
+//		case("/mentorScheduleInsert.do"):
+//			System.out.println("멘토 product 페이지");
+//			command=new PMentorProductListCommand();
+//			command.execute(request, response);
+//			viewPage="productInsertSchedule.jsp";
+//			break;
+		case("/mentorScheduleListView.do"):
+			System.out.println("product->schedule");
+			command=new MentorScheduleListViewCommand();
+			command.execute(request, response);
+			viewPage="mentorScheduleListView.jsp";
+			break;
 			//
+		case("/deleteSchedule.do"):
+			System.out.println("schedule->delete");
+			command=new MentorScheduleDeleteCommand();
+			command.execute(request, response);
+			viewPage="mentorScheduleListView.do";
+			break;
 			
 		case("/insertScheduleView.do"):
 			System.out.println("스케쥴 입력 선택");
-			viewPage="insertScheduleView.jsp";
+			viewPage="productInsertSchedule.jsp";
 			break;
 			
 			//-> 일단 없는 걸로 체크
@@ -425,7 +497,7 @@ public class FrontController extends HttpServlet {
 			System.out.println("스케쥴 입력");
 			command=new PScheduleInsertCommand();
 			command.execute(request, response);
-			viewPage="/mentorProductPage.do";
+			viewPage="/mentorScheduleListView.do";
 			break;
 			
 		case("/mentorMentoringCompleteTokenCheck.do"):

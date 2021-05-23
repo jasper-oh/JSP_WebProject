@@ -21,7 +21,7 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="mentorInfoUpdatePage.do">기본 정보수정</a></li>
+                    <li><a href="/MentoringProject/mentorInfoUpdatePage.do">기본 정보수정</a></li>
                     <li><a href="/MentoringProject/mentorProductList.do">포스 관리</a></li>
                     <li><a href="/MentoringProject/mentorScheduledList.do">예약관리</a></li>
                    	<li> <a href="정산관리.jsp">정산 관리</a></li>

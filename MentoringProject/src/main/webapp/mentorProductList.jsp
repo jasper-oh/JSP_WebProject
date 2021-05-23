@@ -41,6 +41,8 @@
 			<th>부전공</th>
 			<th>title</th>
 			<th>가격</th>
+			<th>삭제</th>
+			
 		
 		</tr>
 		<c:forEach items="${ProductList }" var="dto">
@@ -50,6 +52,7 @@
 			<td>${dto.submajorname }</td>
 			<td><a href="/MentoringProject/mentorProductPage.do?productpk=${dto.productpk }">${dto.title }</a></td>
 			<td>${dto.price }</td>
+			<td><a href="">삭제하기 </a></td>
 			
 			
 		</tr>		

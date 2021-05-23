@@ -40,7 +40,7 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="userBeMentorPage.jsp">멘토가 되어보세요</a></li>
+                    <li><a href="userBeMentorPage.jsp">마스터가 되어보세요</a></li>
                     <li><a href="helpPage.jsp">도움말</a></li>
                     <li><a href="userMyPage.jsp">마이페이지</a></li>
                     <li><a href="visitorPage.jsp">로그아웃</a></li>
@@ -49,7 +49,7 @@
         </nav>
        <section>
             <div class="search__box">
-                <div class="search__title">당신의 멘토를<br /> 검색해 보세요.</div>
+                <div class="search__title">당신의 마스터를<br /> 검색해 보세요.</div>
                	<form action="userShowSearchListPage.do" method="post">
 	                <table>
 	                    <tr>
@@ -139,7 +139,7 @@
         </section>
 
         <section>
-            <div class="sec__title">분야별 최고의 멘토</div>
+            <div class="sec__title">분야별 최고의 마스터</div>
             <div class="choo__box">
                 <div class="choo_img1"></div>
                 <div class="choo_img2"></div>
@@ -151,11 +151,11 @@
 
         <section>
             <div class="sec__title2">Take Your Time Premium 을 만나보세요!</div>
-            <div class="sec__content">퀄리티와 실력이 검증된 멘토 PICK!</div>
+            <div class="sec__content">퀄리티와 실력이 검증된 마스터 PICK!</div>
             <div class="ad2"></div>
         </section>
       <section>
-            <div class="sec__title">멘토 프로필</div>
+            <div class="sec__title">마스터 프로필</div>
 
             <div class="home__box">
                 <c:forEach items="${mentorProfile1 }" var="mentorProfile1">
