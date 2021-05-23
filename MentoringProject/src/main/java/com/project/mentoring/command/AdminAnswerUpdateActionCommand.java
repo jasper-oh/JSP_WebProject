@@ -11,11 +11,13 @@ import com.project.mentoring.dto.QnaDto;
 import com.project.mentoring.dto.ShareVar;
 
 /**
- * 클래스설명 : 
- * @version : 2021. 5. 23.
- * @author : biso
- * @분류 : 
- * MentoringProject / package com.project.mentoring.command;
+ * 
+ * 1. ClassName : 
+ * 2. FileName          : AdminAnswerUpdateActionCommand.java
+ * 3. Package           : com.project.mentoring.command
+ * 4. Commnet           : 
+ * 5. 작성자                       : biso
+ * 6. 작성일                       : 2021. 5. 24. 오전 2:34:40
  */
 
 public class AdminAnswerUpdateActionCommand implements Command {

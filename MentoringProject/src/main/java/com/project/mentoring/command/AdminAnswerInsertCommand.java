@@ -10,11 +10,13 @@ import com.project.mentoring.dao.QnaDao;
 import com.project.mentoring.dto.QnaDto;
 
 /**
- * 클래스설명 : 
- * @version : 2021. 5. 23.
- * @author : biso
- * @분류 : 
- * MentoringProject / package com.project.mentoring.command;
+ * 
+ * 1. ClassName : 
+ * 2. FileName          : AdminAnswerInsertCommand.java
+ * 3. Package           : com.project.mentoring.command
+ * 4. Commnet           : 
+ * 5. 작성자                       : biso
+ * 6. 작성일                       : 2021. 5. 24. 오후 2:34:48
  */
 
 public class AdminAnswerInsertCommand implements Command {

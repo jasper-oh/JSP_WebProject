@@ -6,10 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.project.mentoring.dao.AdminMajorListDao;
 import com.project.mentoring.dto.AdminMajorListDto;
 
+
 /**
  * 
  * 1. ClassName : 
- * 2. FileName          : AdminMajorUpdateViewCommand.java
+ * 2. FileName          : AdminMajorUpdateActionCommand.java
  * 3. Package           : com.project.mentoring.command
  * 4. Commnet           : 
  * 5. 작성자                       : biso
