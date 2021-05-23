@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.project.mentoring.command.AdminAnswerBlockCommand;
+import com.project.mentoring.command.AdminAnswerInsertCommand;
+import com.project.mentoring.command.AdminAnswerUpdateActionCommand;
+import com.project.mentoring.command.AdminAnswerUpdateViewCommand;
+import com.project.mentoring.command.AdminMajorUpdateActionCommand;
+import com.project.mentoring.command.AdminMajorUpdateViewCommand;
 import com.project.mentoring.command.AdminPageAnnouncementShowCommand;
 import com.project.mentoring.command.AdminPageMajorInsertCommand;
 import com.project.mentoring.command.AdminPageMajorListShowCommand;
@@ -17,8 +23,13 @@ import com.project.mentoring.command.AdminPageSubMajorInsertCommand;
 import com.project.mentoring.command.AdminPageSubMajorListShowCommand;
 import com.project.mentoring.command.AdminPageUserListShowCommand;
 import com.project.mentoring.command.AdminQnaListCommand;
+import com.project.mentoring.command.AdminQnaViewCommand;
 import com.project.mentoring.command.AdminReviewBlockCommand;
 import com.project.mentoring.command.AdminReviewListCommand;
+import com.project.mentoring.command.AdminSubMajorUpdateActionCommand;
+import com.project.mentoring.command.AdminSubMajorUpdateViewCommand;
+import com.project.mentoring.command.AdminSubmajorDeleteCommand;
+import com.project.mentoring.command.AdminUserBlockCommand;
 import com.project.mentoring.command.Command;
 import com.project.mentoring.command.HomePageMentorListShowCommand;
 import com.project.mentoring.command.IntCommand;
@@ -53,6 +64,10 @@ import com.project.mentoring.command.UserFindIdByEmailCommand;
 import com.project.mentoring.command.UserFindIdByPhoneCommand;
 import com.project.mentoring.command.UserFindPwCommand;
 import com.project.mentoring.command.UserLoginPageSelectCommand;
+import com.project.mentoring.command.UserQnaListCommand;
+import com.project.mentoring.command.UserQnaViewCommand;
+import com.project.mentoring.command.UserQuestionBlockCommand;
+import com.project.mentoring.command.UserQuestionInsertCommand;
 import com.project.mentoring.command.UserSearchPageShowCommand;
 import com.project.mentoring.command.UserSignUpPageInsertCommand;
 import com.project.mentoring.dao.UserLoginDao;
@@ -463,6 +478,95 @@ public class FrontController extends HttpServlet {
 			command = new AdminQnaListCommand();
 			command.execute(request, response);
 			viewPage = "adminQnaList.jsp";
+			break;
+		case("/adminQnaView.do"):
+			System.out.println("***admin QNA List 클릭***");
+			command = new AdminQnaViewCommand();
+			command.execute(request, response);
+			viewPage="adminQnaView.jsp";
+			break;
+		case("/answerInsertAction.do"):
+			System.out.println("***admin Answer Insert***");
+			command = new AdminAnswerInsertCommand();
+			command.execute(request, response);
+			viewPage = "adminQnaView.do";
+			break;
+		case("/adminAnswerBlock.do"):
+			System.out.println("***admin Answer Block***");
+			command = new AdminAnswerBlockCommand();
+			command.execute(request, response);
+			viewPage = "adminQnaView.do";
+			break;
+		case("/adminAnswerUpdateView.do"):
+			System.out.println("***admin Answer View Popup***");
+			command = new AdminAnswerUpdateViewCommand();
+			command.execute(request, response);
+			viewPage = "adminAnswerUpdateView.jsp";
+			break;			
+		case("/adminAnswerUpdateAction.do"):
+			System.out.println("***admin Answer Update***");
+			command = new AdminAnswerUpdateActionCommand();
+			command.execute(request, response);
+			viewPage = "adminAnswerUpdateView.do";
+			break;
+		case("/userQnaList.do"):
+			System.out.println("***User QNA List***");
+			command = new UserQnaListCommand();
+			command.execute(request, response);
+			viewPage = "userQnaList.jsp";
+			break;
+		case("/userQnaInsert.do"):
+			System.out.println("***User Question Insert***");
+			command = new UserQuestionInsertCommand();
+			command.execute(request, response);
+			viewPage = "userQnaList.do";
+			break;
+		case("/userQanView.do"):
+			System.out.println("***User QNA List 클릭***");
+			command = new UserQnaViewCommand();
+			command.execute(request, response);
+			viewPage="userQnaView.jsp";
+			break;
+		case("/userQuestionBlock.do"):
+			System.out.println("***User Question Block***");
+			command = new UserQuestionBlockCommand();
+			command.execute(request, response);
+			viewPage = "userQnaList.do";
+			break;
+		case("/adminSubmajorDeleteAction.do"):
+			command = new AdminSubmajorDeleteCommand();
+			command.execute(request, response);
+			viewPage = "adminSubMajorListShowPage.do";
+			break;
+		case("/adminUserBlock.do"):
+			System.out.println("***admin User Block***");
+			command = new AdminUserBlockCommand();
+			command.execute(request, response);
+			viewPage = "adminUserListShowPage.do";
+			break;
+		case("/adminMajorUpdateView.do"):
+			System.out.println("***ADMIN MAJOR UPDATE 클릭***");
+			command = new AdminMajorUpdateViewCommand();
+			command.execute(request, response);
+			viewPage="adminMajorUpdateView.jsp";
+			break;
+		case("/adminMajorUpdateAction.do"):
+			System.out.println("***ADMIN MAJOR UPDATE***");
+			command = new AdminMajorUpdateActionCommand();
+			command.execute(request, response);
+			viewPage="adminMajorUpdateView.do";
+			break;
+		case("/adminSubMajorUpdateView.do"):
+			System.out.println("***ADMIN SUBMAJOR UPDATE 클릭***");
+			command = new AdminSubMajorUpdateViewCommand();
+			command.execute(request, response);
+			viewPage="adminSubMajorUpdateView.jsp";
+			break;
+		case("/adminSubMajorUpdateAction.do"):
+			System.out.println("***ADMIN SUBMAJOR UPDATE***");
+			command = new AdminSubMajorUpdateActionCommand();
+			command.execute(request, response);
+			viewPage="adminSubMajorUpdateView.do";
 			break;
 			//--------------------2021-05-23seolin------------------
 			

@@ -19,19 +19,17 @@ import com.project.mentoring.dto.QnaDto;
  * 6. 작성일                       : 2021. 5. 23. 오후 3:19:33
  */
 
-public class AdminQnaListCommand implements Command {
+public class UserQnaListCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		String button = request.getParameter("button");					
-		//String orderby = request.getParameter("orderby");			
-		if(request.getParameter("button") == null) {
-			button = "All";
-		}
-		System.out.println(button);
+//		HttpSession session = request.getSession();
+//		String strUserPk = (String) session.getAttribute("userpk");
+//		int userpk = Integer.parseInt(strUserPk);
+		int userpk = 4;
 		QnaDao dao = new QnaDao();
-		ArrayList<QnaDto> dto = dao.AdminQnAList(button);
-		request.setAttribute("QuestionData", dto);
+		ArrayList<QnaDto> dto = dao.UserQnAList(userpk);
+		request.setAttribute("QuestionList", dto);
 
 	}
 

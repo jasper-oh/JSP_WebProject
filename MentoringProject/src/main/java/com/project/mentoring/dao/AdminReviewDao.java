@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.project.mentoring.dto.AdminReviewDto;
+import com.project.mentoring.dto.ShareVar;
 
 /**
  * 클래스설명 : Admin List에서 사용하는 모든 Dao
@@ -171,5 +172,6 @@ public class AdminReviewDao {
 				}
 			}		
 	}
+	
 	
 }

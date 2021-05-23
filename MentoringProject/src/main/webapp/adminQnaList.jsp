@@ -13,7 +13,7 @@
 	<table border="0">
 
 		
-		<tr>
+	<!-- 	<tr>
 		<td colspan="5"></td>
 		<td>
 		전부보기<input type="button" name="button" value="null" onclick="getClick(event)" >
@@ -27,7 +27,7 @@
 		<td>
 		
 		</td>
-		</tr>
+		</tr> -->
 		<tr>
 			<th style="visibility:hidden">pk</th>
 			<th>질문ID</th>
@@ -36,22 +36,17 @@
 			<th>작성날짜</th>
 			<th>삭제날짜</th>
 			<th>답변상태</th>		
-		
 		</tr>
 		<c:forEach items="${QuestionData }" var="dto">
 
 		<tr>
+		
 			<td style="visibility:hidden"></td>
 		    <td>${dto.questionpk }</td>
 			<td>${dto.username }</td>
-			<td>${dto.questiontitle }</td>
+			<td><a href="adminQnaView.do?questionpk=${dto.questionpk }">${dto.questiontitle }</a></td>
 			<td><fmt:formatDate value="${dto.indate }" pattern="yyyy.MM.dd HH:mm" /></td>
 			<td><fmt:formatDate value="${dto.outdate }" pattern="yyyy.MM.dd HH:mm" /></td>
-<%-- <td><c:if test="${empty dto.paymentcanceldate }">
-       <a href="/MentoringProject/menteeBookingCancel.do?paymentpk=${dto.paymentpk }">예약취소</a>
-    </c:if>
-</td>  --%>
-	
 		</tr>		
 		</c:forEach>
 			
