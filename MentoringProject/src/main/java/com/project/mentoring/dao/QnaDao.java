@@ -44,8 +44,7 @@ public class QnaDao {
 	 * @param button
 	 * @return
 	 */
-	public ArrayList<QnaDto> AdminQnAList(String button) {
-		System.out.println(button);
+	public ArrayList<QnaDto> AdminQnAList(int requestPage, int numOfTuplesPerPage) {
 		ArrayList<QnaDto> dtos = new ArrayList<QnaDto>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -53,22 +52,27 @@ public class QnaDao {
 		try {
 			connection = dataSource.getConnection();
 			String query = "select * from question as q "
-					+ "inner join user as u on u.userpk = q.user_userpk ";
-			//+ "where q.outdate is null";
-			switch (button) {
-			case "Block":
-				query = query+"where not q.outdate is null";
-				break;
-			case "General":
-				query = query+"where q.outdate is null";
-				break;
-			case "All":
-			default:
-				break;
-			}
+					+ "inner join user as u on u.userpk = q.user_userpk ORDER BY questionpk DESC LIMIT ?, ?";
+			int offset = requestPage - 1;
+//			switch (button) {
+//			case "Block":
+//				query = query+"where not q.outdate is null";
+//				break;
+//			case "General":
+//				query = query+"where q.outdate is null";
+//				break;
+//			case "All":
+//			default:
+//				break;
+//			}
 			
 			preparedStatement = connection.prepareStatement(query);
-			//preparedStatement.setInt(1, productpk);
+			if (offset  == 0) {
+				preparedStatement.setInt(1, offset);
+			} else {
+				preparedStatement.setInt(1, offset*numOfTuplesPerPage);
+			}
+			preparedStatement.setInt(2, numOfTuplesPerPage);
 			resultSet = preparedStatement.executeQuery();
 	
 			while(resultSet.next()) {
@@ -546,5 +550,37 @@ public class QnaDao {
 				e.printStackTrace();
 			}
 		}
+	}
+	public int countTuple() {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		String query = "SELECT COUNT(*) FROM question";
+		
+		try {
+			conn = dataSource.getConnection();
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+				System.out.println("list-count success");
+			}			
+		} catch (Exception e) {
+			System.out.println("list-count fail");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(psmt != null) psmt.close();
+				if(conn != null) conn.close();
+				System.out.println("< rs, psmt, conn close success>");
+			} catch (Exception e) {
+				System.out.println("< rs, psmt, conn close Fail>");
+			}
+		}
+		
+		return count;
 	}
 }

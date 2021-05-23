@@ -49,7 +49,14 @@
 			<td><fmt:formatDate value="${dto.outdate }" pattern="yyyy.MM.dd HH:mm" /></td>
 		</tr>		
 		</c:forEach>
-			
+		<tr>
+			<td colspan="4" align="center">
+				<!-- 페이징 부분 -->
+				<c:forEach items="${pageList }" var="page">
+					<a href="adminQnaList.do?page=${page }">${page}</a>
+				</c:forEach>
+			</td>
+		</tr>
 
 
 
