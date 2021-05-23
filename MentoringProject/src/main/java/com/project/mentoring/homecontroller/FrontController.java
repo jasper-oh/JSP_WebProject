@@ -16,6 +16,9 @@ import com.project.mentoring.command.AdminPageMajorListShowCommand;
 import com.project.mentoring.command.AdminPageSubMajorInsertCommand;
 import com.project.mentoring.command.AdminPageSubMajorListShowCommand;
 import com.project.mentoring.command.AdminPageUserListShowCommand;
+import com.project.mentoring.command.AdminQnaListCommand;
+import com.project.mentoring.command.AdminReviewBlockCommand;
+import com.project.mentoring.command.AdminReviewListCommand;
 import com.project.mentoring.command.Command;
 import com.project.mentoring.command.HomePageMentorListShowCommand;
 import com.project.mentoring.command.IntCommand;
@@ -442,6 +445,26 @@ public class FrontController extends HttpServlet {
 			viewPage="/mentorScheduleListView.do";
 			break;
 			//--------------------2021-05-22seolin------------------
+			//--------------------2021-05-23seolin------------------
+		case("/adminReviewList.do"):
+			System.out.println("***admin Review List***");
+			command = new AdminReviewListCommand();
+			command.execute(request, response);
+			viewPage = "adminReviewList.jsp";
+			break;
+		case("/adminReviewBlock.do"):
+			System.out.println("***admin Review Block***");
+			command = new AdminReviewBlockCommand();
+			command.execute(request, response);
+			viewPage = "adminReviewList.do";
+			break;
+		case("/adminQnaList.do"):
+			System.out.println("***admin QNA List***");
+			command = new AdminQnaListCommand();
+			command.execute(request, response);
+			viewPage = "adminQnaList.jsp";
+			break;
+			//--------------------2021-05-23seolin------------------
 			
 			
 		// 예약 관련 한 .do
