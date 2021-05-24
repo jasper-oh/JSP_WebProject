@@ -265,6 +265,8 @@ public class FrontController extends HttpServlet {
 				
 				
 			}else {
+				command = new HomePageMentorListShowCommand();
+				command.execute(request, response);
 				request.setAttribute("loginResult", loginResult);
 				viewPage = "visitorPage.jsp";
 				
