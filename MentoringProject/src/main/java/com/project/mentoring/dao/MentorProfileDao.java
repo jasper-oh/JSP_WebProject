@@ -17,6 +17,7 @@ import javax.sql.*;
 import com.project.mentoring.dto.AdminSubMajorListDto;
 import com.project.mentoring.dto.AdminUserListDto;
 import com.project.mentoring.dto.HomePageMentorListDto;
+import com.project.mentoring.dto.MentorMyPageShowInfoDto;
 
 public class MentorProfileDao {
 	
@@ -247,10 +248,57 @@ public class MentorProfileDao {
 		
 		return homePageMentorListDtos;
 	}
-	
-	
-	
-	
+
+	public ArrayList<MentorMyPageShowInfoDto> getMentorMyPageShowInfo(int userPk) {
+		
+		ArrayList<MentorMyPageShowInfoDto> mentorMyPageShowInfoDtos = new ArrayList<MentorMyPageShowInfoDto>();
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = dataSource.getConnection();
+			
+			String mentorInfoShowQuery1 = "select m.mentorpk, m.mentorimage, m.mentoraddress, mentoruser.userid, mentoruser.userphone, mentoruser.useremail ";
+			String mentorInfoShowQuery2 = "from mentor as m inner join user as mentoruser on m.user_userpk = mentoruser.userpk ";
+			String mentorInfoShowQuery3 = "where mentoruser.userpk = " + userPk;
+			
+			
+			prepareStatement = connection.prepareStatement(mentorInfoShowQuery1 + mentorInfoShowQuery2 + mentorInfoShowQuery3);
+			
+			resultSet = prepareStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				
+				int userPk1 = userPk;
+				int mentorPk = resultSet.getInt("mentorpk");
+				String userId = resultSet.getString("userid");
+				String userEmail = resultSet.getString("useremail");
+				String userPhone = resultSet.getString("userphone");
+				String mentorImage = resultSet.getString("mentorimage");
+				String mentorAddress = resultSet.getString("mentoraddress");
+				
+				MentorMyPageShowInfoDto mentorMyPageShowInfoDto = new MentorMyPageShowInfoDto(userPk1, mentorPk, userId, userEmail, userPhone, mentorImage, mentorAddress);
+				mentorMyPageShowInfoDtos.add(mentorMyPageShowInfoDto);
+				
+				System.out.println("불러오기 완료");
+			}
+
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+			
+		}finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(prepareStatement != null) prepareStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return mentorMyPageShowInfoDtos;
+	}
 	
 
 }//-end Line

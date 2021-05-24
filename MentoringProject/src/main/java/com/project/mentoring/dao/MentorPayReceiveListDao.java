@@ -13,10 +13,8 @@ import javax.sql.DataSource;
 
 import com.project.mentoring.dto.MentorPayReceiveListDto;
 
-
 public class MentorPayReceiveListDao {
 	DataSource dataSource;
-
 	public MentorPayReceiveListDao() {
 		
 		

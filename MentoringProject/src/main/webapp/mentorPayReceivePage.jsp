@@ -28,7 +28,7 @@
 			<td>${dto.totalprice }</td>
 			<td>${dto.paymentsenddate }</td>
 			
-	<!-- 		<td><a href="/MentoringProject/mentorProfile.do">멘토마이페이지로</a></td> -->
+			<td><a href="/MentoringProject/mentorProfile.do">멘토마이페이지로</a></td>
 			
 			
 		</tr>		

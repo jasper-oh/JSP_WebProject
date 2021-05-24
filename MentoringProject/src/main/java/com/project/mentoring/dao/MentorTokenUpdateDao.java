@@ -21,7 +21,7 @@ public class MentorTokenUpdateDao {
 			
 		}
 	}
-	// change update senddate where token
+	
 	public int tokenUpdate(String token, int paymentPk) {
 		
 		Connection connection = null;
@@ -31,8 +31,8 @@ public class MentorTokenUpdateDao {
 		try {
 			connection = dataSource.getConnection();
 			
-			String tokenUpdateQuery1 = "update payment set paymentsenddate = now() "; 
-			String tokenUpdateQuery2= "where paymenttoken = '"+token+"'";
+			String tokenUpdateQuery1 = "update payment set paymenttoken = '"+token+"'"; 
+			String tokenUpdateQuery2= "where paymentpk = " + paymentPk;
 			prepareStatement = connection.prepareStatement(tokenUpdateQuery1 + tokenUpdateQuery2);
 			
 			prepareStatement.executeUpdate();

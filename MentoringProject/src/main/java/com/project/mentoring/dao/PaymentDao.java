@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import com.project.mentoring.dto.AppointmentDto;
@@ -143,6 +142,9 @@ public class PaymentDao {
 		//MentoringFunction에서 랜덤 id 추출
 		MentoringFunction mentoringFunction = new MentoringFunction();
 		String strpaymentpk=Integer.toString(mentoringFunction.gen());
+		//int userid = session.getAttribute("USERID"); 
+		//병합과정에 추가하기!
+		//추가 완료
 		PaymentDto dto = null;
 		
 		Connection connection = null;
@@ -332,7 +334,7 @@ public class PaymentDao {
 	
 	  * @작성자 : biso
 	
-	  * @변경이력 : 
+	  * @변경이력 : createschedule 이름 변경 && 약간의 오류가 있는 거 같음
 	
 	  * @Method 설명 : mentor가 product에 schedule을 insert
 	
@@ -341,7 +343,7 @@ public class PaymentDao {
 	  * @param starttime
 	  * @param endtime
 	 */
-	public void creatschedule(String startday, String endday, int starttime, int endtime, int productpk) {
+	public void createschedule(String startday, String endday, String starttime, String endtime, int productpk) {
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
@@ -817,7 +819,7 @@ public class PaymentDao {
 		System.out.println(2);
 		try {		
 			connection=dataSource.getConnection();
-			String query="select mentoruser.username as mentorname, mj.majorname, p.title , r.reviewtitle, p.productpk\n"
+			String query="select mentoruser.username as mentorname, mj.majorname, p.title , r.reviewtitle, p.productpk, r.reviewpk\n"
 					+ "	from payment as py inner join schedule as s on py.schedule_schedulepk = s.schedulepk\n"
 					+ " inner join user as mentee on mentee.userpk = py.user_userpk\n"
 					+ " inner join review as r on mentee.userpk = r.user_userpk\n"
@@ -839,10 +841,11 @@ public class PaymentDao {
 				String title = resultSet.getString("title");
 				String reviewtitle = resultSet.getString("reviewtitle");
 				String productpk = resultSet.getString("productpk");
+				int reviewpk = resultSet.getInt("reviewpk");
 				
 				
 				
-				MenteeDto dto=new MenteeDto(mentorname, majorname, title, reviewtitle, productpk);		
+				MenteeDto dto=new MenteeDto(mentorname, majorname, title, reviewtitle, productpk,reviewpk);		
 				dtos.add(dto);
 				
 				System.out.println(dtos);
@@ -899,7 +902,7 @@ public class PaymentDao {
 			preparedStatement.setInt(1, userpk);  
 			resultSet=preparedStatement.executeQuery();
 			while(resultSet.next()) {		
-				String menteename = resultSet.getString("mentorname");
+				String mentorname = resultSet.getString("mentorname");
 				String majorname = resultSet.getString("majorname");
 				String submajorname = resultSet.getString("submajorname");
 				Date startday = resultSet.getDate("startday");
@@ -909,7 +912,7 @@ public class PaymentDao {
 				String paymentpk = resultSet.getString("paymentpk");
 				
 				
-				MenteeDto dto= new MenteeDto(menteename, majorname, submajorname, startday, starttime, endtime, totalprice, paymentpk);		
+				MenteeDto dto= new MenteeDto(mentorname, majorname, submajorname, startday, starttime, endtime, totalprice, paymentpk);		
 				dtos.add(dto);
 				
 				System.out.println(dtos);

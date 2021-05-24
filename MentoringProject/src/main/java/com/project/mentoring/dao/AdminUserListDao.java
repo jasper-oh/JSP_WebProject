@@ -41,7 +41,6 @@ public class AdminUserListDao {
 			connection = dataSource.getConnection();
 			
 			String userListQuery = "select userid, username, userphone, useremail, usercheck ,indate, outdate from user";
-			// order by 추가		
 			prepareStatement = connection.prepareStatement(userListQuery);
 			resultSet = prepareStatement.executeQuery();
 			

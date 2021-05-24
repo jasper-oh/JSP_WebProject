@@ -9,13 +9,11 @@ import javax.servlet.http.HttpSession;
 import com.project.mentoring.dao.MentorPayReceiveListDao;
 import com.project.mentoring.dto.MentorPayReceiveListDto;
 
-
 public class MentorPayReceiveListCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-
 		MentorPayReceiveListDao mentorPayReceiveListDao = new MentorPayReceiveListDao();
 		
 		HttpSession session = request.getSession();
@@ -29,7 +27,6 @@ public class MentorPayReceiveListCommand implements Command {
 		request.setAttribute("mentorPayReceiveList", mentorPayReceiveListDto);
 		
 		System.out.println("out");
-
 	}
 
 }
