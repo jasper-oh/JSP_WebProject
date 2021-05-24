@@ -18,6 +18,7 @@ import com.project.mentoring.command.AdminPageSubMajorListShowCommand;
 import com.project.mentoring.command.AdminPageUserListShowCommand;
 import com.project.mentoring.command.Command;
 import com.project.mentoring.command.HomePageMentorListShowCommand;
+import com.project.mentoring.command.HompageCategorySearchCommand;
 import com.project.mentoring.command.IntCommand;
 import com.project.mentoring.command.LogoutCommand;
 import com.project.mentoring.command.MenteeBookingCancelCommand;
@@ -303,6 +304,24 @@ public class FrontController extends HttpServlet {
 			}
 			
 			break;
+			
+			
+			/**
+			 * 5/24 
+			 * 이찬호  / 홈페이지 메인 화면에서 포스별 둘러보기 누를떄
+			 */
+		case("/HompageCategorySearch.do"):
+			System.out.println("홈페이지에서 카테고리 선택");
+			command = new HompageCategorySearchCommand();
+			command.execute(request, response);
+			viewPage="searchPage.jsp";
+			break;
+			
+			
+			
+			
+			
+			
 			
 		// -- mentorPage 의 *.do
 		case("/mentorProfile.do"):

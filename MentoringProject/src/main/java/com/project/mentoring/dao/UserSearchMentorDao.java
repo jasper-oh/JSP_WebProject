@@ -49,7 +49,7 @@ public class UserSearchMentorDao {
 			String mentorListQuery6 = "where m.outdate is null and m.mentoraddress like '%"+mentorAddress+"%' ";
 			String mentorListQuery7 = "and mj.majorname = '"+ mentorMajor+"' and s.submajorname like '%"+mentorSubMajor+"%'";
 			prepareStatement = connection.prepareStatement(mentorListQuery1+mentorListQuery2+mentorListQuery3+mentorListQuery4+mentorListQuery5+mentorListQuery6+mentorListQuery7);
-			
+			System.out.println(prepareStatement);
 			
 			resultSet = prepareStatement.executeQuery();
 			
@@ -64,7 +64,7 @@ public class UserSearchMentorDao {
 				String price = resultSet.getString("price");
 				
 				UserSearchMentorDto userSearchMentorDto = new UserSearchMentorDto(mentorimage, majorname, title, submajorname, productPk, username, price);
-				userSearchMentorDtos.add(userSearchMentorDto);
+				
 				
 			}
 		}catch(Exception e) {
