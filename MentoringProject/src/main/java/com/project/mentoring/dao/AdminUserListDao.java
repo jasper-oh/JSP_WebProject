@@ -75,6 +75,45 @@ public class AdminUserListDao {
 		
 		return adminUserListDtos;
 	}
+	/**
+	 * 
+	 * 1. MethodName        : AdminUserBlock
+	 * 2. ClassName         : AdminUserListDao
+	 * 3. Commnet           : 
+	 * 4. 작성자                       : biso
+	 * 5. 작성일                       : 2021. 5. 24. 오전 1:15:02
+	 * @return void
+	 * @param userpk
+	 * @param check
+	 */
+		public void AdminUserBlock(String userid, int check) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		System.out.println(check);
+		try {
+			connection = dataSource.getConnection();
+			String query = null;
+			if (check == 1) {
+				query = "update user set outdate = null where userid = ?";
+			}if (check == 0) {
+				query = "update user set outdate = now() where userid = ?";
+			}
+			System.out.println(query);
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userid);
+	
+			preparedStatement.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	
 	

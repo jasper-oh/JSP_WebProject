@@ -154,6 +154,136 @@ public class AdminSubMajorListDao {
 		return adminSubMajorListDtos;
 		
 	}
+	/**
+	 * 
+	 * 1. MethodName        : adminSubMajorDeleteAction
+	 * 2. ClassName         : AdminSubMajorListDao
+	 * 3. Commnet           : 
+	 * 4. 작성자                       : biso
+	 * 5. 작성일                       : 2021. 5. 24. 오전 2:20:13
+	 * @return int
+	 * @param submajorpk
+	 * @return
+	 */
+		public int adminSubMajorDeleteAction(int submajorpk) {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			
+			try {
+				connection = dataSource.getConnection();
+				
+				String adminSubMajorInsertQuery = "delete from submajor where submajorpk = ?";
+				preparedStatement = connection.prepareStatement(adminSubMajorInsertQuery );
+				
+				preparedStatement.setInt(1, submajorpk);
+				
+				preparedStatement.executeUpdate();
+				
+				return 1;
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				
+				try {
+					if(preparedStatement != null) preparedStatement.close();
+					if(connection != null) connection.close();	
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				
+			}
+			return 0;
+		}
+	/**
+	 * 
+	 * 1. MethodName        : AdminMajorUpdateView
+	 * 2. ClassName         : AdminSubMajorListDao
+	 * 3. Commnet           : 
+	 * 4. 작성자                       : biso
+	 * 5. 작성일                       : 2021. 5. 24. 오전 2:22:18
+	 * @return AdminSubMajorListDto
+	 * @param isubmajorpk
+	 * @return
+	 */
+		public AdminSubMajorListDto AdminMajorUpdateView(int isubmajorpk) {
+			AdminSubMajorListDto dto = null;
+			
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			ResultSet resultSet = null;
+			
+			try {
+				connection = dataSource.getConnection();
+				
+				String query = "select * from submajor where submajorpk = ?";
+
+				preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setInt(1, isubmajorpk);
+				resultSet = preparedStatement.executeQuery();
+
+				if(resultSet.next()) {
+
+					String submajorPk = resultSet.getString("submajorpk");
+					String submajorName = resultSet.getString("submajorname");
+					
+					
+					dto = new AdminSubMajorListDto(submajorPk,submajorName);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					
+					if(resultSet != null) resultSet.close(); 
+					if(preparedStatement != null) preparedStatement.close();
+					if(connection != null) connection.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			return dto;
+			
+		}
+	/**
+	 * 
+	 * 1. MethodName        : adminSubMajorUpdateAction
+	 * 2. ClassName         : AdminSubMajorListDao
+	 * 3. Commnet           : 
+	 * 4. 작성자                       : biso
+	 * 5. 작성일                       : 2021. 5. 24. 오전 2:22:14
+	 * @return void
+	 * @param submajorpk
+	 * @param submajorName
+	 */
+		public void adminSubMajorUpdateAction(int submajorpk, String submajorName) {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			
+			try {
+				connection = dataSource.getConnection();
+				
+				String query = "Update submajor set submajorname = ? where submajorpk = ?";
+				preparedStatement = connection.prepareStatement(query);
+				
+				preparedStatement.setString(1, submajorName);
+				preparedStatement.setInt(2, submajorpk);
+				
+				preparedStatement.executeUpdate();
+
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				
+				try {
+					if(preparedStatement != null) preparedStatement.close();
+					if(connection != null) connection.close();	
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}
 	
 	
 }// -- end Line

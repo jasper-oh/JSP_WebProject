@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="css/components/searchResult.css">
 <title>검색 결과 출력 </title>
 </head>
+<script>
+	function alert(){
+		
+		alert("로그인이 필요한 서비스 입니다! ");
+	}
+</script>
 <body>
 
 <c:choose>
@@ -30,7 +36,7 @@
                 	<li><a href="userBeMentorPage.jsp">멘토정보 추가등록</a></li>
                     <li><a href="helpPage.jsp">도움말</a></li>
                     <li><a href="mentorMyPage.jsp">마이페이지</a></li>
-                    <li><a href="visitorPage.jsp">로그아웃</a></li>
+                    <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
                 </ul>
             </div>
         </nav>
@@ -55,13 +61,13 @@
                     <li><a href="userBeMentorPage.jsp">멘토가 되어보세요</a></li>
                     <li><a href="helpPage.jsp">도움말</a></li>
                     <li><a href="userMyPage.jsp">마이페이지</a></li>
-                    <li><a href="visitorPage.jsp">로그아웃</a></li>
+                    <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
                 </ul>
             </div>
         </nav>
 </header>
 </c:when>
-<c:otherwise>
+<c:when test="${userCheck == -1 }">
 	 <header>
         <nav>
             <div class="logo">
@@ -75,14 +81,14 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="#">도움말</a></li>
+                    <li><a href="helpPage.jsp">도움말</a></li>
                     <li><a href="userSignUpPage.jsp">회원가입</a></li>
                     <li><a href="userLoginPage.jsp">로그인</a></li>
                 </ul>
             </div>
         </nav>
        </header>
-</c:otherwise>
+</c:when>
 </c:choose>
 
 
@@ -100,7 +106,18 @@
 		        <span>${mentorList.subMajor }</span>
 		        <span>${mentorList.mentorName } </span>
 		        <span>${mentorList.mentorPrice }</span> 
+		  <c:choose>      
+		  <c:when test="${userCheck == -1 }">
+		  		<!-- <a href="userLoginPage.jsp" onclick="alert();">예약하기</a> -->
+		  		<a href="userLoginPage.jsp" onclick="alert();">예약하기</a>
+		  </c:when>
+		  <c:when test="${userCheck == 0 }">
 		        <a href="/MentoringProject/appointment.do?productpk=${mentorList.productPk }" >예약하기!</a>
+		  </c:when>
+		  <c:when test="${userCheck == 1 }">
+		        <a href="/MentoringProject/appointment.do?productpk=${mentorList.productPk }" >예약하기!</a>
+		  </c:when>
+		  </c:choose>      
 		      </div>
 	      </c:forEach>
 	      

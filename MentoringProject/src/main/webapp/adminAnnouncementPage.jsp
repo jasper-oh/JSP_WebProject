@@ -1,38 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 출력 페이지</title>
+<title>공지사항</title>
 </head>
 <body>
-	<h2>공지사항 출력</h2>
-	<table border="0" >
+	<h3>공지사항 List</h3>
+	<table border="1">
 		<tr>
-			<td colspan="4"><a href="adminAnnouncementWritePage.jsp">글작성</a></td>
-		</tr>
-		<tr>
-			<th>글번호</th>
+			<th>번호</th>
 			<th>제목</th>
-			<th>내용</th>
-			<th>작성자</th>
-			<th>작성일</th>
+			<th>날짜</th>
 		</tr>
-				<c:forEach items="${announcementList }" var="noticeDto">
+		<c:forEach items="${list}" var="dto">
 		<tr>
-			<td>${noticeDto.noticePk }</td>
-			<td>${noticeDto.noticeTitle }</td>
-			<td>${noticeDto.noticeText }</td>
-			<td>${noticeDto.adminPk }</td>
-			<td>${noticeDto.inDate }</td>
-		</tr>		
+			<td>${dto.noticepk }</td>
+			<td><a href="AdminAnnouncementContent.do?noticepk=${dto.noticepk }">${dto.noticetitle }</a></td>
+			<td>${dto.indate }</td>
+		</tr>
 		</c:forEach>
-		
 	</table>
-
-
+	<table>
+		<tr>
+				<td colspan="4" align="center">
+ 					<c:forEach items="${announcementList }" var="page">
+						<a href="AdminAnnouncementList.do?page=${page }">${page}</a>
+					</c:forEach>
+				</td>
+			</tr>
+		<tr>
+			<td colspan="5" align="right"><a href="adminAnnouncementWritePage.jsp">글작성</a></td>
+		</tr>	
+	</table>
 </body>
 </html>
 

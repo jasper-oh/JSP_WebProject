@@ -24,8 +24,8 @@
                     <li><a href="/MentoringProject/mentorInfoUpdatePage.do">기본 정보수정</a></li>
                     <li><a href="/MentoringProject/mentorProductList.do">포스 관리</a></li>
                     <li><a href="/MentoringProject/mentorScheduledList.do">예약관리</a></li>
-                   	<li> <a href="정산관리.jsp">정산 관리</a></li>
-					<li><a href="리뷰보기.jsp">리뷰 보기</a></li>
+                   	<li> <a href="/MentoringProject/mentorPayReceiveList.do">정산완료내역</a></li>
+					<li><a href="/MentoringProject/mentorReviewView.do">리뷰 보기</a></li>
                 </ul>
             </div>
         </nav>

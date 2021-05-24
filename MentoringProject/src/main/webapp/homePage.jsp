@@ -60,7 +60,7 @@
                     	<li><a href="userBeMentorPage.jsp">마스터가 되어보세요</a></li> 
                         <li><a href="helpPage.jsp">도움말</a></li>
                         <li><a href="userMyPage.jsp">마이페이지</a></li>
-                        <li><a href="visitorPage.jsp">로그아웃</a></li>
+                        <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
                         
                 </ul>
             </nav>

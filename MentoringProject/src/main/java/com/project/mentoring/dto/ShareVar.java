@@ -8,4 +8,5 @@ public class ShareVar {
 	
 	public static int productpk = 0;
 	public static int schedulepk = 0;
+	public static int questionpk = 0;
 }

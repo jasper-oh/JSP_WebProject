@@ -60,7 +60,7 @@
                    <li><a href="userBeMentorPage.jsp">포스정보 추가등록</a></li>
                     <li><a href="helpPage.jsp">도움말</a></li>
                     <li><a href="mentorMyPage.jsp">마이페이지</a></li>
-                    <li><a href="visitorPage.jsp">로그아웃</a></li>
+                    <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
                 </ul>
             </nav>
         </div>

@@ -22,6 +22,10 @@
 			<tr>
 				<td>${majorDto.majorPk }</td>
 				<td><a href="adminSubMajorListShowPage.do?majorpk=${majorDto.majorPk}&majorname=${majorDto.majorName}">${majorDto.majorName }</a></td>
+				<td> <a href="adminMajorUpdateView.do?majorpk=${majorDto.majorPk}" 
+				onclick="window.open(this.href, '_blank', 'width=200, height=50'); return false;">
+				수정
+			</a></td>
 			</tr>		
 		</c:forEach>
 		<tr>
