@@ -1,22 +1,21 @@
 package com.project.mentoring.command;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.project.mentoring.dao.AdminAnnouncementListDao;
 import com.project.mentoring.dto.AdminAnnouncementListDto;
 
-public class AdminPageAnnouncementShowCommand implements Command {
+public class AdminPageAnnouncementContentCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		String noticepk=request.getParameter("noticepk");
+		AdminAnnouncementListDao dao=new AdminAnnouncementListDao();
+		AdminAnnouncementListDto dto=dao.contentView(noticepk);
 		
-		AdminAnnouncementListDao adminAnnouncementListDao = new AdminAnnouncementListDao();
-		ArrayList<AdminAnnouncementListDto> announcementList = adminAnnouncementListDao.showAnnouncement();
-		request.setAttribute("announcementList", announcementList);
-
+		request.setAttribute("adminAnnouncementContentPage", dto);
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.project.mentoring.dao.MentorProfileDao;
 import com.project.mentoring.dto.HomePageMentorListDto;
@@ -23,7 +24,8 @@ public class HomePageMentorListShowCommand implements Command {
 		request.setAttribute("mentorProfile3", mentorListDto3 );
 		request.setAttribute("mentorProfile4", mentorListDto4 );
 		
-		
+		HttpSession session = request.getSession();
+		session.setAttribute("userCheck", -1);
 
 	}
 

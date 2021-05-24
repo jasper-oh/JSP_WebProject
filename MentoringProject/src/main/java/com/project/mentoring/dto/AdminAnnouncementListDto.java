@@ -3,53 +3,77 @@ package com.project.mentoring.dto;
 import java.sql.Timestamp;
 
 public class AdminAnnouncementListDto {
-	
-	int noticePk;
-	int adminPk;
-	String noticeTitle;
-	String noticeText;
-	Timestamp inDate;
+	int noticepk;
+	int admin_adminpk;
+	String noticetitle;
+	String noticetext;
+	Timestamp indate;
+	Timestamp outdate;
 	
 	public AdminAnnouncementListDto() {
-		
+
 	}
-	public AdminAnnouncementListDto(int noticePk, int adminPk, String noticeTitle, String noticeText, Timestamp inDate) {
+
+	
+
+	public AdminAnnouncementListDto(int noticepk, int admin_adminpk, String noticetitle, String noticetext, Timestamp indate, Timestamp outdate) {
 		super();
-		this.noticePk = noticePk;
-		this.adminPk = adminPk;
-		this.noticeTitle = noticeTitle;
-		this.noticeText = noticeText;
-		this.inDate = inDate;
+		this.noticepk = noticepk;
+		this.admin_adminpk = admin_adminpk;
+		this.noticetitle = noticetitle;
+		this.noticetext = noticetext;
+		this.indate = indate;
+		this.outdate = outdate;
 	}
-	public int getNoticePk() {
-		return noticePk;
+
+	public int getnoticepk() {
+		return noticepk;
 	}
-	public void setNoticePk(int noticePk) {
-		this.noticePk = noticePk;
+	
+	public void setnoticepk(int noticepk) {
+		this.noticepk = noticepk;
 	}
-	public int getAdminPk() {
-		return adminPk;
+
+	public int getadmin_adminpk() {
+		return admin_adminpk;
 	}
-	public void setAdminPk(int adminPk) {
-		this.adminPk = adminPk;
+	
+	public void setadmin_adminpk(int admin_adminpk) {
+		this.admin_adminpk = admin_adminpk;
 	}
-	public String getNoticeTitle() {
-		return noticeTitle;
+
+	public String getnoticetitle() {
+		return noticetitle;
 	}
-	public void setNoticeTitle(String noticeTitle) {
-		this.noticeTitle = noticeTitle;
+
+
+	public void setnoticetitle(String noticetitle) {
+		this.noticetitle = noticetitle;
 	}
-	public String getNoticeText() {
-		return noticeText;
+
+
+	public String getnoticetext() {
+		return noticetext;
 	}
-	public void setNoticeText(String noticeText) {
-		this.noticeText = noticeText;
+
+	public void setnoticetext(String noticetext) {
+		this.noticetext = noticetext;
 	}
-	public Timestamp getInDate() {
-		return inDate;
+
+	public Timestamp getindate() {
+		return indate;
 	}
-	public void setInDate(Timestamp inDate) {
-		this.inDate = inDate;
+
+	public void setindate(Timestamp indate) {
+		this.indate = indate;
+	}
+	
+	public Timestamp getoutdate() {
+		return outdate;
+	}
+	
+	public void setoutdate(Timestamp outdate) {
+		this.outdate = outdate;
 	}
 	
 }

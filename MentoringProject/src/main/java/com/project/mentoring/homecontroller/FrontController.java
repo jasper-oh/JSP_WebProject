@@ -16,7 +16,11 @@ import com.project.mentoring.command.AdminAnswerUpdateActionCommand;
 import com.project.mentoring.command.AdminAnswerUpdateViewCommand;
 import com.project.mentoring.command.AdminMajorUpdateActionCommand;
 import com.project.mentoring.command.AdminMajorUpdateViewCommand;
-import com.project.mentoring.command.AdminPageAnnouncementShowCommand;
+import com.project.mentoring.command.AdminPageAnnouncementContentCommand;
+import com.project.mentoring.command.AdminPageAnnouncementDeleteCommand;
+import com.project.mentoring.command.AdminPageAnnouncementListCommand;
+import com.project.mentoring.command.AdminPageAnnouncementModifyCommand;
+import com.project.mentoring.command.AdminPageAnnouncementWriteCommand;
 import com.project.mentoring.command.AdminPageMajorInsertCommand;
 import com.project.mentoring.command.AdminPageMajorListShowCommand;
 import com.project.mentoring.command.AdminPageSubMajorInsertCommand;
@@ -32,6 +36,7 @@ import com.project.mentoring.command.AdminSubmajorDeleteCommand;
 import com.project.mentoring.command.AdminUserBlockCommand;
 import com.project.mentoring.command.Command;
 import com.project.mentoring.command.HomePageMentorListShowCommand;
+import com.project.mentoring.command.HompageCategorySearchCommand;
 import com.project.mentoring.command.IntCommand;
 import com.project.mentoring.command.LogoutCommand;
 import com.project.mentoring.command.MenteeBookingCancelCommand;
@@ -77,6 +82,7 @@ import com.project.mentoring.command.UserQuestionBlockCommand;
 import com.project.mentoring.command.UserQuestionInsertCommand;
 import com.project.mentoring.command.UserSearchPageShowCommand;
 import com.project.mentoring.command.UserSignUpPageInsertCommand;
+import com.project.mentoring.command.userShowAnnouncementPageCommand;
 import com.project.mentoring.dao.UserLoginDao;
 
 // 기본 마스터
@@ -190,10 +196,35 @@ public class FrontController extends HttpServlet {
 				
 			}
 			break;
-		case("/adminAnnouncementPage.do"):
-			command = new AdminPageAnnouncementShowCommand();
+		case("/AdminAnnouncementList.do"):
+			command=new AdminPageAnnouncementListCommand();
 			command.execute(request, response);
 			viewPage="adminAnnouncementPage.jsp";
+			break;
+		case("/AdminAnnouncementWrite_view.do"):
+			viewPage="adminAnnouncementWritePage.jsp";
+			break;
+		case("/AdminAnnouncementWrite.do"):
+			System.out.println("작성 들어옴");
+			command=new AdminPageAnnouncementWriteCommand();
+			command.execute(request, response);
+			viewPage="AdminAnnouncementList.do";
+			break;
+		case("/AdminAnnouncementContent.do"):
+			command=new AdminPageAnnouncementContentCommand();
+			command.execute(request, response);
+			viewPage="adminAnnouncementContentPage.jsp";
+			break;
+		case("/AdminAnnouncementModify.do"):
+			System.out.println("수정 들어옴");
+			command=new AdminPageAnnouncementModifyCommand();
+			command.execute(request, response);
+			viewPage="AdminAnnouncementList.do";
+			break;
+		case("/AdminAnnouncementDelete.do"):
+			command=new AdminPageAnnouncementDeleteCommand();
+			command.execute(request, response);
+			viewPage="AdminAnnouncementList.do";
 			break;
 			
 			
@@ -321,6 +352,19 @@ public class FrontController extends HttpServlet {
 				viewPage = "visitorPage.jsp";
 			}
 			
+			break;
+			
+		case("/userShowAnnouncementPage.do"):
+			command = new userShowAnnouncementPageCommand();
+			command.execute(request, response);
+			viewPage = "userAnnouncementPage.jsp";
+			break;
+			
+		case("/HompageCategorySearch.do"):
+			System.out.println("홈페이지에서 카테고리 선택");
+			command = new HompageCategorySearchCommand();
+			command.execute(request, response);
+			viewPage="searchPage.jsp";
 			break;
 			
 		// -- mentorPage 의 *.do
@@ -479,7 +523,8 @@ public class FrontController extends HttpServlet {
 			viewPage="mentorProductList.jsp";
 			break;
 			//
-			
+
+			/////////============/////////	
 		case("/mentorProductPage.do"):
 			command=new PMentorProductPageCommand();
 			command.execute(request, response);
@@ -510,7 +555,7 @@ public class FrontController extends HttpServlet {
 			System.out.println("schedule->delete");
 			command=new MentorScheduleDeleteCommand();
 			command.execute(request, response);
-			viewPage="mentorScheduleListView.do";
+			viewPage="mentorProductPage.do";
 			break;
 			
 		case("/insertScheduleView.do"):
@@ -524,7 +569,7 @@ public class FrontController extends HttpServlet {
 			System.out.println("스케쥴 입력");
 			command=new PScheduleInsertCommand();
 			command.execute(request, response);
-			viewPage="/mentorScheduleListView.do";
+			viewPage="/mentorProductPage.do";
 			break;
 
 			// 병합 시작

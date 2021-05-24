@@ -1,18 +1,14 @@
 package com.project.mentoring.dao;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
 import com.project.mentoring.dto.AdminReviewDto;
 import com.project.mentoring.dto.ShareVar;
-
 /**
  * 클래스설명 : Admin List에서 사용하는 모든 Dao
  * @version : 2021. 5. 23.
@@ -20,21 +16,17 @@ import com.project.mentoring.dto.ShareVar;
  * @분류 : 
  * MentoringProject / package com.project.mentoring.dao;
  */
-
 public class AdminReviewDao {
 	DataSource dataSource;
-	
 	public AdminReviewDao() {
 		// TODO Auto-generated constructor stub
 		try {
 			Context context = new InitialContext();  //server context.xml연결
 			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/mentoringdb");
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
 	/**
 	 * 
 	 * 1. MethodName        : AdminReviewList
@@ -45,12 +37,12 @@ public class AdminReviewDao {
 	 * @return ArrayList<AdminReviewDto>
 	 * @return
 	 */
-	public ArrayList<AdminReviewDto> AdminReviewList(String button, String where, String keyword) {
-			System.out.println(button);
+	public ArrayList<AdminReviewDto> AdminReviewList(String button, String where, String keyword, int requestPage, int numOfTuplePerPage) {
 			ArrayList<AdminReviewDto> dtos = new ArrayList<AdminReviewDto>();
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
 			ResultSet resultSet = null;
+			int offset = requestPage - 1;
 			try {
 				connection = dataSource.getConnection();
 				String query = "select * from review as r "
@@ -100,12 +92,17 @@ public class AdminReviewDao {
 					default:
 						break;
 					}
-					
 				}
+				query = query + " ORDER BY r.indate DESC LIMIT ?, ? ;";
+				System.out.println(query);
 				preparedStatement = connection.prepareStatement(query);
-				//preparedStatement.setInt(1, productpk);
+				if (offset  == 0) {
+					preparedStatement.setInt(1, offset);
+				} else {
+					preparedStatement.setInt(1, offset*numOfTuplePerPage);
+				}
+				preparedStatement.setInt(2, numOfTuplePerPage);
 				resultSet = preparedStatement.executeQuery();
-
 				while(resultSet.next()) {
 					int reviewpk = resultSet.getInt("reviewpk");
 					String username = resultSet.getString("username");
@@ -115,7 +112,6 @@ public class AdminReviewDao {
 					int reviewscore = resultSet.getInt("reviewscore");
 					Date indate = resultSet.getDate("indate");
 					Date outdate = resultSet.getDate("outdate");
-				
 					AdminReviewDto dto = new AdminReviewDto(reviewpk, username, title, reviewtitle, reviewtext, reviewscore, indate, outdate);
 					dtos.add(dto);
 				}
@@ -123,7 +119,6 @@ public class AdminReviewDao {
 				e.printStackTrace();
 			}finally {
 				try {
-					
 					if(resultSet != null) resultSet.close(); 
 					if(preparedStatement != null) preparedStatement.close();
 					if(connection != null) connection.close();
@@ -155,7 +150,6 @@ public class AdminReviewDao {
 					update="update review set outdate = now() where reviewpk = ?";	
 				} else {
 					update="update review set outdate = null where reviewpk = ?";	
-					
 				}
 				preparedStatement=connection.prepareStatement(update);
 				preparedStatement.setInt(1, reviewpk);  
@@ -172,6 +166,43 @@ public class AdminReviewDao {
 				}
 			}		
 	}
-	
-	
+	/**
+	 * 
+	 * 1. MethodName        : countTuple
+	 * 2. ClassName         : AdminReviewDao
+	 * 3. Commnet           : list에서 사용하는 릴레이션이 가진 튜플의 총 갯수를 리턴한다.
+	 * 4. 작성자                       : biso
+	 * 5. 작성일                       : 2021. 5. 24. 오후 4:17:30
+	 * @return int
+	 * @return
+	 */
+	public int countTuple() {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		String query = "SELECT COUNT(*) FROM review";
+		try {
+			conn = dataSource.getConnection();
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+				System.out.println("list-count success");
+			}			
+		} catch (Exception e) {
+			System.out.println("list-count fail");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(psmt != null) psmt.close();
+				if(conn != null) conn.close();
+				System.out.println("< rs, psmt, conn close success>");
+			} catch (Exception e) {
+				System.out.println("< rs, psmt, conn close Fail>");
+			}
+		}
+		return count;
+	}
 }

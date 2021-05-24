@@ -101,7 +101,7 @@
 			</div>
 			<nav>
 				<ul>
-					<li><a href="/MentoringProject/adminAnnouncementPage.do">공지사항</a></li> 
+					<li><a href="/MentoringProject/userShowAnnouncementPage.do">공지사항</a></li> 
 					<li><a href="/MentoringProject/adminQnaList.do">QnA</a></li>
 				</ul>
 			</nav>		 

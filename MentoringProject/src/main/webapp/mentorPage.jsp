@@ -148,7 +148,7 @@
                         <div class="imgbox">
                             <img src="./img/banner01.jpg" alt="">
                             <div class="sbox">
-                                <a href="#none"><p>프로그래밍</p></a>
+                                <a href="/MentoringProject/HompageCategorySearch.do?majornum=1"><p>소프트웨어개발</p></a>
                             </div>
                             <div class="line">
                                 <div class="topline"></div>
@@ -162,7 +162,7 @@
                         <div class="imgbox">
                             <img src="./img/banner02.jpg" alt="">
                             <div class="sbox">
-                                <a href="#none"><p>디자인</p></a>
+                                <a href="/MentoringProject/HompageCategorySearch.do?majornum=2"><p>디자인</p></a>
                             </div>
                             <div class="line">
                                 <div class="topline"></div>
@@ -176,7 +176,7 @@
                         <div class="imgbox">
                             <img src="./img/banner03.jpg" alt="">
                             <div class="sbox">
-                                <a href="#none"><p>예술</p></a>
+                                <a href="/MentoringProject/HompageCategorySearch.do?majornum=3"><p>예술</p></a>
                             </div>
                             <div class="line">
                                 <div class="topline"></div>
@@ -190,7 +190,7 @@
                         <div class="imgbox">
                             <img src="./img/banner01.jpg" alt="">
                             <div class="sbox">
-                                <a href="#none"><p>운동</p></a>
+                                <a href="/MentoringProject/HompageCategorySearch.do?majornum=4"><p>운동</p></a>
                             </div>
                             <div class="line">
                                 <div class="topline"></div>
