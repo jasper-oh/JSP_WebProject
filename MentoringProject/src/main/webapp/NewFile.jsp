@@ -86,95 +86,19 @@ button.now {
 </header>
   <div id="main">
 <article>
-<h3>REVIEW LIST</h3>
-	<form action="adminReviewList.do" method="get">
-	<table border="0">
-		<tr>
-		<td colspan="2"></td>
-		<td>
-		<input type="button" name="button" value="All" onclick="getClick(event)">
-		</td>
-		<td>
-		<input type="button" name="button" value="Block" onclick="getClick(event)">
-		</td>
-		<td>
-		<input type="button" name="button" value="General" onclick="getClick(event)">
-		</td>
-		<td>
-		<select name="where">
-		<option value="username">작성자</option>
-		<option value="review">리뷰내용</option>
-		<option value="title">작성된 포스</option>
-		</select>
-		</td>
-		<td>
-		<input type="text" name="keyword">
-		</td>
-		<td>
-		<input type="submit" value="검색">
-		</td>
-		</tr>
-		<tr>
-	</table>
-	</form>
-	<table>
-		<tr>
-			<th>review pk</th>
-			<th>producttitle</th>
-			<th>작성자</th>
-			<th>리뷰제목</th>
-			<th>리뷰내용</th>
-			<th>score</th>
-			<th>작성시간</th>
-			<th>차단시간</th>
-			<th>-</th>
 
-		</tr>
-		<c:forEach items="${ReviewData }" var="dto">
-		<tr>
-			<td>${dto.reviewpk }</td>
-			<td>${dto.title }</td>
-		    <td>${dto.username }</td>
-			<td>${dto.reviewtitle }</td>
-			<td>${dto.reviewtext }</td>
-			<td>${dto.reviewscore }</td>
-			<td><fmt:formatDate value="${dto.indate }" pattern="yyyy.MM.dd HH:mm:ss" /></td>
-			<td><fmt:formatDate value="${dto.outdate }" pattern="yyyy.MM.dd HH:mm:ss" /></td>
-<td>
-	<c:if test="${empty dto.outdate }">
-       <a href="/MentoringProject/adminReviewBlock.do?paymentpk=${dto.reviewpk }&id=0&reviewpk=${dto.reviewpk }">차단하기</a>
-    </c:if>
-	<c:if test="${!empty dto.outdate }">
-       <a href="/MentoringProject/adminReviewBlock.do?paymentpk=${dto.reviewpk }&id=1&reviewpk=${dto.reviewpk }&button=">차단해제</a>
-    </c:if>
-</td> 
-		</tr>		
-		</c:forEach>
-	</table>
-	
-		<table>
-		<tr>
-			<td colspan="4" align="center">
-				<!-- 페이징 부분 -->
-				<c:forEach items="${pageList }" var="page">
-					<a href="adminReviewList.do?page=${page }">${page}</a>
-				</c:forEach>
-			</td>
-		</tr>
-	</table>
 </article>
 <nav>
 	<button type="button" onclick="location.href='AdminAnnouncementList.do' ">Announcement</button>
  	<button type="button" onclick="location.href='adminUserListShowPage.do' ">User</button>
  	<button type="button" onclick="location.href='adminMajorListShowPage.do' ">Force</button>
- 	<button type="button" class="now" onclick="location.href='adminReviewList.do' ">Review</button>
+ 	<button type="button" onclick="location.href='adminReviewList.do' ">Review</button>
  	<button type="button" onclick="location.href='adminQnaList.do' ">QnA</button>
  	<button type="button" onclick="location.href='' ">결제 내역 관리</button>
 </nav>
 <aside></aside>
   </div>
-<footer>
-</footer>
+<footer></footer>
   
 </body>
 </html>
