@@ -25,6 +25,8 @@ import com.project.mentoring.command.MenteeBookingCancelCommand;
 import com.project.mentoring.command.MenteeBookinglistCommand;
 import com.project.mentoring.command.MenteeMentoringListCommand;
 import com.project.mentoring.command.MenteeMentoringReviewCommand;
+import com.project.mentoring.command.MenteeMyPageModifyCommand;
+import com.project.mentoring.command.MenteeMyPageOpenCommand;
 import com.project.mentoring.command.MenteeReviewDeleteActionCommand;
 import com.project.mentoring.command.MenteeReviewEditActionCommand;
 import com.project.mentoring.command.MenteeReviewEditCommand;
@@ -318,9 +320,29 @@ public class FrontController extends HttpServlet {
 			break;
 			
 			
+			/**
+			 * 5/24
+			 * 이찬호 / 제다이 마이페이지에 기인 프로필 불러오기
+			 */
+		case("/menteeMyPageOpen.do"):
+			System.out.println("멘티 마이 페이지에 멘티 정보 띄우기");
+			command = new MenteeMyPageOpenCommand();
+			command.execute(request, response);
+			viewPage="userMyPage.jsp";
+			break;
 			
+			/**
+			 * 5/24
+			 * 이찬호 / 제다이 마이페이지에서 수정하기
+			 */
+		case("/MenteeMyPageModify.do"):
+			System.out.println("멘티 마이 페이지에 멘티 정보 띄우기");
+			command = new MenteeMyPageModifyCommand();
+			command.execute(request, response);
+			viewPage="/menteeMyPageOpen.do";
+			break;
 			
-			
+//----------------------------------------------------------------------------------
 			
 			
 		// -- mentorPage 의 *.do
