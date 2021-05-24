@@ -32,6 +32,7 @@ import com.project.mentoring.command.MentorPayReceiveListCommand;
 import com.project.mentoring.command.MentorProfileInsertCommand;
 import com.project.mentoring.command.MentorProfileIntroduceInsertCommand;
 import com.project.mentoring.command.MentorProfileSubMajorFindCommand;
+import com.project.mentoring.command.MentorReviewViewCommand;
 import com.project.mentoring.command.MentorScheduledCompleteListShowCommand;
 import com.project.mentoring.command.MentorScheduledListShowCommand;
 import com.project.mentoring.command.MentorSelectMentorPkCommand;
@@ -403,11 +404,19 @@ public class FrontController extends HttpServlet {
 
 			break;
 			
-			
-			
-			
-			
-			
+			/**
+			 * 5/23 일요일
+			 *  마스터의 리뷰관리 페이지
+			 *  이찬호
+			 */
+		case("/mentorReviewView.do"):
+			System.out.println("리뷰리스트 목록");
+			command = new MentorReviewViewCommand();
+			command.execute(request, response);
+			viewPage="mentorReviewView.jsp";
+
+			break;
+				
 			
 			
 		//------------------ 5/23 이찬호 종료 ---------	------

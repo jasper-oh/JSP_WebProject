@@ -25,7 +25,7 @@
                     <li><a href="/MentoringProject/mentorProductList.do">종목조회</a></li>
                     <li><a href="/MentoringProject/mentorScheduledList.do">예약관리</a></li>
                    	<li> <a href="/MentoringProject/mentorPayReceiveList.do">정산완료내역</a></li>
-					<li><a href="리뷰보기.jsp">리뷰 보기</a></li>
+					<li><a href="/MentoringProject/mentorReviewView.do">리뷰 보기</a></li>
                 </ul>
             </div>
         </nav>

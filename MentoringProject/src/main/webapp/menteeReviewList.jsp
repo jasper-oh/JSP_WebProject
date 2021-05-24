@@ -23,7 +23,7 @@
 			
 		
 		</tr>
-		<c:forEach items="${MenteeReviewList }" var="dto">
+		<c:forEach items="${mentorReviewView }" var="dto">
 		<tr>
 		    <td>${dto.mentorname }</td>
 			<td>${dto.majorname }</td>

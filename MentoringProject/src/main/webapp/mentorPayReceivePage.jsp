@@ -20,15 +20,15 @@
 			
 		
 		</tr>
-		<c:forEach items="${mentorPayReceivePage }" var="dto">
+		<c:forEach items="${mentorPayReceiveList }" var="dto">
 		<tr>
-		    <td>${dto.paymentpk }</td>
-			<td>${dto.title }</td>
+		    <td>${dto.paymentPk }</td>
+			<td>${dto.producttitle }</td>
 			<td>${dto.startday }</td>
 			<td>${dto.totalprice }</td>
 			<td>${dto.paymentsenddate }</td>
 			
-			<td><a href="/MentoringProject//mentorProfile.do">멘토마이페이지로</a></td>
+	<!-- 		<td><a href="/MentoringProject/mentorProfile.do">멘토마이페이지로</a></td> -->
 			
 			
 		</tr>		

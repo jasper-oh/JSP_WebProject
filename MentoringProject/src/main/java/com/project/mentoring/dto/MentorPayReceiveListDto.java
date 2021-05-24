@@ -9,7 +9,7 @@ public class MentorPayReceiveListDto {
 		String paymentPk;
 		String producttitle;
 		Date startday;
-		int tatalprice;
+		int totalprice;
 		Timestamp paymentsenddate;
 
 		
@@ -18,13 +18,13 @@ public class MentorPayReceiveListDto {
 		}
 
 
-		public MentorPayReceiveListDto(String paymentPk, String producttitle, Date startday, int tatalprice,
+		public MentorPayReceiveListDto(String paymentPk, String producttitle, Date startday, int totalprice,
 				Timestamp paymentsenddate) {
 			super();
 			this.paymentPk = paymentPk;
 			this.producttitle = producttitle;
 			this.startday = startday;
-			this.tatalprice = tatalprice;
+			this.totalprice = totalprice;
 			this.paymentsenddate = paymentsenddate;
 		}
 
@@ -59,13 +59,13 @@ public class MentorPayReceiveListDto {
 		}
 
 
-		public int getTatalprice() {
-			return tatalprice;
+		public int gettotalprice() {
+			return totalprice;
 		}
 
 
-		public void setTatalprice(int tatalprice) {
-			this.tatalprice = tatalprice;
+		public void settotalprice(int totalprice) {
+			this.totalprice = totalprice;
 		}
 
 
