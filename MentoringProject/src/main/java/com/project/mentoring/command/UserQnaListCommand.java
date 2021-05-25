@@ -30,7 +30,8 @@ public class UserQnaListCommand implements Command {
 		QnaDao dao = new QnaDao();
 		ArrayList<QnaDto> dto = dao.UserQnAList(userpk);
 		request.setAttribute("QuestionList", dto);
-
+		
+		
 	}
 
 }

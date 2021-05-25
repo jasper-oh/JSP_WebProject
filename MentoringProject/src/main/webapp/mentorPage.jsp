@@ -23,10 +23,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TakeYourTime</title>
-    <link rel="stylesheet" href="css/reset.css">
+   	<link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="shortcut icon" sizes="76x76" type="image/x-icon"
         href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico">
@@ -57,9 +58,9 @@
             </div>
             <nav>
                 <ul>
-                   <li><a href="userBeMentorPage.jsp">포스정보 추가등록</a></li>
+                <li><a href="mentorBeAnotherMentor2.jsp">포스정보 추가등록</a></li> 
                     <li><a href="helpPage.jsp">도움말</a></li>
-                    <li><a href="mentorMyPage.jsp">마이페이지</a></li>
+                    <li><a href="/MentoringProject/showMentorMyPage.do">마이페이지</a></li>
                     <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
                 </ul>
             </nav>

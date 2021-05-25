@@ -1,17 +1,10 @@
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<!-- <style type="text/css">
-table{border-spacing:20px; 
-text-align:center;
-}
-</style> -->
- <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TakeYourTime</title>
@@ -26,7 +19,8 @@ text-align:center;
     <script src="js/slick.min.js"></script>
 </head>
 <body>
-		<header id="header">
+<!-- 유저가 제다이 -->
+<header id="header">
         <div class="topmenu">
             <div class="row">
                 <a href="#none"><i class="fab fa-facebook-square"></i></a>
@@ -48,93 +42,50 @@ text-align:center;
             </div>
             <nav>
                 <ul>
-                    	<li><a href="userBeMentorPage.html">마스터가 되어보세요</a></li> 
-                        <li><a href="helpPage.html">도움말</a></li>
-                        <li><a href="userMyPage.html">마이페이지</a></li>
-                        <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
-                        
+                <li><a href="mentorBeAnotherMentor2.jsp">포스정보 추가등록</a></li> 
+                    <li><a href="/MentoringProject/help.do">도움말</a></li>
+                    <li><a href="/MentoringProject/showMentorMyPage.do">마이페이지</a></li>
+                    <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     
-    <!-- 디자인 들어간 부분 -->
-    	<section>
-		<article class="subpage">
+    <section>
+		<article class="subpage page3"> 
 			<div class="row">
-				<div class="bookinglist">
-					<h2>나의 예약대기 내역</h2>
-					<div class="info cf">
-						<ul>
-							<li>
-								 &nbsp;<input type="radio" name="booking" value="null" onclick="getClick(event)" th:checked="${empty param.booking ? 'checked' : ''}">&nbsp;전부보기
-							</li>
-							<li>
-								&nbsp;<input type="radio" name="booking" value="wait" onclick="getClick(event)" th:checked="${param.booking eq 'wait' ? 'checked' : ''}">&nbsp;예약대기 
-							</li>
-							<li>
-								<input type="radio" name="booking" value="complite" onclick="getClick(event)" th:checked="${param.booking eq 'complite' ? 'checked' : ''}">&nbsp;예약성공 
-							</li>
-							<li>
-								<input type="radio" name="booking" value="cancel" onclick="getClick(event)" th:checked="${param.booking eq 'cancel' ? 'checked' : ''}">&nbsp;예약취소 
-							</li>
-						</ul>
-					</div>
-					<table>
-						<colgroup>
-						<col>
-						<col>
-						<col>
-						<col>
-						<col>
-						<col>
-						<col>
-						<col>
-						<col>
-						</colgroup>
-						<thead>
-							<tr>
-								<th style="visibility:hidden">pk</th>
-								<th>멘토이름</th>
-								<th>전공이름</th>
-								<th>부전공이름</th>
-								<th>시작날짜</th>
-								<th>시간</th>
-								<th>결제일</th>
-								<th>예약취소일</th>
-								<th>토큰</th>
-								<th>선택</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${MenteeBookingList }" var="dto">
-							<tr>
-								<td style="visibility:hidden">${dto.paymentpk }</td>
-							    <td>${dto.menteename }</td>
-								<td>${dto.majorname }</td>
-								<td>${dto.submajorname }</td>
-								<td>${dto.startday }</td>
-								<td>${dto.starttime }~${dto.endtime }</td>
-								<td><fmt:formatDate value="${dto.paymentpaydate }" pattern="yyyy.MM.dd HH:mm:ss" /></td>
-								<td><fmt:formatDate value="${dto.paymentcanceldate }" pattern="yyyy.MM.dd HH:mm:ss" /></td>
-								<td>${dto.paymenttoken }</td>
-								<td>
-									<c:if test="${empty dto.paymentcanceldate }">
-					       				<a href="/MentoringProject/menteeBookingCancel.do?paymentpk=${dto.paymentpk }">예약취소</a>
-					    			</c:if>
-								</td> 
-							</tr>		
-							</c:forEach>
-						</tbody>
-					</table>
+				<div class="step cf">
+					<ul>
+						<li>
+							1단계
+						</li>
+						<li>
+							2단계
+						</li>
+						<li>
+							3단계
+						</li>
+					</ul>
 				</div>
+				<div class="title">
+					<h2>멘토가 되신것을 축하합니다!!</h2>
+						
+							
+				</div>
+				<form action="userCheckUpdate.do" method="post">
+					<div class="container cf">
+							<h1> 또 다른 마스터가 되신 것을 다시 한번 축하드립니다.  </h1><br>
+							<span>마이페이지에서 관리가 가능하며, 아래의 버튼을 통해 홈페이지로 이동해 주시면 됩니다.</span>
+					</div>
+					<button>
+						<input id= "insertMentorProfile" type="submit" value="홈페이지로 이동하기" onclick="showButton()">
+					</button>
+				</form>
 			</div>
 		</article>
 	</section>
-	<!-- 디자인 들어간 부분 끝-->
-
-
-	<footer id="footer">
+    
+		<footer id="footer">
         <div class="row">
             <p>
                 <a href="#none">회사소개</a>
@@ -153,10 +104,5 @@ text-align:center;
     </footer>
     <div class="gotop"><a href="#"><i class="fas fa-angle-up"></i><br><span>top</span></a></div>
 
-	<script type="text/javascript">
-		function getClick(event) {
-		  location.href="menteeBookingList.do?booking="+event.target.value;}
-	</script>
-	
 </body>
 </html>

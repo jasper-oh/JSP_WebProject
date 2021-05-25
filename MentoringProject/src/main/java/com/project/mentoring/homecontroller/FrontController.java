@@ -35,6 +35,7 @@ import com.project.mentoring.command.AdminSubMajorUpdateViewCommand;
 import com.project.mentoring.command.AdminSubmajorDeleteCommand;
 import com.project.mentoring.command.AdminUserBlockCommand;
 import com.project.mentoring.command.Command;
+import com.project.mentoring.command.HelpPageShowCommand;
 import com.project.mentoring.command.HomePageMentorListShowCommand;
 import com.project.mentoring.command.HompageCategorySearchCommand;
 import com.project.mentoring.command.IntCommand;
@@ -43,6 +44,8 @@ import com.project.mentoring.command.MenteeBookingCancelCommand;
 import com.project.mentoring.command.MenteeBookinglistCommand;
 import com.project.mentoring.command.MenteeMentoringListCommand;
 import com.project.mentoring.command.MenteeMentoringReviewCommand;
+import com.project.mentoring.command.MenteeMyPageModifyCommand;
+import com.project.mentoring.command.MenteeMyPageOpenCommand;
 import com.project.mentoring.command.MenteeReviewDeleteActionCommand;
 import com.project.mentoring.command.MenteeReviewEditActionCommand;
 import com.project.mentoring.command.MenteeReviewEditCommand;
@@ -248,6 +251,7 @@ public class FrontController extends HttpServlet {
 				session.setAttribute("userpk", userpk);
 				
 				
+				
 				System.out.println("로그인 성공! ");
 				
 				UserCheckSelectCommand userCheckSelectCommand = new UserCheckSelectCommand();
@@ -275,6 +279,20 @@ public class FrontController extends HttpServlet {
 				
 				
 			}
+			break;
+		case("/menteeMyPageOpen.do"):
+			System.out.println("멘티 마이 페이지에 멘티 정보 띄우기");
+			command = new MenteeMyPageOpenCommand();
+			command.execute(request, response);
+			viewPage="userMyPage.jsp";
+			
+			break;
+			
+		case("/menteeMyPageModify.do"):
+			System.out.println("멘티 마이 페이지에 멘티 정보 띄우기");
+				command = new MenteeMyPageModifyCommand();
+				command.execute(request, response);
+				viewPage="/menteeMyPageOpen.do";
 			break;
 		
 		case("/userSignUpPage.do"):
@@ -355,6 +373,18 @@ public class FrontController extends HttpServlet {
 			}
 			
 			break;
+		
+			
+		case("/help.do"):
+//			어드민의 announement 보여주는 command
+			command = new userShowAnnouncementPageCommand();
+			command.execute(request, response);
+//			어드민과 연결되는 q&a 보여주는 command
+			UserQnaListCommand userQnaListCommand = new UserQnaListCommand();
+			userQnaListCommand.execute(request, response);
+
+			viewPage="helpPage.jsp";
+			break;
 			
 		case("/userShowAnnouncementPage.do"):
 			command = new userShowAnnouncementPageCommand();
@@ -368,27 +398,33 @@ public class FrontController extends HttpServlet {
 			command.execute(request, response);
 			viewPage="searchPage.jsp";
 			break;
+						
 			
-		// -- mentorPage 의 *.do
 		case("/mentorProfile.do"):
+			// 멘토되기 1
 			intCommand = new MentorProfileInsertCommand();
 		
 			int mentorProfileInsertResult = intCommand.execute(request, response);
 			
+			
 			if(mentorProfileInsertResult == 1) {
-				
-				
 				System.out.println("프로필 등록 성공");
 				viewPage = "userBeMentorPage2.jsp";
 				
 			}else {
-			
+				
+				
 				System.out.println("프로필 등록 실패");
 				viewPage = "userBeMentorPage.jsp";
 			}
 			break;
+			
+	
+			
 		
 		case("/mentorProfileMajor.do"):
+			// 멘토되기 2
+			
 			intCommand = new MentorProfileSubMajorFindCommand();
 			MentorSelectMentorPkCommand mentorSelectMentorPkCommand = new MentorSelectMentorPkCommand();
 			int mentorPk = mentorSelectMentorPkCommand.execute(request, response);
@@ -397,17 +433,38 @@ public class FrontController extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("mentorPk", mentorPk);
+			request.setAttribute("userCheck", session.getAttribute("userCheck"));
 			
 			request.setAttribute("majorPk", majorPk);
+			
+			
 			viewPage = "userBeMentorPage3.jsp";
 
 			break;
 			
+		case("/mentorProfileMajorAdd.do"):
+			intCommand = new MentorProfileSubMajorFindCommand();
+			MentorSelectMentorPkCommand mentorSelectMentorPkCommand1 = new MentorSelectMentorPkCommand();
+			int mentorPk1 = mentorSelectMentorPkCommand1.execute(request, response);
+		
+			int majorPk1 = intCommand.execute(request, response);
+		
+			HttpSession session1 = request.getSession();
+			session1.setAttribute("mentorPk", mentorPk1);
+			request.setAttribute("userCheck", session1.getAttribute("userCheck"));
+		
+			request.setAttribute("majorPk", majorPk1);
+		
+		
+			viewPage = "mentorBeAnotherMentor3.jsp";
+			break;
+			
+			
 		case("/mentorProfileIntroduce.do"):
+//			멘토되기 3
 			intCommand = new MentorProfileIntroduceInsertCommand();
-			
 			int mentorProfileIntroduceResult = intCommand.execute(request, response);
-			
+
 			if(mentorProfileIntroduceResult == 1) {
 				System.out.println("상품 정보 등록 성공");
 				viewPage="userBeMentorPage4.jsp";
@@ -418,12 +475,32 @@ public class FrontController extends HttpServlet {
 			
 			break;
 			
+		case("/mentorProfileIntroduceAdd.do"):
+			intCommand = new MentorProfileIntroduceInsertCommand();
+			int mentorProfileIntroduceResult1 = intCommand.execute(request, response);
+
+			if(mentorProfileIntroduceResult1 == 1) {
+				System.out.println("상품 정보 등록 성공");
+				viewPage="mentorBeAnotherMentor4.jsp";
+			}else {
+				System.out.println("상품 정보 등록 실패");
+				viewPage="mentorBeAnotherMentor4.jsp";
+			}
+			break;
+		
+		case("/showMentorMyPage.do"):
+			System.out.println("마이페이지 인포 보기 들어옴");
+			command = new MentorInfoShowCommand();
+			command.execute(request, response);
+			viewPage="mentorMyPage.jsp";
+			break;
+			
 		// 작업중	
 		case("/mentorInfoUpdatePage.do"):
 			System.out.println("마이페이지 인포 보기 들어옴");
 			command = new MentorInfoShowCommand();
 			command.execute(request, response);
-			viewPage="mentorInfoShowPage.jsp";
+			viewPage="mentorMyPage.jsp";
 			break;
 			
 			

@@ -31,17 +31,26 @@ public class AdminUserListDao {
 	/* Admin Page 에 User의 list 를 
 	 * 
 	 *  아이디, 이름 , 핸드폰번호, 이메일, 멘토/ 멘티 ,가입날짜 , 탈퇴 날짜 보여주기 */
-	public ArrayList<AdminUserListDto > userList(){
+	public ArrayList<AdminUserListDto > userList(int requestPage, int numOfTuplePerPage){
 		ArrayList<AdminUserListDto> adminUserListDtos = new ArrayList<AdminUserListDto>();
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;
 		
+		int offset= requestPage -1;
+		
 		try {
 			connection = dataSource.getConnection();
 			
-			String userListQuery = "select userid, username, userphone, useremail, usercheck ,indate, outdate from user";
+			String userListQuery = "select userid, username, userphone, useremail, usercheck ,indate, outdate from user order by userpk desc limit ? , ?";
 			prepareStatement = connection.prepareStatement(userListQuery);
+			
+			if(offset == 0) {
+				prepareStatement.setInt(1, offset);
+			}else {
+				prepareStatement.setInt(1, offset*numOfTuplePerPage);
+			}
+			prepareStatement.setInt(2, numOfTuplePerPage);
 			resultSet = prepareStatement.executeQuery();
 			
 			while(resultSet.next()) {
@@ -114,6 +123,35 @@ public class AdminUserListDao {
 			}
 		}
 	}
+		public int countTuple() {
+			Connection conn = null;
+			PreparedStatement psmt = null;
+			ResultSet rs = null;
+			int count = 0;
+			String query = "SELECT COUNT(*) FROM user";
+			try {
+				conn = dataSource.getConnection();
+				psmt = conn.prepareStatement(query);
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					count = rs.getInt(1);
+					System.out.println("list-count success");
+				}			
+			} catch (Exception e) {
+				System.out.println("list-count fail");
+				e.printStackTrace();
+			} finally {
+				try {
+					if(rs != null) rs.close();
+					if(psmt != null) psmt.close();
+					if(conn != null) conn.close();
+					System.out.println("< rs, psmt, conn close success>");
+				} catch (Exception e) {
+					System.out.println("< rs, psmt, conn close Fail>");
+				}
+			}
+			return count;
+		}
 	
 	
 	

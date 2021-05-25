@@ -12,8 +12,6 @@
  
 		<div class="tab">
 		  <button class="tablinks active" onclick="openTab(event, 'tab1')">도움말</button>
-		  <button class="tablinks" onclick="openTab(event, 'tab2')">공지사항</button>
-		  <button class="tablinks" onclick="openTab(event, 'tab3')">QnA</button>
 		</div>
 		
 		<div id="tab1" class="tabcontent" style="display: block;">
@@ -188,71 +186,14 @@
 		
 		
 		
-		<div id="tab2" class="tabcontent" style="display: none;"> 
-			<h3>공지사항 List</h3>
-	<table border="1">
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>내용</th>
-			<th>날짜</th>
-		</tr>
-		<c:forEach items="${list}" var="dto">
-		<tr>
-			<td>${dto.noticepk }</td>
-			<td>${dto.noticetitle }</td>
-			<td>${dto.noticetext }</td>
-			<td>${dto.indate }</td>
-		</tr>
-		</c:forEach>
-	</table>
-	<table>
-		<tr>
-				<td colspan="4" align="center">
- 					<c:forEach items="${announcementList }" var="page">
-						<a href="AdminAnnouncementList.do?page=${page }">${page}</a>
-					</c:forEach>
-				</td>
-		</tr>	
-	</table>
-		</div>
-		
-		
-		
-		<div id="tab3" class="tabcontent" style="display: none;"> 
-			<input type="button" value="질문하기" onclick="location.href='userQuestionInsert.jsp'">
-		<table>
-		<tr>
-		<td></td>
-		<td></td>
-		<td>작성자</td>
-		<td>제목</td>
-		<td>작성일</td>
-		<td>답변상태</td>
-		</tr>
-		<c:forEach items="${QuestionList }" var="dto" varStatus="status">
 
-		<tr>
-			<td style="visibility:hidden">${dto.questionpk }</td>
-		    <td>${status.count }</td>
-		    <td>${dto.username }</td>
-			<td>
-			 <a href="userQanView.do?questionpk=${dto.questionpk }">${dto.questiontitle }
-			</td>
-			<td><fmt:formatDate value="${dto.indate }" pattern="yyyy.MM.dd HH:mm" /></td>
-			<td>
-			
-			</td>
-			</tr>		
-		</c:forEach>
-</table>
 			
 			
 				
 
 	
 
-		</div>
+		
 	
 
 	<style>

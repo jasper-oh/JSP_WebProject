@@ -1,0 +1,532 @@
+@charset "utf-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Roboto&display=swap");
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+.row {
+  max-width: 1200px;
+  padding: 0px 10px;
+  margin: 0 auto;
+}
+body {
+  color: #2e363e;
+  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+button {
+  outline: none;
+  background: none;
+  border: none;
+}
+
+/* userBeMentorPage 페이지 */
+section {
+  margin-top: 98px;
+}
+.subpage {
+  padding: 80px 0 150px;
+}
+.title h1 {
+  font-size: 27px;
+  font-weight: 700;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  position: relative;
+}
+.mentorpage form {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 50px 20px;
+  overflow: hidden;
+}
+.container {
+  height: 400px;
+  padding: 50px 20px;
+  border-bottom: 3px double #aaa;
+  border-top: 3px double #aaa;
+}
+form > button {
+  padding: 8px 20px;
+  background: #61be03;
+  border-radius: 5px;
+  float: right;
+  margin-top: 50px;
+  color: #fff;
+  transition: all 0.5s;
+}
+form > button:hover {
+  background: #478b02;
+}
+.photo .photobox {
+  width: 180px;
+  height: 200px;
+  border: 1px solid #555;
+}
+.photo > button {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+.photo {
+  float: left;
+  width: 23%;
+  height: 100%;
+}
+.content {
+  float: left;
+  width: 77%;
+  height: 100%;
+  padding-top: 25px;
+}
+.content table {
+  font-size: 20px;
+}
+.content table col:nth-child(1) {
+  width: 20%;
+}
+.content table col:nth-child(2) {
+  width: auto;
+}
+.content table tr th {
+  text-align: left;
+  padding: 15px;
+  font-weight: bold;
+}
+.content table tr td {
+  padding-left: 10px;
+}
+.content table input {
+  background: #f0f0f0;
+}
+.content table input[type="text"] {
+  width: 100px;
+  height: 30px;
+}
+.content table tr:nth-child(1) td {
+  font-size: 18px;
+}
+.content table tr:nth-child(3) input[type="text"] {
+  width: 350px;
+}
+.content table tr:nth-child(3) input[type="button"] {
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+.step {
+  margin: 20px 0;
+}
+.step ul {
+  float: right;
+  margin: 0 80px 30px 0;
+}
+.step ul li {
+  display: inline-block;
+  margin: 10px;
+  padding: 13px 21px;
+  border-radius: 5px;
+  font-size: 18px;
+  background: #666;
+  color: #fff;
+  position: relative;
+}
+.step ul li::after {
+  height: 3px;
+  width: 10px;
+  background: rgb(71, 139, 2);
+  position: absolute;
+  content: "";
+  right: -16px;
+  top: 20px;
+}
+.page1 .step ul li:nth-child(1) {
+  display: inline-block;
+  margin: 10px;
+  padding: 13px 21px;
+  font-size: 18px;
+  background: #61be03;
+  color: #fff;
+}
+.step ul li:nth-of-type(4)::after {
+  display: none;
+}
+.page2 .step ul li:nth-child(1),
+.page2 .step ul li:nth-child(2) {
+  display: inline-block;
+  margin: 10px;
+  padding: 13px 21px;
+  font-size: 18px;
+  background: #61be03;
+  color: #fff;
+}
+.page3 .step ul li:nth-child(1),
+.page3 .step ul li:nth-child(2),
+.page3 .step ul li:nth-child(3) {
+  display: inline-block;
+  margin: 10px;
+  padding: 13px 21px;
+  font-size: 18px;
+  background: #61be03;
+  color: #fff;
+}
+.page4 .step ul li:nth-child(1),
+.page4 .step ul li:nth-child(2),
+.page4 .step ul li:nth-child(3),
+.page4 .step ul li:nth-child(4) {
+  display: inline-block;
+  margin: 10px;
+  padding: 13px 21px;
+  font-size: 18px;
+  background: #61be03;
+  color: #fff;
+}
+
+/* searchPage 페이지 */
+section {
+  position: relative;
+}
+.search_box {
+  position: fixed;
+  top: 27%;
+  right: 0%;
+  right: 0;
+  margin-right: 30px;
+  width: 450px;
+  padding: 30px;
+  background-color: #43a047;
+  display: inline-block;
+  border-radius: 6px;
+  box-shadow: 0 2px 2px 0 rgb(214, 214, 214);
+  animation: ani 2s ease-in-out 0s infinite alternate;
+}
+@keyframes ani {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}
+.search_title h2 {
+  padding: 10px 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #0c300f;
+}
+.search_sub_title {
+  padding: 10px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #104213;
+}
+table {
+  width: 100%;
+}
+.search_input {
+  height: 45px;
+  width: 100%;
+  color: rgb(100, 98, 98);
+  font-size: 15px;
+  border: 1px solid rgb(230, 227, 227);
+}
+.search_button {
+  float: right;
+  padding: 20px 0;
+}
+.button {
+  background: #055705;
+  color: #fff;
+  width: 70px;
+  height: 45px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 0;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.button:hover {
+  background: #033603;
+}
+.searchlist {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+/* 수정 */
+.s_box {
+  background: #61be032c;
+  padding: 20px;
+  height:240px;
+}
+.imgbox {
+  float: left;
+  width: 23%;
+  width: 180px;
+  height: 200px;
+  border: 2px solid #333;
+  overflow: hidden;
+  cursor: pointer;
+}
+.imgbox p {
+  transition: all 0.5s;
+}
+.imgbox p:hover {
+  transform: scale(1.2);
+}
+.search_content {
+  float: left;
+  width: 62%;
+  padding: 10px 15px;
+  line-height: 1.5;
+  height: 200px;
+}
+.search_content h2 {
+  font-size: 23px;
+  font-weight: 700;
+  padding-bottom: 10px;
+}
+.s_box {
+  margin: 30px 0;
+}
+.s_box a {
+  float: left;
+  width: 15%;
+  background: #61be03c9;
+  margin-top: 48px;
+  padding: 40px 0;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 2px 0 #a3cf77;
+  transition: all 0.5s;
+}
+.s_box a:hover {
+  background: #478b02;
+}
+
+/* menteeBookingList 페이지*/
+.bookinglist h2 {
+  font-size: 27px;
+  font-weight: 700;
+  padding-bottom: 20px;
+  padding-left: 30px;
+}
+.bookinglist .info ul {
+  float: right;
+}
+.bookinglist .info ul li {
+  display: inline-block;
+  padding: 0 10px;
+  margin: 20px 0;
+}
+.bookinglist table {
+  margin: 0 auto;
+  text-align: center;
+}
+.bookinglist table tr th {
+  padding: 13px;
+  background: #a3cf77;
+  font-size: 17px;
+  font-weight: 700;
+  border-bottom: 4px double #478b02;
+}
+.bookinglist table tr td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+.bookinglist table col:nth-of-type(1) {
+  width: 110px;
+}
+.bookinglist table col:nth-of-type(2) {
+  width: 150px;
+}
+.bookinglist table col:nth-of-type(3) {
+  width: 130px;
+}
+.bookinglist table col:nth-of-type(4) {
+  width: 130px;
+}
+.bookinglist table col:nth-of-type(5) {
+  width: 80px;
+}
+.bookinglist table col:nth-of-type(6) {
+  width: auto;
+}
+.bookinglist table col:nth-of-type(7) {
+  width: auto;
+}
+.bookinglist table col:nth-of-type(8) {
+  width: 70px;
+}
+.bookinglist table col:nth-of-type(9) {
+  width: 110px;
+}
+.bookinglist table tr td > a {
+  padding: 5px 13px;
+  background: #79c231;
+  border-radius: 5px;
+  transition: all 0.5s;
+}
+.bookinglist table tr td > a:hover {
+  color: #fff;
+  background: #478b02;
+}
+.bookinglist {
+  margin: 100px 0;
+}
+
+/* mentorProductPage 페이지 */
+.box1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 70px;
+  margin-top: 50px;
+}
+.productbox {
+  flex: 3;
+}
+.productbox table,
+.myforcebox table,
+.reviewbox table {
+  text-align: center;
+}
+.productbox tr td:last-child a {
+  padding: 5px 13px;
+  background: #79c231;
+  border-radius: 5px;
+  transition: all 0.5s;
+}
+.productbox tr td:last-child a:hover {
+  color: #fff;
+  background: #478b02;
+}
+.productbox table col:nth-child(1) {
+  width: 100px;
+}
+.productbox table col:nth-child(2) {
+  width: auto;
+}
+.productbox table col:nth-child(3) {
+  width: 120px;
+}
+.productbox table col:nth-child(4) {
+  width: 120px;
+}
+.productbox table col:nth-child(5) {
+  width: 150px;
+}
+.myforcebox {
+  flex: 2;
+  margin-right: 70px;
+}
+.reviewbox {
+  width: 100%;
+  margin-bottom: 50px;
+}
+.subpage h2 {
+  font-size: 27px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.productbox table tr th,
+.reviewbox table tr th {
+  padding: 10px;
+  background: #a3cf77;
+  font-size: 17px;
+  font-weight: 700;
+  border-bottom: 2px double #478b02;
+}
+.productbox table tr td,
+.reviewbox table tr td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+.myforcebox table tr th {
+  padding: 10px;
+  background: #a3cf77;
+  font-size: 17px;
+  font-weight: 700;
+  border-bottom: 1px solid #eee;
+  border-right: 2px double #478b02;
+}
+.myforcebox table tr td {
+  padding: 10px;
+  font-size: 15px;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+}
+.myforcebox table col:nth-child(1) {
+  width: 170px;
+}
+.myforcebox table col:nth-child(2) {
+  width: auto;
+}
+.myforcebox table tr input {
+  padding: 5px 13px;
+  background: #79c231;
+  border-radius: 5px;
+  transition: all 0.5s;
+  font-size: 15px;
+}
+.myforcebox table tr input:hover {
+  color: #fff;
+  background: #478b02;
+}
+
+/* mentoMyPage */
+
+.flip-card {
+  background-color: transparent;
+  width: 800px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+.flip-card-front ul {
+  width: 400px;
+  margin: 0 auto;
+}
+.flip-card-back ul li {
+  padding: 5px;
+}
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg);
+}

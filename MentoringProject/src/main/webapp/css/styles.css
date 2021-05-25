@@ -10,26 +10,11 @@ body {color: #2e363e; font-family: 'Noto Sans KR', sans-serif;
       font-family: 'Roboto', sans-serif;}
 button {outline: none;}
 
-/* header구역 */
-#header.on .topmenu {display: none}
-#header .topmenu {background: #f3f3f3; color:#999; text-align: right; padding: 5px 0;}
-#header .topmenu a {display: inline-block; border-right: 1px solid #e3e3e3; padding: 2px 15px;
-                    font-size: 14px; transition: all 0.5s;}
-#header .topmenu a:nth-of-type(1) {border-left: 1px solid #e3e3e3}
-#header .topmenu a:hover {color: green}
-#header.on {position: fixed; width: 100%; top: 0; left: 0; z-index: 999999; background: #fff;}
-#header .menubar {max-width: 1200px; margin: 0 auto; position: relative;}
-#header h1 {float: left; padding: 15px 10px 15px; padding-left: 20px; font-size: 40px; 
-            font-weight: bold; background: green}
-#header nav {position: absolute; top: 3px; bottom: 0; right: 100px; z-index: 9999;}
-#header nav ul > li {float: left; position: relative; padding: 30px 14px; transition: all 0.5s;}
-#header nav ul > li:hover {color: green}
-#header nav ul > li > a {display: block; font-size: 21px; 
-                         text-align: center; font-weight: bold}
+
 
 /* section구역 */
 /* article1 */
-#article1 {position: relative; margin-bottom: 70px;}
+#article1 {position: relative; margin-bottom: 70px; margin-top: 98px;}
 #article1 .slide {position: relative;}
 #article1 .slide_group .slide1 {height: 750px; background: url(../img/main01.jpg) no-repeat center;
                                 background-size: cover;}
@@ -59,11 +44,11 @@ table {width: 100%;}
                 font-size: 15px;
                 border: 1px solid rgb(230, 227, 227);}
 .search_button {float: right; padding: 20px 0; }
-.button {background: #fd8286; color: #fff;
+.button {background: #055705; color: #fff;
          width: 70px; height: 45px; font-size: 15px;
          font-weight: 700; border-radius: 6px;
          border: 0; cursor: pointer; transition: all 0.5s;}
-.button:hover {background: #fd585d;}
+.button:hover {background: #033603;}
 
 /* article2 */
 #article2 {margin-bottom: 70px; padding: 50px 0;}
@@ -196,17 +181,3 @@ table {width: 100%;}
 
 
 
-
-/* footer구역 */
-#footer {background: #303030; padding: 25px 0 15px; text-align: center; 
-        color: #8d8b8b; font-size: 12px;}
-#footer p:nth-child(1) a {font-weight: bold; display: inline-block; font-size: 13px; 
-                          color: #bbb; padding: 0px 3px 0px 8px;}
-#footer p:nth-child(1) a:hover {color: #fff;}
-#footer p:nth-child(2) {margin-top: 17px; margin-bottom: 9px; line-height: 1.6;}
-
-/* gotop버튼 */
-.gotop {position: fixed; right: 10px; bottom: 10px;}
-.gotop a {width: 45px; height: 45px; display: inline-block;
-          background:rgba(0,0,0,0.6); color: #fff; text-align: center; padding-top: 3px;
-          border-radius: 3px;}

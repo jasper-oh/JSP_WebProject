@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="shortcut icon" sizes="76x76" type="image/x-icon"
         href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico">
@@ -58,8 +59,8 @@
             <nav>
                 <ul>
                     	<li><a href="userBeMentorPage.jsp">마스터가 되어보세요</a></li> 
-                        <li><a href="helpPage.jsp">도움말</a></li>
-                        <li><a href="userMyPage.jsp">마이페이지</a></li>
+                        <li><a href="/MentoringProject/help.do">도움말</a></li>
+                        <li><a href="/MentoringProject/menteeMyPageOpen.do">마이페이지</a></li>
                         <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
                         
                 </ul>
