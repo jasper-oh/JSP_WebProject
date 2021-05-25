@@ -484,6 +484,9 @@ table {
 
 /* mentoMyPage */
 
+
+
+
 .flip-card {
   background-color: transparent;
   width: 800px;
@@ -513,7 +516,6 @@ table {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-
 .flip-card-front {
   background-color: #bbb;
   color: black;

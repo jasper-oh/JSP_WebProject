@@ -52,7 +52,6 @@ text-align:center;
                         <li><a href="helpPage.html">도움말</a></li>
                         <li><a href="userMyPage.html">마이페이지</a></li>
                         <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
-                        
                 </ul>
             </nav>
         </div>
