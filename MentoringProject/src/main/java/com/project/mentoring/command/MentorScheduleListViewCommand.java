@@ -13,12 +13,12 @@ public class MentorScheduleListViewCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		MentorScheduleActionDao dao = new MentorScheduleActionDao();
-		ArrayList<ScheduleDto> dto = dao.ScheduleListView(ShareVar.productpk);
-
-		
-		request.setAttribute("MentorScheduleList", dto);
+//		// TODO Auto-generated method stub
+//		MentorScheduleActionDao dao = new MentorScheduleActionDao();
+//		ArrayList<ScheduleDto> dto = dao.ScheduleListView(ShareVar.productpk);
+//
+//		
+//		request.setAttribute("MentorScheduleList", dto);
 	}
 
 }
