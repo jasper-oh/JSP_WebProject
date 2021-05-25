@@ -75,6 +75,22 @@ button.now {
   <!--  <link rel="stylesheet" type="text/css" href="css/adminstyle.css"> -->
 <meta charset="UTF-8">
 <title>공지사항</title>
+<c:choose>
+<c:when test="${subMajorDeleteResult == 1 }">
+	<script>
+
+	alert("삭제되었습니다.");
+	
+	</script>	
+</c:when>
+<c:when test="${subMajorDeleteResult == 0}">
+	<script>
+
+	alert("사용중인 데이터는 삭제할 수 없습니다.");
+	
+	</script>	
+</c:when>
+</c:choose>
 </head>
 <body>
 <header>
@@ -100,7 +116,7 @@ button.now {
 		onclick="window.open(this.href, '_blank', 'width=200, height=50'); return false;">
 					수정
 		</a></td>
-		<td><input type="button" value="삭제" onclick="location.href='adminSubmajorDeleteAction.do?submajorpk=${subMajorDto.submajorPk }&majorname=<%=request.getParameter("majorname") %>&majorpk=<%=request.getParameter("majorpk") %>'"> </td>
+		<td><input type="button" value="삭제" class="confirmation" onclick="location.href='adminSubmajorDeleteAction.do?submajorpk=${subMajorDto.submajorPk }&majorname=<%=request.getParameter("majorname") %>&majorpk=<%=request.getParameter("majorpk") %>'"> </td>
 		</tr>
 		</c:forEach>
 		<tr>
@@ -121,4 +137,13 @@ button.now {
 <footer></footer>
   
 </body>
+	<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('정말 삭제하시겠습니까?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
 </html>

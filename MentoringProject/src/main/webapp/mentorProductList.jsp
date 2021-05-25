@@ -52,7 +52,7 @@
 			<td>${dto.submajorname }</td>
 			<td><a href="/MentoringProject/mentorProductPage.do?productpk=${dto.productpk }">${dto.title }</a></td>
 			<td>${dto.price }</td>
-			<td><a href="">삭제하기 </a></td>
+			<td><a href="" class="confirmation">삭제하기 </a></td>
 			
 			
 		</tr>		
@@ -61,4 +61,13 @@
 	</table>
 	</div>
 </body>
+<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('정말 해당 포스를 삭제하시겠습니까?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
 </html>

@@ -112,7 +112,14 @@ button.now {
  <td><fmt:formatDate value="${dto.payDate }" pattern="yyyy.MM.dd HH:mm" /></td>
  <td>${dto.totalPrice }</td>
  <td>${dto.cancelDate }</td>
- <td><a href="adminCancelPayment.do?paymentPk=${dto.paymentPk }">환불 하기</a></td>
+ <td>
+	<c:if test="${empty dto.cancelDate }">
+       <a href="adminCancelPayment.do?paymentPk=${dto.paymentPk }" class="confirmationB">환불하기</a>
+    </c:if>
+	<c:if test="${!empty dto.cancelDate }">
+      환불완료
+    </c:if>
+</td> 
 </tr>
  </c:forEach>
 <tr>

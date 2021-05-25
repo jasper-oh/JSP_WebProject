@@ -32,10 +32,7 @@
 </tr>
 
 </table>
-		<%
-	session.setAttribute("USERNAME","username");
-	
-	%>
+
 <section>
     <p>----------------------</p>
     <div><label><input type="radio" name="method" value="카드" checked/>신용카드</label></div>
@@ -48,7 +45,7 @@
 <script>
 	var totalprice = '<c:out value="${Paymentdata.totalprice }"/>';
 	var title = '<c:out value="${Paymentdata.title }"/>';
-	var username = '<%=session.getAttribute("USERNAME") %>';
+	var username = '<%=session.getAttribute("username") %>';
     var tossPayments = TossPayments("test_ck_kZLKGPx4M3MLwj1E9yd8BaWypv1o");
     var button = document.getElementById("payment-button");
 
@@ -58,7 +55,7 @@
         var method = document.querySelector('input[name=method]:checked').value; // "카드" 혹은 "가상계좌"
 
         var paymentData = {
-            amount: 5000,
+            amount: totalprice,
             orderId: orderId,
             orderName: title,
             customerName: username,

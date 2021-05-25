@@ -256,9 +256,10 @@ public class AdminSubMajorListDao {
 	 * @param submajorpk
 	 * @param submajorName
 	 */
-		public void adminSubMajorUpdateAction(int submajorpk, String submajorName) {
+		public int adminSubMajorUpdateAction(int submajorpk, String submajorName) {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
+			int result = 1;
 			
 			try {
 				connection = dataSource.getConnection();
@@ -270,9 +271,10 @@ public class AdminSubMajorListDao {
 				preparedStatement.setInt(2, submajorpk);
 				
 				preparedStatement.executeUpdate();
-
+				result = 1;
 			}catch(Exception e) {
 				e.printStackTrace();
+				result = 0;
 			}finally {
 				
 				try {
@@ -280,9 +282,12 @@ public class AdminSubMajorListDao {
 					if(connection != null) connection.close();	
 				}catch(Exception e) {
 					e.printStackTrace();
+					result = 0;
 				}
 				
 			}
+			
+		return result;
 		}
 	
 	

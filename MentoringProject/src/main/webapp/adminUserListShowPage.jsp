@@ -108,10 +108,10 @@ button.now {
 		<td>${userDto.userInDate }</td>
 		<td>${userDto.userOutDate }</td>
 		<td><c:if test="${empty userDto.userOutDate }">
-		      <a href="/MentoringProject/adminUserBlock.do?userid=${userDto.userId }&check=0">차단</a>
+		      <a href="/MentoringProject/adminUserBlock.do?userid=${userDto.userId }&check=0" class="confirmationB">차단</a>
 		    </c:if>
 		<c:if test="${!empty userDto.userOutDate }">
-		      <a href="/MentoringProject/adminUserBlock.do?userid=${userDto.userId }&check=1">차단해제</a>
+		      <a href="/MentoringProject/adminUserBlock.do?userid=${userDto.userId }&check=1" class="confirmationA">차단해제</a>
 		    </c:if>
 		</td> 
 		</tr>		
@@ -141,4 +141,20 @@ button.now {
 <footer></footer>
   
 </body>
+<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmationB');
+    var confirmIt = function (e) {
+        if (!confirm('정말 차단하시겠습니까?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+    var elems = document.getElementsByClassName('confirmationA');
+    var confirmIt = function (e) {
+        if (!confirm('정말 차단을 해제하시겠습니까?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
 </html>

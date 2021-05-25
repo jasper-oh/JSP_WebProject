@@ -97,7 +97,7 @@ button.now {
 		<tr>
 			<td>${dto.noticepk }</td>
 			<td><a href="AdminAnnouncementContent.do?noticepk=${dto.noticepk }">${dto.noticetitle }</a></td>
-			<td>${dto.indate }</td>
+			<td><fmt:formatDate value="${dto.indate }" pattern="yyyy.MM.dd HH:mm:ss" /></td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -105,6 +105,13 @@ button.now {
 		<tr>
 				<td colspan="4" align="center">
  					<c:forEach items="${announcementList }" var="page">
+						<a href="AdminAnnouncementList.do?page=${page }">${page}</a>
+					</c:forEach>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" align="center">
+ 					<c:forEach items="${pageList }" var="page">
 						<a href="AdminAnnouncementList.do?page=${page }">${page}</a>
 					</c:forEach>
 				</td>

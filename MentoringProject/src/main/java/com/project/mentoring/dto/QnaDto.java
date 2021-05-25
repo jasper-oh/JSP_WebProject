@@ -15,6 +15,7 @@ public class QnaDto {
 	String username;
 	String questiontitle;
 	String questiontext;
+	String result;
 	Timestamp indate;
 	Timestamp outdate;
 	
@@ -59,7 +60,30 @@ public class QnaDto {
 		this.outdate = outdate;
 	}
 
-
+/**
+ * 
+ * 1. MethodName        : QnaDto
+ * 2. ClassName         : QnaDto
+ * 3. Commnet           : admin qna list
+ * 4. 작성자                       : biso
+ * 5. 작성일                       : 2021. 5. 25. 오후 2:44:47
+ * @param questionpk
+ * @param username
+ * @param questiontitle
+ * @param indate
+ * @param outdate
+ * @param result
+ */
+	public QnaDto(int questionpk, String username, String questiontitle, Timestamp indate,
+			Timestamp outdate, String result) {
+		super();
+		this.questionpk = questionpk;
+		this.username = username;
+		this.questiontitle = questiontitle;
+		this.indate = indate;
+		this.outdate = outdate;
+		this.result = result;
+	}
 	public QnaDto(int questionpk, String username, String questiontitle, String questiontext, Timestamp indate,
 			Timestamp outdate) {
 		super();
@@ -129,6 +153,12 @@ public class QnaDto {
 
 	public void setOutdate(Timestamp outdate) {
 		this.outdate = outdate;
+	}
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
 	}
 	
 

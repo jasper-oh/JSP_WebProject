@@ -53,8 +53,8 @@
 		        <span> 예약된 분야 :${scheduledList.scheduledMajor } </span><br>
 		        <span>예약된 세부 분야 : ${scheduledList.scheduledSubMajor }</span><br>
 		        <span>예약된 가격 : ${scheduledList.scheduledPrice }</span> <br>
-		        <a href="/MentoringProject/mentorScheduledCompleteList.do?paymentPk=${scheduledList.paymentPk }" >예약 확정 하기</a>
-		        <a href="#" >예약 취소 하기</a>
+		        <a href="/MentoringProject/mentorScheduledCompleteList.do?paymentPk=${scheduledList.paymentPk }" class="confirmationB" >예약 확정 하기</a>
+		        <a href="#" class="confirmationA">예약 취소 하기</a>
 		      </div>
 	      </c:forEach>
 	      
@@ -65,4 +65,20 @@
 
 
 </body>
+<script type="text/javascript">
+var elems = document.getElementsByClassName('confirmationA');
+var confirmIt = function (e) {
+    if (!confirm('정말 예약을 취소하시겠습니까?')) e.preventDefault();
+};
+for (var i = 0, l = elems.length; i < l; i++) {
+    elems[i].addEventListener('click', confirmIt, false);
+}
+var elems = document.getElementsByClassName('confirmationB');
+var confirmIt = function (e) {
+    if (!confirm('예약을 승인하시겠습니까?')) e.preventDefault();
+};
+for (var i = 0, l = elems.length; i < l; i++) {
+    elems[i].addEventListener('click', confirmIt, false);
+}
+</script>
 </html>

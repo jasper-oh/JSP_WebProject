@@ -142,10 +142,10 @@ button.now {
 			<td><fmt:formatDate value="${dto.outdate }" pattern="yyyy.MM.dd HH:mm:ss" /></td>
 <td>
 	<c:if test="${empty dto.outdate }">
-       <a href="/MentoringProject/adminReviewBlock.do?paymentpk=${dto.reviewpk }&id=0&reviewpk=${dto.reviewpk }">차단하기</a>
+       <a href="/MentoringProject/adminReviewBlock.do?paymentpk=${dto.reviewpk }&id=0&reviewpk=${dto.reviewpk }" class="confirmationB">차단하기</a>
     </c:if>
 	<c:if test="${!empty dto.outdate }">
-       <a href="/MentoringProject/adminReviewBlock.do?paymentpk=${dto.reviewpk }&id=1&reviewpk=${dto.reviewpk }&button=">차단해제</a>
+       <a href="/MentoringProject/adminReviewBlock.do?paymentpk=${dto.reviewpk }&id=1&reviewpk=${dto.reviewpk }&button=" class="confirmationA">차단해제</a>
     </c:if>
 </td> 
 		</tr>		
@@ -177,4 +177,20 @@ button.now {
 </footer>
   
 </body>
+<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmationB');
+    var confirmIt = function (e) {
+        if (!confirm('정말 해당 리뷰를 차단하시겠습니까?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+    var elems = document.getElementsByClassName('confirmationA');
+    var confirmIt = function (e) {
+        if (!confirm('정말 해당 리뷰를 차단을 해제하시겠습니까?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
 </html>

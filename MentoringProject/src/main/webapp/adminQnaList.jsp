@@ -108,6 +108,7 @@ button.now {
 <td><a href="adminQnaView.do?questionpk=${dto.questionpk }">${dto.questiontitle }</a></td>
  <td><fmt:formatDate value="${dto.indate }" pattern="yyyy.MM.dd HH:mm" /></td>
  <td><fmt:formatDate value="${dto.outdate }" pattern="yyyy.MM.dd HH:mm" /></td>
+<td>${dto.result }</td>
 </tr>
  </c:forEach>
 <tr>
