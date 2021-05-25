@@ -22,7 +22,7 @@ public class MentorTokenUpdateDao {
 		}
 	}
 	
-	public int tokenUpdate(String token, int paymentPk) {
+	public int tokenUpdate(String token, String paymentPk) {
 		
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
@@ -32,7 +32,7 @@ public class MentorTokenUpdateDao {
 			connection = dataSource.getConnection();
 			
 			String tokenUpdateQuery1 = "update payment set paymenttoken = '"+token+"'"; 
-			String tokenUpdateQuery2= "where paymentpk = " + paymentPk;
+			String tokenUpdateQuery2= "where paymentpk = '" + paymentPk + "'";
 			prepareStatement = connection.prepareStatement(tokenUpdateQuery1 + tokenUpdateQuery2);
 			
 			prepareStatement.executeUpdate();

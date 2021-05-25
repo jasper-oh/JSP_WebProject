@@ -39,7 +39,7 @@
                         </path>
     	                <h2>Take Your Time</h2>
                     </svg> -->
-                <h1><a href="home.html">LOGO</a></h1>
+                <h1><a href="/MentoringProject/userHomePage.do">LOGO</a></h1>
             </div>
             <nav>
                 <ul>
@@ -81,7 +81,7 @@
                             <div class="flip-card-inner">
                                 <div class="flip-card-front">
                                     <ul>
-                                        <li><img src="imgurl" alt="제다이 이미지입니다."></li>
+                                        <li><img src="img/starwars5.jpg" alt="제다이 이미지입니다."></li>
                                     </ul>
                                 </div>
                					<form action="/MentoringProject/menteeMyPageModify.do" method="post" >

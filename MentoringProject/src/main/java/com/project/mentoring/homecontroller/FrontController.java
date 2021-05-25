@@ -14,6 +14,7 @@ import com.project.mentoring.command.AdminAnswerBlockCommand;
 import com.project.mentoring.command.AdminAnswerInsertCommand;
 import com.project.mentoring.command.AdminAnswerUpdateActionCommand;
 import com.project.mentoring.command.AdminAnswerUpdateViewCommand;
+import com.project.mentoring.command.AdminCancelPaymentCommand;
 import com.project.mentoring.command.AdminMajorUpdateActionCommand;
 import com.project.mentoring.command.AdminMajorUpdateViewCommand;
 import com.project.mentoring.command.AdminPageAnnouncementContentCommand;
@@ -23,6 +24,7 @@ import com.project.mentoring.command.AdminPageAnnouncementModifyCommand;
 import com.project.mentoring.command.AdminPageAnnouncementWriteCommand;
 import com.project.mentoring.command.AdminPageMajorInsertCommand;
 import com.project.mentoring.command.AdminPageMajorListShowCommand;
+import com.project.mentoring.command.AdminPageShowPayResultCommand;
 import com.project.mentoring.command.AdminPageSubMajorInsertCommand;
 import com.project.mentoring.command.AdminPageSubMajorListShowCommand;
 import com.project.mentoring.command.AdminPageUserListShowCommand;
@@ -229,7 +231,16 @@ public class FrontController extends HttpServlet {
 			command.execute(request, response);
 			viewPage="AdminAnnouncementList.do";
 			break;
-			
+		case("/adminPageShowPayResult.do"):
+			command = new AdminPageShowPayResultCommand();
+			command.execute(request, response);
+			viewPage="adminShowPayResultPage.jsp";
+			break;
+		case("/adminCancelPayment.do"):
+			command = new AdminCancelPaymentCommand();
+			command.execute(request, response);
+			viewPage="adminPageShowPayResult.do";
+			break;
 			
 		// -- userPage 의 *.do
 		case("/userLoginPage.do"):
@@ -280,6 +291,21 @@ public class FrontController extends HttpServlet {
 				
 			}
 			break;
+			
+		case("/userHomePage.do"):
+			command = new HomePageMentorListShowCommand();
+			command.execute(request, response);
+			viewPage = "homePage.jsp";
+			break;
+			
+			
+		case("/mentorHomePage.do"):
+			command = new HomePageMentorListShowCommand();
+			command.execute(request, response);
+			viewPage="mentorPage.jsp";
+			break;
+			
+			
 		case("/menteeMyPageOpen.do"):
 			System.out.println("멘티 마이 페이지에 멘티 정보 띄우기");
 			command = new MenteeMyPageOpenCommand();
@@ -495,7 +521,7 @@ public class FrontController extends HttpServlet {
 			viewPage="mentorMyPage.jsp";
 			break;
 			
-		// 작업중	
+
 		case("/mentorInfoUpdatePage.do"):
 			System.out.println("마이페이지 인포 보기 들어옴");
 			command = new MentorInfoShowCommand();
@@ -580,20 +606,6 @@ public class FrontController extends HttpServlet {
 
 			break;
 		
-			//-------------------2021-05-22seolin-------------------
-			//PMentorProductPageCommand 수정
-			
-			//PMentorProductListCommand 수정
-			
-			//mentorProductList.jsp 수정
-			
-			//mentorProductPage.jsp 수정
-			
-			//MetorScheduleActionDao 추가
-			
-			//ScheduleDto 추가
-			
-			//mentorScheduleInsert.do --->삭제해도 될 것 같음!!
 			
 		case("/mentorProductList.do"):
 			System.out.println("멘토 마이페이지 product");
@@ -603,7 +615,7 @@ public class FrontController extends HttpServlet {
 			break;
 			//
 
-			/////////============/////////	
+	
 		case("/mentorProductPage.do"):
 			command=new PMentorProductPageCommand();
 			command.execute(request, response);
@@ -617,12 +629,6 @@ public class FrontController extends HttpServlet {
 			break;
 			
 			
-//		case("/mentorScheduleInsert.do"):
-//			System.out.println("멘토 product 페이지");
-//			command=new PMentorProductListCommand();
-//			command.execute(request, response);
-//			viewPage="productInsertSchedule.jsp";
-//			break;
 		case("/mentorScheduleListView.do"):
 			System.out.println("product->schedule");
 			command=new MentorScheduleListViewCommand();
@@ -859,7 +865,7 @@ public class FrontController extends HttpServlet {
 			//
 			
 			
-			// 문제 생김 -------
+
 		case("/menteeMentoringReview.do"):
 			System.out.println("멘티리뷰작성 가기");
 			command = new MenteeMentoringReviewCommand();

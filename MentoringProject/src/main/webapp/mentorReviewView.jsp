@@ -8,6 +8,21 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<%@include file="mentorHeader.jsp" %>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h1>마스터의 리뷰 관리 페이지</h1>
  	<table border="0">
 		<tr>
@@ -25,5 +40,7 @@
 		</tr>
 	</c:forEach>
 	</table>
+	
+<%@include file="everyFooter.jsp" %>
 </body>
 </html>

@@ -71,7 +71,7 @@
                         </path>
     	                <h2>Take Your Time</h2>
                     </svg> -->
-                <h1><a href="home.html">LOGO</a></h1>
+                <h1><a href="/MentoringProject/userHomePage.do">LOGO</a></h1>
             </div>
             <nav>
                 <ul>
@@ -103,7 +103,7 @@
 					</ul>
 				</div>
 				<div class="title">
-					<h1>1단계 : 당신의 전공을 먼저 입력해주세요!</h1>
+					<h1>1단계 : 당신의 포스를 먼저 입력해주세요!</h1>
 				</div>
 				<form action="mentorProfileMajorAdd.do" method="post">
 					<div class="container cf">
@@ -113,9 +113,9 @@
 										<select name="major" onchange="handleOnChange(this)">
 							
 											<option value="<%out.print(adminMajorList.get(0).getMajorName()); %>" selected="selected">
-												<%out.print(adminMajorList.get(0).getMajorName());%>
+												포스를 선택해 주세요!
 											</option>
-													<%for(int i = 1; i < adminMajorList.size() ; i++){ %>
+													<%for(int i = 0; i < adminMajorList.size() ; i++){ %>
 											<option value="<%out.print(adminMajorList.get(i).getMajorName()); %>">
 												<%out.print(adminMajorList.get(i).getMajorName());%>
 											</option>
@@ -126,7 +126,7 @@
 								</tr>
 								<tr>
 									<td>
-										<input type="text" id="majortext" name="majorname">
+										<input type="text" id="majortext" name="majorname" >
 				
 									</td>
 								</tr>

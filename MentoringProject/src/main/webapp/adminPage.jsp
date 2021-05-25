@@ -88,7 +88,7 @@ button.now {
  	<button type="button" onclick="location.href='adminMajorListShowPage.do' ">Force</button> <br>
  	<button type="button" onclick="location.href='adminReviewList.do' ">Review</button>
  	<button type="button" onclick="location.href='adminQnaList.do' ">QnA</button>
- 	<button type="button" onclick="location.href='' ">Payment</button>
+ 	<button type="button" onclick="location.href='adminPageShowPayResult.do' ">Payment</button>
   	
 	<div class="container">
 		

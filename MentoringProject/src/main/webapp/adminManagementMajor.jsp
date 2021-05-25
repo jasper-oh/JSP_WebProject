@@ -113,7 +113,7 @@ button.now {
  	<button type="button" class="now" onclick="location.href='adminMajorListShowPage.do' ">Force</button> <br>
  	<button type="button" onclick="location.href='adminReviewList.do' ">Review</button>
  	<button type="button" onclick="location.href='adminQnaList.do' ">QnA</button>
- 	<button type="button" onclick="location.href='' ">결제 내역 관리</button>
+ 	<button type="button" onclick="location.href='adminPageShowPayResult.do' ">결제 내역 관리</button>
 </nav>
     <aside></aside>
   </div>

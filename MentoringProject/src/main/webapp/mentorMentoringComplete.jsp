@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<%@include file="mentorHeader.jsp" %>
 	<h1>축하드립니다</h1>
 	
 	<h3>포터링을 성공적으로 마치셨습니다.</h3>
@@ -23,6 +23,6 @@
 		<input type="submit" value="토큰 번호 입력">
 	
 	</form>
-
+	<%@include file="everyFooter.jsp" %>
 </body>
 </html>

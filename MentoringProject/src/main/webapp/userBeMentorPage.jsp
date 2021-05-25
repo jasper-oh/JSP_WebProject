@@ -106,8 +106,8 @@
 					<div class="container cf">
 						<div class="photo">
 							<div class="photobox">
-								<div>
-									<!-- 사진담는 박스 -->
+								<div id="image_container">
+									
 								</div>
 							</div>
 							<button><input type="file" name="mentorimage" id="image" accept="image/*" onchange="setThumbnail(event);"></button>

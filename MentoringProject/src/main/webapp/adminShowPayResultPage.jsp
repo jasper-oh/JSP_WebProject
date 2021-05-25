@@ -84,57 +84,60 @@ button.now {
     <h2 class="byline" id="byline">The Force Awakens</h2>
   </div>
 </header>
+  
+  <!-- 여기서 부터 -->
+  
   <div id="main">
 <article>
-		<h2>유저리스트 출력</h2>
-			<table border="0" >
-		 <tr>
-		 <th>유저 ID</th>
-		 <th>유저 이름</th>
-		 <th>유저 phone</th>
-		 <th>유저 email</th>
-		 <th>멘티 / 멘토</th>
-		 <th>유저 가입 날짜</th>
-		 <th>유저 탈퇴 날짜</th>
-		 <th>버튼</th>
-		 </tr>
-		 <c:forEach items="${userList }" var="userDto">
-		<tr>
-		<td>${userDto.userId }</td>
-		<td>${userDto.userName }</td>
-		<td>${userDto.userPhone }</td>
-		<td>${userDto.userEmail }</td>
-		<td>${userDto.userCheck }</td>
-		<td>${userDto.userInDate }</td>
-		<td>${userDto.userOutDate }</td>
-		<td><c:if test="${empty userDto.userOutDate }">
-		      <a href="/MentoringProject/adminUserBlock.do?userid=${userDto.userId }&check=0">차단</a>
-		    </c:if>
-		<c:if test="${!empty userDto.userOutDate }">
-		      <a href="/MentoringProject/adminUserBlock.do?userid=${userDto.userId }&check=1">차단해제</a>
-		    </c:if>
-		</td> 
-		</tr>		
-		</c:forEach>
-		</table>
-	<table>
-		<tr>
-			<td colspan="4" align="center">
-			<!-- 페이징 부분 -->
-			<c:forEach items="${pageList }" var="page"><!-- 유저리스트를 불러오기  -->
-				<a href="adminUserListShowPage.do?page=${page }">${page}</a>
-			</c:forEach>
-			</td>
-		</tr>
+<h3>결제 관리</h3>
+	<table border="0">
+
+
+<tr>
+ <th style="visibility:hidden">pk</th>
+<th>제다이 이름</th>
+<th>마스터 이름</th>
+<th>송금 날짜</th>
+<th>결제 금액</th>
+<th>취소 날짜</th>
+<th>환불 하기</th>
+ </tr>
+<c:forEach items="${PaymentData }" var="dto">
+
+<tr>
+ <td style="visibility:hidden">${dto.paymentPk }</td>
+		    
+<td>${dto.senderName }</td>
+<td>${dto.receiverName }</td>
+ <td><fmt:formatDate value="${dto.payDate }" pattern="yyyy.MM.dd HH:mm" /></td>
+ <td>${dto.totalPrice }</td>
+ <td>${dto.cancelDate }</td>
+ <td><a href="adminCancelPayment.do?paymentPk=${dto.paymentPk }">환불 하기</a></td>
+</tr>
+ </c:forEach>
+<tr>
+ <td colspan="4" align="center">
+ <!-- 페이징 부분 -->
+<c:forEach items="${pageList }" var="page">
+ <a href="adminPageShowPayResult.do?page=${page }">${page}</a>
+ </c:forEach>
+</td>
+ </tr>
+
+
+
 	</table>
 </article>
+
+<!-- 여기까지-->
+
 <nav>
 	<button type="button" onclick="location.href='AdminAnnouncementList.do' ">Announcement</button>
- 	<button type="button" class="now" onclick="location.href='adminUserListShowPage.do' ">User</button>
+ 	<button type="button" onclick="location.href='adminUserListShowPage.do' ">User</button>
  	<button type="button" onclick="location.href='adminMajorListShowPage.do' ">Force</button>
  	<button type="button" onclick="location.href='adminReviewList.do' ">Review</button>
  	<button type="button" onclick="location.href='adminQnaList.do' ">QnA</button>
- 	<button type="button" onclick="location.href='adminPageShowPayResult.do' ">결제 내역 관리</button>
+ 	<button type="button" class="now" onclick="location.href='adminPageShowPayResult.do' ">결제 내역 관리</button>
 </nav>
 <aside></aside>
   </div>

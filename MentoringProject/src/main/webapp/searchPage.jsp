@@ -59,7 +59,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="mentorBeAnotherMentor2.jsp">멘토정보 추가등록</a></li> 
+                <li><a href="mentorBeAnotherMentor2.jsp">포스정보 추가등록</a></li> 
                 <li><a href="/MentoringProject/help.do">도움말</a></li>
                 <li><a href="/MentoringProject/showMentorMyPage.do">마이페이지</a></li>
                 <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
