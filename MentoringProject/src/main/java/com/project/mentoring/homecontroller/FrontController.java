@@ -75,6 +75,7 @@ import com.project.mentoring.command.PPaymentCommand;
 import com.project.mentoring.command.PProductScheduleSelectCommand;
 import com.project.mentoring.command.PProductScheduleViewCommand;
 import com.project.mentoring.command.PScheduleInsertCommand;
+import com.project.mentoring.command.StringCommand;
 import com.project.mentoring.command.UserCheckSelectCommand;
 import com.project.mentoring.command.UserCheckUpdateToMentorCommand;
 import com.project.mentoring.command.UserFindIdByEmailCommand;
@@ -137,6 +138,7 @@ public class FrontController extends HttpServlet {
 		
 		Command command = null;
 		IntCommand intCommand = null;
+		StringCommand stringCommand = null;
 		
 		System.out.println(com);
 		
@@ -338,52 +340,20 @@ public class FrontController extends HttpServlet {
 			break;
 			
 		case("/userFindIdByEmail.do"):
-			intCommand = new UserFindIdByEmailCommand();
-			int findIdByEmailResult = intCommand.execute(request, response);
-			
-			if(findIdByEmailResult  == 1) {
-				
-				request.setAttribute("findIdResult", findIdByEmailResult);
-				viewPage="userIdFindResult.jsp";
-				
-			}else {
-				request.setAttribute("findIdResult", findIdByEmailResult);
-				System.out.println("id찾기 오류");
-				viewPage="userFindId.jsp";
-			}	
-			
+			command = new UserFindIdByEmailCommand();
+			command.execute(request, response);
+			viewPage="userFindId.jsp";
 			break;
 			
 		case("/userFindIdByPhone.do"):
-			intCommand = new UserFindIdByPhoneCommand();
-		
-			int findIdByPhoneResult = intCommand.execute(request, response);
-			
-			if(findIdByPhoneResult  == 1) {
-				request.setAttribute("findIdResult", findIdByPhoneResult);
-				viewPage="userIdFindResult.jsp";
-				
-			}else {
-				request.setAttribute("findIdResult", findIdByPhoneResult);
-				System.out.println("id찾기 오류");
-				viewPage="userFindId.jsp";
-				
-			}
+			command = new UserFindIdByPhoneCommand();
+			command.execute(request, response);
+			viewPage="userFindId.jsp";
 			break;
 		case("/userFindPwResult.do"):
-			intCommand = new UserFindPwCommand();
-			int findPwResult = intCommand.execute(request, response);
-			if(findPwResult == 1) {
-				
-				request.setAttribute("findPwResult", findPwResult);
-				viewPage="userFindPwResult.jsp";
-				
-			}else {
-				
-				request.setAttribute("findPwResult", findPwResult);
-				viewPage="userFindPw.jsp";
-			}
-			
+			command = new UserFindPwCommand();
+			command.execute(request, response);
+			viewPage="userFindPw.jsp";
 			break;
 			
 		case("/userShowSearchListPage.do"):

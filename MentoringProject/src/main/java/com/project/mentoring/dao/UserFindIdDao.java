@@ -29,12 +29,11 @@ public class UserFindIdDao {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		
-		String userId="";
-		
+		String userId="0";
 		try {
 			connection = dataSource.getConnection();
 			
-			String findIdQuery = "select userid from user where username = ? and useremail = ?";
+			String findIdQuery = "select replace(userid,substring(userid,2,3),'***')as userid from user where username = ? and useremail = ?";
 			preparedStatement = connection.prepareStatement(findIdQuery);
 			
 			preparedStatement.setString(1,userName);
@@ -60,12 +59,12 @@ public class UserFindIdDao {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		
-		String userId="";
+		String userId="0";
 		
 		try {
 			connection = dataSource.getConnection();
 			
-			String findIdQuery = "select userid from user where username = ? and userphone = ?";
+			String findIdQuery = "select replace(userid,substring(userid,2,3),'***')as userid from user where username = ? and userphone = ?";
 			preparedStatement = connection.prepareStatement(findIdQuery);
 			
 			preparedStatement.setString(1,userName);

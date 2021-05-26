@@ -25,7 +25,7 @@ public class UserFindPwDao {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		
-		String userPw ="";
+		String userPw ="0";
 		
 		try {
 			connection = dataSource.getConnection();

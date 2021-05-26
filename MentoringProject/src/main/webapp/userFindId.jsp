@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TakeYourTime</title>
@@ -20,25 +21,45 @@
     <link rel="stylesheet" href="css/join.css">
     </head>
 <body>
-<c:if test="${ findIdResult == 0 }">
-	
-		<script>
-		
-			alert("입력하신 정보의 아이디가 없습니다. 다시 입력하시거나 회원가입 부탁드립니다.");
-			
+<c:choose>
+	<c:when test="${findIdResult=='0'}">
+		<script>		
+			alert("입력하신 정보의 아이디가 없습니다. 다시 확인해주세요.");
 		</script>
-</c:if> 
+	</c:when>
+	<c:when test="${!empty findIdResult}">
+		<script type="text/javascript">
+		var findIdResult = '<c:out value="${findIdResult}"/>';
+			alert("당신의 아이디는 "+findIdResult+" 입니다." );
+			location.href='userLoginPage.jsp';
+		</script>
+	</c:when>
+</c:choose>
+
 <script>
 	function FindIdByEmail(){
 		if(document.findIdEmail.username.value == "" || document.findIdEmail.useremail.value == ""){
 			alert("내용을 입력해 주세요");
 			return;
+		}else{
+		document.findIdEmail.submit();			
 		}
-		
+	/* 	
 		url = "/MentoringProject/userFindIdByEmail.do";
-			open(url , "find","toolbar=no,location=no,status=no,scrollbar=no,resizable=no,width=300,height=200");
-		
+			open(url , "find","toolbar=no,location=no,status=no,scrollbar=no,resizable=no,width=300,height=200"); */
 	}
+	function FindIdByPhone(){
+		if(document.findIdPhone.username.value == "" || document.findIdPhone.userphone.value == ""){
+			alert("내용을 입력해 주세요");
+			return;
+		}else{
+			document.findIdPhone.submit();		
+		}
+	/* 	
+		url = "/MentoringProject/userFindIdByEmail.do";
+			open(url , "find","toolbar=no,location=no,status=no,scrollbar=no,resizable=no,width=300,height=200"); */
+	}
+		
 
 
 </script>
@@ -76,12 +97,15 @@
             </nav>
         </div>
     </header>
-    	
     	<div class="cont">
     	<div class="demo">
 		회원 ID 찾기 페이지 입니다. 
 	<div class="joinBox row">
 	<form action="userFindIdByEmail.do" method="post" name="findIdEmail" >
+	<br>
+	<br>
+	<br>
+
 		<h2>이메일로 아이디 찾기</h2>
 		<table>
 		<tr>
@@ -101,7 +125,7 @@
 	</form>
 	</div>
 	<div class="joinBox row">
-	<form action="userFindIdByPhone.do" method="post">
+	<form action="userFindIdByPhone.do" method="post" name="findIdPhone">
 		<h2>핸드폰 번호로 아이디 찾기</h2>
 		<table>
 		<tr>
@@ -114,21 +138,13 @@
 		</tr>
 		</table>
 		<div class="btn">
-			<input type="submit" value="ID 찾기">
+			<input type="button" value="ID 찾기" onclick="FindIdByPhone(this.form)">
 		</div>	
 	</form>
 	</div>
 	</div>
 	</div>
-	
-	
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+
 	
 	     	<footer id="footer">
         	<div class="row">

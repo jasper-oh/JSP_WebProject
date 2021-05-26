@@ -5,10 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.project.mentoring.dao.UserFindPwDao;
 
-public class UserFindPwCommand implements IntCommand {
+public class UserFindPwCommand implements Command {
 
 	@Override
-	public int execute(HttpServletRequest request, HttpServletResponse response) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String userId = request.getParameter("userid");
 		String userName = request.getParameter("username");
@@ -18,11 +18,11 @@ public class UserFindPwCommand implements IntCommand {
 		
 		String userPw = userFindPwDao.userFindPw(userId,userName,userPhone);
 		
-		if(userPw.equals("")) {
-			return 0;
+		if(userPw.equals("0")) {
+			request.setAttribute("findPwResult", userPw);
 		}else {
-			request.setAttribute("userpw", userPw);
-			return 1;
+			request.setAttribute("findPwResult", userPw);
+			
 		}
 
 	}

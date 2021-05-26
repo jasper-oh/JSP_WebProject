@@ -40,7 +40,28 @@
 		document.forms["mentorBasicProfile"].submit();
 		
 	}
+	
+	function check(){
+		if(!document.beMentorForm.mentorimage.value ){
+			alert("사진을 등록해주세요.");
+			break;
+			
+		}
+		if(!document.beMentorForm.year.value || !document.beMentorForm.month.value || !document.beMentorForm.day.value){
+			alert("생년월일을 빈칸 없이 입력해 주세요");
+			return false;
+			break;
+		}
 		
+		if(!document.beMentorForm.address.value){
+			alert("주소를 등록해 주세요");
+			return false;
+			break;
+		}
+		
+		beMentorForm.submit();
+		
+	}
 		
 	</script>
 	
@@ -102,7 +123,7 @@
 				<div class="title">
 					<h1>1단계 : 개인정보를 입력해 주세요!</h1>
 				</div>
-				<form action="mentorProfile.do" method="post" id="mentorBasicProfile" enctype="multipart/form-data">
+				<form action="mentorProfile.do" method="post" id="mentorBasicProfile" enctype="multipart/form-data" name="beMentorForm">
 					<div class="container cf">
 						<div class="photo">
 							<div class="photobox">
@@ -128,7 +149,7 @@
 								<tr>
 									<th>생년월일 </th>
 									<td>
-										<input type="text" name="year" size="5">년
+										<input type="text" name="year" size="5" >년
 										<input type="text" name="month" size="5">월
 										<input type="text" name="day" size="5">일
 									</td>
@@ -145,7 +166,7 @@
 					</div>
 					<button>
 						<!-- <a href="userBeMentorPage2.html">등록하고 다음으로 넘어가기</a> -->
-						<input id= "insertMentorProfile" type="submit" value="등록하고 다음으로 넘어가기" onclick="showButton()">
+						<input id="insertMentorProfile" type="button" value="등록하고 다음으로 넘어가기" onclick="check(this.form)">
 					</button>
 				</form>
 			</div>
