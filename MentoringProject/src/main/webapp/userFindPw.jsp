@@ -6,9 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>PW 찾기</title>
+<style type="text/css">
+</style>
 </head>
 <script type="text/javascript">
-
 function findPw(){
 	if(!document.findPwForm.userid.value ){
 		alert("ID 를 입력해 주세요");
@@ -28,19 +29,24 @@ function findPw(){
 	findPwForm.submit();
 	
 }
-
-
 </script>
+<c:choose>
+<c:when test="${findPwResult=='0'}">
+	<script>		
+		alert("입력하신 정보의 비밀번호가 없습니다. 다시 확인해주세요.");
+	</script>
+</c:when>
+<c:when test="${!empty findPwResult}">
+	<script type="text/javascript">
+	var findPwResult = '<c:out value="${findPwResult}"/>';
+		alert("당신의 비밀번호는 "+findPwResult+" 입니다." );
+		location.href='userLoginPage.jsp';
+	</script>
+</c:when>
+</c:choose>
 <body>
-<c:if test="${ findPwResult == 0 }">
-	
-		<script>
-		
-			alert("입력하신 정보의 비밀번호가 없습니다. 다시 입력하시거나 회원가입 부탁드립니다.");
-			
-		</script>
-</c:if> 
 
+<article>
 회원 PW 찾기 페이지 입니다.
 
 		<h2>비밀번호 찾기</h2>
@@ -68,6 +74,7 @@ function findPw(){
 		</tr>
 	</table>
 </form>
+</article>
 
 
 

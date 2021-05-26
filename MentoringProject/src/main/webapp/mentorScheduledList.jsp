@@ -111,8 +111,8 @@
 			                    <td>${dto.scheduledMajor }</td>
 			                    <td>${dto.scheduledSubMajor }</td>
                                 <td>${dto.scheduledPrice }</td>
-                                <td><a href="/MentoringProject/mentorScheduledCompleteList.do?paymentPk=${dto.paymentPk }" >예약 확정 하기</a></td>
-                                <td><a href="#" >예약 취소</a></td>
+                                <td><a href="/MentoringProject/mentorScheduledCompleteList.do?paymentPk=${dto.paymentPk }" class="confirmationB" >예약 확정 하기</a></td>
+                                <td><a href="/MentoringProject/menteeBookingCancel.do" class="confirmationA">예약 취소</a></td>
 							</tr>		
 							</c:forEach>
 						</tbody>
@@ -140,9 +140,21 @@
         </div>
     </footer>
     <div class="gotop"><a href="#"><i class="fas fa-angle-up"></i><br><span>top</span></a></div>
-	<script type="text/javascript">
-		function getClick(event) {
-		  location.href="menteeBookingList.do?booking="+event.target.value;}
-	</script>
+<script type="text/javascript">
+var elems = document.getElementsByClassName('confirmationA');
+var confirmIt = function (e) {
+    if (!confirm('정말 예약을 취소하시겠습니까?')) e.preventDefault();
+};
+for (var i = 0, l = elems.length; i < l; i++) {
+    elems[i].addEventListener('click', confirmIt, false);
+}
+var elems = document.getElementsByClassName('confirmationB');
+var confirmIt = function (e) {
+    if (!confirm('예약을 승인하시겠습니까?')) e.preventDefault();
+};
+for (var i = 0, l = elems.length; i < l; i++) {
+    elems[i].addEventListener('click', confirmIt, false);
+}
+</script>
 </body>
 </html>

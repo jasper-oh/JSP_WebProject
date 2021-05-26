@@ -282,9 +282,10 @@ public class FrontController extends HttpServlet {
 			}else {
 				command = new HomePageMentorListShowCommand();
 				command.execute(request, response);
+				HttpSession session = request.getSession();
+				session.invalidate();
 				request.setAttribute("loginResult", loginResult);
-				viewPage = "visitorPage.jsp";
-				
+				viewPage = "userLoginPage.jsp";
 				
 				System.out.println("로그인 실패! ");
 				
@@ -322,70 +323,28 @@ public class FrontController extends HttpServlet {
 			break;
 		
 		case("/userSignUpPage.do"):
-			intCommand = new UserSignUpPageInsertCommand();
-			int signUpResult = intCommand.execute(request,response);
-			
-			if(signUpResult == 1) {
-				
-				request.setAttribute("signUpResult", signUpResult);
-				viewPage = "visitorPage.jsp";
-				
-			}else {
-				request.setAttribute("signUpResult", signUpResult);
-				viewPage = "userSignUpPage.jsp";
-			}
-			
+			command = new UserSignUpPageInsertCommand();
+			command.execute(request,response);
+				//viewPage = "visitorPage.jsp"
+			viewPage = "userSignUpPage.jsp";
 			break;
 			
 		case("/userFindIdByEmail.do"):
-			intCommand = new UserFindIdByEmailCommand();
-			int findIdByEmailResult = intCommand.execute(request, response);
-			
-			if(findIdByEmailResult  == 1) {
-				
-				request.setAttribute("findIdResult", findIdByEmailResult);
-				viewPage="userIdFindResult.jsp";
-				
-			}else {
-				request.setAttribute("findIdResult", findIdByEmailResult);
-				System.out.println("id찾기 오류");
-				viewPage="userFindId.jsp";
-			}	
-			
+			command = new UserFindIdByEmailCommand();
+			command.execute(request, response);
+			viewPage="userFindId.jsp";
 			break;
 			
 		case("/userFindIdByPhone.do"):
-			intCommand = new UserFindIdByPhoneCommand();
-		
-			int findIdByPhoneResult = intCommand.execute(request, response);
-			
-			if(findIdByPhoneResult  == 1) {
-				request.setAttribute("findIdResult", findIdByPhoneResult);
-				viewPage="userIdFindResult.jsp";
-				
-			}else {
-				request.setAttribute("findIdResult", findIdByPhoneResult);
-				System.out.println("id찾기 오류");
-				viewPage="userFindId.jsp";
-				
-			}
+			command = new UserFindIdByPhoneCommand();
+			command.execute(request, response);
+			viewPage="userFindId.jsp";
 			break;
 		case("/userFindPwResult.do"):
-			intCommand = new UserFindPwCommand();
-			int findPwResult = intCommand.execute(request, response);
-			if(findPwResult == 1) {
-				
-				request.setAttribute("findPwResult", findPwResult);
-				viewPage="userFindPwResult.jsp";
-				
-			}else {
-				
-				request.setAttribute("findPwResult", findPwResult);
-				viewPage="userFindPw.jsp";
-			}
-			
+			command = new UserFindPwCommand();
+			command.execute(request, response);
+			viewPage="userFindPw.jsp";
 			break;
-			
 		case("/userShowSearchListPage.do"):
 			intCommand = new UserSearchPageShowCommand();
 			int searchResult = intCommand.execute(request, response);

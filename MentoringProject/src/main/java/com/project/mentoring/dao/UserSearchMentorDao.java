@@ -40,15 +40,26 @@ public class UserSearchMentorDao {
 		try {
 			
 			connection = dataSource.getConnection();
-			
-			String mentorListQuery1 = "select m.mentorimage , mj.majorname , p.title , s.submajorname ,p.productpk, u.username,p.price from product as p ";
-			String mentorListQuery2 = "inner join mentor as m on m.mentorpk = p.mentor_mentorpk ";
-			String mentorListQuery3 = "inner join submajor as s on p.submajor_submajorpk = s.submajorpk ";
-			String mentorListQuery4 = "inner join major as mj on mj.majorpk=s.major_majorpk ";
-			String mentorListQuery5 = "inner join user as u on u.userpk = m.user_userpk ";
-			String mentorListQuery6 = "where m.outdate is null and m.mentoraddress like '%"+mentorAddress+"%' ";
-			String mentorListQuery7 = "and mj.majorname = '"+ mentorMajor+"' and s.submajorname like '%"+mentorSubMajor+"%'";
-			prepareStatement = connection.prepareStatement(mentorListQuery1+mentorListQuery2+mentorListQuery3+mentorListQuery4+mentorListQuery5+mentorListQuery6+mentorListQuery7);
+			String query = null;
+			if (mentorMajor == "0") {
+				query = "select m.mentorimage , mj.majorname , p.title , s.submajorname ,p.productpk, u.username,p.price from product as p "
+						+ "inner join mentor as m on m.mentorpk = p.mentor_mentorpk "
+						+ "inner join submajor as s on p.submajor_submajorpk = s.submajorpk "
+						+ "inner join major as mj on mj.majorpk=s.major_majorpk "
+						+ "inner join user as u on u.userpk = m.user_userpk "
+						+ "where m.outdate is null and m.mentoraddress like '%"+mentorAddress+"%' "
+						+ "and s.submajorname like '%"+mentorSubMajor+"%'";
+						
+			}else {
+				query = "select m.mentorimage , mj.majorname , p.title , s.submajorname ,p.productpk, u.username,p.price from product as p "
+						 + "inner join mentor as m on m.mentorpk = p.mentor_mentorpk "
+						 + "inner join submajor as s on p.submajor_submajorpk = s.submajorpk "
+						 + "inner join major as mj on mj.majorpk=s.major_majorpk "
+						 + "inner join user as u on u.userpk = m.user_userpk "
+						 + "where m.outdate is null and m.mentoraddress like '%"+mentorAddress+"%' "
+						 + "and mj.majorname = '"+ mentorMajor+"' and s.submajorname like '%"+mentorSubMajor+"%'";
+			}
+			prepareStatement = connection.prepareStatement(query);
 			
 			
 			resultSet = prepareStatement.executeQuery();
