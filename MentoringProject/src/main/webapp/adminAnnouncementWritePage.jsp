@@ -69,10 +69,16 @@ button {
 button.now {
     background-color: #8CD790;
 }
+div.row {
+	color:#D7FFF1;
+}
+a.footer{
+	color:#77AF9C;
+}
 </style>
 <head>
    <link rel="stylesheet" type="text/css" href="css/starwars.css">
-  <!--  <link rel="stylesheet" type="text/css" href="css/adminstyle.css"> -->
+	<link rel="stylesheet" type="text/css" href="css/adminstyle.css">
 <meta charset="UTF-8">
 <title>공지사항</title>
 </head>
@@ -89,15 +95,17 @@ button.now {
 <form action="/MentoringProject/AdminAnnouncementWrite.do" method="post">
  <table border="0">
  <tr>
- <td>제목</td>
- <td><input type="text" name="noticetitle" size="50"></td>
+
+ <th>제목</th>
+
+ <td class="l"><input type="text" name="noticetitle" size="50"></td>
  </tr>
  <tr>
- <td>내용</td>
+ <th>내용</th>
  <td><textarea rows="10" cols="50" name="noticetext"></textarea></td>
  </tr>
  <tr>
- <td colspan="2"><input type="submit" value="입력">&nbsp;&nbsp;&nbsp;<a href="AdminAnnouncementList.do">목록보기</a></td>
+ <td colspan="2" class="c"><input type="submit" value="입력">&nbsp;&nbsp;&nbsp;<a href="AdminAnnouncementList.do">목록보기</a></td>
  </tr>
  </table>
  </form>
@@ -112,7 +120,23 @@ button.now {
 </nav>
 <aside></aside>
   </div>
-<footer></footer>
+  <footer>
+   <div class="row">
+            <p>
+                <a href="#none" class="footer">회사소개</a>
+                <a href="#none" class="footer">사업분야</a>
+                <a href="#none" class="footer">갤러리</a>
+                <a href="#none" class="footer">온라인문의</a>
+                <a href="#none" class="footer">고객센터</a>
+            </p>
+            <p><span>주소 : 부산광역시 해운대구 좌동 273-10</span> <span class="hide"> / </span> <span>상호 : 디자인선사인</span> <span
+                    class="hide"> / </span>사업자등록번호 : 123-456-7890<br>
+                <a href="tel:070-7155-19749" class="footer">Tel : 070-7155-19749</a> <span class="hide"> / </span><span>Fax :
+                    02-2139-1142</span> <span class="hide"> / </span><a href="mailto:gijung23@nate.com" class="footer">E-mail :
+                    gijung23@nate.com</a></p>
+            <p>Copyright &copy; Sunsine.com All Rights Reserved.</p>
+        </div>
+  </footer>
   
 </body>
 </html>
