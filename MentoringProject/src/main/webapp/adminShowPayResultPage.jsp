@@ -69,12 +69,18 @@ button {
 button.now {
     background-color: #8CD790;
 }
+div.row {
+	color:#D7FFF1;
+}
+a.footer{
+	color:#77AF9C;
+}
 </style>
 <head>
    <link rel="stylesheet" type="text/css" href="css/starwars.css">
-  <!--  <link rel="stylesheet" type="text/css" href="css/adminstyle.css"> -->
+ <link rel="stylesheet" href="css/adminstyle.css">
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>PAYMENT</title>
 </head>
 <body>
 <header>
@@ -89,12 +95,11 @@ button.now {
   
   <div id="main">
 <article>
-<h3>결제 관리</h3>
+<h3>PAYMENT</h3>
 	<table border="0">
 
-
+<thead>
 <tr>
- <th style="visibility:hidden">pk</th>
 <th>제다이 이름</th>
 <th>마스터 이름</th>
 <th>송금 날짜</th>
@@ -102,27 +107,38 @@ button.now {
 <th>취소 날짜</th>
 <th>환불 하기</th>
  </tr>
+</thead>
+<tbody>
 <c:forEach items="${PaymentData }" var="dto">
 
 <tr>
- <td style="visibility:hidden">${dto.paymentPk }</td>
 		    
 <td>${dto.senderName }</td>
 <td>${dto.receiverName }</td>
  <td><fmt:formatDate value="${dto.payDate }" pattern="yyyy.MM.dd HH:mm" /></td>
  <td>${dto.totalPrice }</td>
  <td>${dto.cancelDate }</td>
- <td><a href="adminCancelPayment.do?paymentPk=${dto.paymentPk }">환불 하기</a></td>
+ <td>
+	<c:if test="${empty dto.cancelDate }">
+       <a href="adminCancelPayment.do?paymentPk=${dto.paymentPk }" class="confirmationB">환불하기</a>
+    </c:if>
+	<c:if test="${!empty dto.cancelDate }">
+      환불완료
+    </c:if>
+</td> 
 </tr>
  </c:forEach>
+</tbody>
+<thead>
 <tr>
- <td colspan="4" align="center">
+ <th colspan="10" align="center">
  <!-- 페이징 부분 -->
 <c:forEach items="${pageList }" var="page">
  <a href="adminPageShowPayResult.do?page=${page }">${page}</a>
  </c:forEach>
 </td>
  </tr>
+</thead>
 
 
 
@@ -139,9 +155,24 @@ button.now {
  	<button type="button" onclick="location.href='adminQnaList.do' ">QnA</button>
  	<button type="button" class="now" onclick="location.href='adminPageShowPayResult.do' ">결제 내역 관리</button>
 </nav>
-<aside></aside>
   </div>
-<footer></footer>
+  <footer>
+   <div class="row">
+            <p>
+                <a href="#none" class="footer">회사소개</a>
+                <a href="#none" class="footer">사업분야</a>
+                <a href="#none" class="footer">갤러리</a>
+                <a href="#none" class="footer">온라인문의</a>
+                <a href="#none" class="footer">고객센터</a>
+            </p>
+            <p><span>주소 : 부산광역시 해운대구 좌동 273-10</span> <span class="hide"> / </span> <span>상호 : 디자인선사인</span> <span
+                    class="hide"> / </span>사업자등록번호 : 123-456-7890<br>
+                <a href="tel:070-7155-19749" class="footer">Tel : 070-7155-19749</a> <span class="hide"> / </span><span>Fax :
+                    02-2139-1142</span> <span class="hide"> / </span><a href="mailto:gijung23@nate.com" class="footer">E-mail :
+                    gijung23@nate.com</a></p>
+            <p>Copyright &copy; Sunsine.com All Rights Reserved.</p>
+        </div>
+  </footer>
   
 </body>
 </html>

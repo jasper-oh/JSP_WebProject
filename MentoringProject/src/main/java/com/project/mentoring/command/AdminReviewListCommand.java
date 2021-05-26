@@ -7,7 +7,7 @@ import com.project.mentoring.dao.AdminReviewDao;
 import com.project.mentoring.dto.AdminReviewDto;
 public class AdminReviewListCommand implements Command {
 	//페이지당 표시할 게시글의 수
-		int numOfTuplesPerPage = 10;
+		int numOfTuplesPerPage = 7;
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub

@@ -168,10 +168,10 @@ public class AdminMajorListDao {
 	 * @param majorpk
 	 * @param majorName
 	 */
-	public void adminMajorUpdateAction(int majorpk, String majorName) {
+	public int adminMajorUpdateAction(int majorpk, String majorName) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+		int result = 1;
 		try {
 			connection = dataSource.getConnection();
 			
@@ -185,6 +185,7 @@ public class AdminMajorListDao {
 
 		}catch(Exception e) {
 			e.printStackTrace();
+			result = 0;
 		}finally {
 			
 			try {
@@ -192,9 +193,11 @@ public class AdminMajorListDao {
 				if(connection != null) connection.close();	
 			}catch(Exception e) {
 				e.printStackTrace();
+				result = 0;
 			}
 			
 		}
+		return result;
 	}
 	
 	

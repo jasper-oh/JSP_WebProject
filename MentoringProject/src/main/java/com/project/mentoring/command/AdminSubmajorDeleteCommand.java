@@ -17,11 +17,13 @@ public class AdminSubmajorDeleteCommand implements Command {
 		String majorname = request.getParameter("majorname");
 		String strsubmajorpk = request.getParameter("submajorpk");
 		int majorPk = Integer.parseInt(strMajorPk);
-		
 		int submajorpk = Integer.parseInt(strsubmajorpk);
 		
 		AdminSubMajorListDao adminSubMajorListDao = new AdminSubMajorListDao();
-		adminSubMajorListDao.adminSubMajorDeleteAction(submajorpk);
+		
+		int result = adminSubMajorListDao.adminSubMajorDeleteAction(submajorpk);
+		
+		request.setAttribute("subMajorDeleteResult", result);
 				
 	}
 
