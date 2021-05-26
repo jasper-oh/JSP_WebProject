@@ -69,12 +69,18 @@ button {
 button.now {
     background-color: #8CD790;
 }
+div.row {
+	color:#D7FFF1;
+}
+a.footer{
+	color:#77AF9C;
+}
 </style>
 <head>
    <link rel="stylesheet" type="text/css" href="css/starwars.css">
-  <!--  <link rel="stylesheet" type="text/css" href="css/adminstyle.css"> -->
+ <link rel="stylesheet" href="css/adminstyle.css">
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>NOTICE</title>
 </head>
 <body>
 <header>
@@ -88,23 +94,21 @@ button.now {
 <article>
 <!-- 질문내용 -->
 <table>
+
 		<tr>
-			<td align="left">작성자 ${QuestionData.username }</td>
+			<td align="left">작성자</td><td> ${QuestionData.username }</td>
 		</tr>
 		<tr>
-			<td align="left">작성날짜 ${QuestionData.indate }</td>
+			<td align="left">작성날짜</td><td> ${QuestionData.indate }</td>
 		</tr>
 		<tr>
-			<td align="left">작성날짜 ${QuestionData.outdate }</td>
+			<td align="left">삭날짜</td><td> ${QuestionData.outdate }</td>
 		</tr>
 		<tr>
-			<td align="left">제목 ${QuestionData.questiontitle }</td>
+			<td align="left">제목</td><td> ${QuestionData.questiontitle }</td>
 		</tr>
 		<tr>
-			<td align="left">${QuestionData.questionpk }</td>
-		</tr>
-		<tr>
-			<td><textarea rows="40" cols="70">${QuestionData.questiontext }</textarea> </td>
+			<td colspan="2"><textarea rows="40">${QuestionData.questiontext }</textarea> </td>
 		</tr>
 </table>
 <div id="adminanswerlist">
@@ -137,6 +141,7 @@ button.now {
 				onclick="window.open(this.href, '_blank', 'width=600, height=200'); return false;">
 				수정
 			</a>
+			<td align="left" hidden="">${QuestionData.questionpk }</td>
 			</td>
 			</tr>		
 		</c:forEach>
@@ -160,7 +165,23 @@ button.now {
 </nav>
 <aside></aside>
   </div>
-<footer></footer>
+  <footer>
+   <div class="row">
+            <p>
+                <a href="#none" class="footer">회사소개</a>
+                <a href="#none" class="footer">사업분야</a>
+                <a href="#none" class="footer">갤러리</a>
+                <a href="#none" class="footer">온라인문의</a>
+                <a href="#none" class="footer">고객센터</a>
+            </p>
+            <p><span>주소 : 부산광역시 해운대구 좌동 273-10</span> <span class="hide"> / </span> <span>상호 : 디자인선사인</span> <span
+                    class="hide"> / </span>사업자등록번호 : 123-456-7890<br>
+                <a href="tel:070-7155-19749" class="footer">Tel : 070-7155-19749</a> <span class="hide"> / </span><span>Fax :
+                    02-2139-1142</span> <span class="hide"> / </span><a href="mailto:gijung23@nate.com" class="footer">E-mail :
+                    gijung23@nate.com</a></p>
+            <p>Copyright &copy; Sunsine.com All Rights Reserved.</p>
+        </div>
+  </footer>
   
 </body>
 <script>

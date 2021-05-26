@@ -23,7 +23,11 @@ body {
 	text-align: center;
   flex: 1;
 }
-#main > nav, 
+#main > nav {
+  flex: 0 0 0vw;
+  background: ;
+
+}
 #main > aside {
   flex: 0 0 17vw;
   background: ;
@@ -69,12 +73,18 @@ button {
 button.now {
     background-color: #8CD790;
 }
+div.row {
+	color:#D7FFF1;
+}
+a.footer{
+	color:#77AF9C;
+}
 </style>
 <head>
    <link rel="stylesheet" type="text/css" href="css/starwars.css">
-  <!--  <link rel="stylesheet" type="text/css" href="css/adminstyle.css"> -->
+ <link rel="stylesheet" href="css/adminstyle.css">
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>REVIEW LIST</title>
 </head>
 <body>
 <header>
@@ -118,18 +128,21 @@ button.now {
 	</table>
 	</form>
 	<table>
+	<thead>
 		<tr>
-			<th>review pk</th>
-			<th>producttitle</th>
+			<th>id</th>
+			<th>Force title</th>
 			<th>작성자</th>
-			<th>리뷰제목</th>
-			<th>리뷰내용</th>
+			<th>제목</th>
+			<th>내용</th>
 			<th>score</th>
 			<th>작성시간</th>
 			<th>차단시간</th>
-			<th>-</th>
+			<th></th>
 
 		</tr>
+	</thead>
+	<tbody>
 		<c:forEach items="${ReviewData }" var="dto">
 		<tr>
 			<td>${dto.reviewpk }</td>
@@ -150,17 +163,20 @@ button.now {
 </td> 
 		</tr>		
 		</c:forEach>
+	</tbody>
 	</table>
 	
 		<table>
+		<thead>
 		<tr>
-			<td colspan="4" align="center">
+			<th colspan="4" align="center">
 				<!-- 페이징 부분 -->
 				<c:forEach items="${pageList }" var="page">
 					<a href="adminReviewList.do?page=${page }">${page}</a>
 				</c:forEach>
-			</td>
+			</th>
 		</tr>
+		</thead>
 	</table>
 </article>
 <nav>
@@ -171,11 +187,24 @@ button.now {
  	<button type="button" onclick="location.href='adminQnaList.do' ">QnA</button>
  	<button type="button" onclick="location.href='adminPageShowPayResult.do' ">결제 내역 관리</button>
 </nav>
-<aside></aside>
   </div>
-<footer>
-</footer>
-  
+  <footer>
+   <div class="row">
+            <p>
+                <a href="#none" class="footer">회사소개</a>
+                <a href="#none" class="footer">사업분야</a>
+                <a href="#none" class="footer">갤러리</a>
+                <a href="#none" class="footer">온라인문의</a>
+                <a href="#none" class="footer">고객센터</a>
+            </p>
+            <p><span>주소 : 부산광역시 해운대구 좌동 273-10</span> <span class="hide"> / </span> <span>상호 : 디자인선사인</span> <span
+                    class="hide"> / </span>사업자등록번호 : 123-456-7890<br>
+                <a href="tel:070-7155-19749" class="footer">Tel : 070-7155-19749</a> <span class="hide"> / </span><span>Fax :
+                    02-2139-1142</span> <span class="hide"> / </span><a href="mailto:gijung23@nate.com" class="footer">E-mail :
+                    gijung23@nate.com</a></p>
+            <p>Copyright &copy; Sunsine.com All Rights Reserved.</p>
+        </div>
+  </footer>
 </body>
 <script type="text/javascript">
     var elems = document.getElementsByClassName('confirmationB');

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ADMIN ANSWER</title>
+ <link rel="stylesheet" href="css/adminstyle.css">
 </head>
 <body>
 <form action="adminAnswerUpdateAction.do" method="get">
@@ -24,8 +25,10 @@
 		<tr>
 			<td align="left"><input type="text" name="answertext" value="${AnswerData.questiontitle }"></td>
 		</tr>
-</table>
+<td td align="center">
 <input type="submit" value="수정"> <input type="button" value="취소" onclick="self.close()">
+</td>
+</table>
 </form>
 </body>
 </html>

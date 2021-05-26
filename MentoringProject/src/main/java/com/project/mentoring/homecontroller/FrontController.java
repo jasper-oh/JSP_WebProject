@@ -322,17 +322,10 @@ public class FrontController extends HttpServlet {
 			break;
 		
 		case("/userSignUpPage.do"):
-			intCommand = new UserSignUpPageInsertCommand();
-			int signUpResult = intCommand.execute(request,response);
-			
-			if(signUpResult == 1) {
-				
-				viewPage = "visitorPage.jsp";
-				
-			}else {
-				viewPage = "userSignUpPage.jsp";
-			}
-			
+			command = new UserSignUpPageInsertCommand();
+			command.execute(request,response);
+				//viewPage = "visitorPage.jsp"
+			viewPage = "userSignUpPage.jsp";
 			break;
 			
 		case("/userFindIdByEmail.do"):

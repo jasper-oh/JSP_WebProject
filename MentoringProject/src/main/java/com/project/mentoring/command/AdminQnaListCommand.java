@@ -22,7 +22,7 @@ import com.project.mentoring.dto.QnaDto;
 public class AdminQnaListCommand implements Command {
 	
 	
-	int numOfTuplesPerPage = 20;
+	int numOfTuplesPerPage = 10;
 	
 	
 	@Override

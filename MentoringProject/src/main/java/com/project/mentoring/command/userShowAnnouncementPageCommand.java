@@ -10,7 +10,7 @@ import com.project.mentoring.dao.AdminAnnouncementListDao;
 import com.project.mentoring.dto.AdminAnnouncementListDto;
 
 public class userShowAnnouncementPageCommand implements Command {
-	int numOfTuplesPerPage = 5;
+	int numOfTuplesPerPage = 10;
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {

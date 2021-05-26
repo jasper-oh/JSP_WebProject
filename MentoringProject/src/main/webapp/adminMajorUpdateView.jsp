@@ -35,8 +35,10 @@
 		<tr>
 			<td align="left"><input type="text" size="20" name="majorname" value="${Major.majorName }"></td>
 		</tr>
-</table>
+		<td align="center">
 <input type="button" value="수정" onclick="result()"> <input type="button" value="취소" onclick="self.close()">
+		</td>
+</table>
 </form>
 </body>
 <script type="text/javascript">

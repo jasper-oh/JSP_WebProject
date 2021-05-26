@@ -69,12 +69,18 @@ button {
 button.now {
     background-color: #8CD790;
 }
+div.row {
+	color:#D7FFF1;
+}
+a.footer{
+	color:#77AF9C;
+}
 </style>
 <head>
    <link rel="stylesheet" type="text/css" href="css/starwars.css">
-  <!--  <link rel="stylesheet" type="text/css" href="css/adminstyle.css"> -->
+ <link rel="stylesheet" href="css/adminstyle.css">
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>SUB FORCE MANAGEMENT</title>
 <c:choose>
 <c:when test="${subMajorDeleteResult == 1 }">
 	<script>
@@ -102,16 +108,21 @@ button.now {
 </header>
   <div id="main">
 <article>
-	<h2><%=request.getParameter("majorname") %> 전공 의 세부전공 관리 페이지 입니다.</h2>
+	<h3> SUB FORCE "<%=request.getParameter("majorname") %>"</h3>
 		<table border="0">
+		<thead>
 		<tr>
 		<th>관리번호</th>
 		<th>이름</th>
+		<th></th>
+		<th></th>
 		</tr>
+		</thead>
+		<tbody>
 		<c:forEach items="${subMajorList }" var="subMajorDto">
 		<tr>
 		<td>${subMajorDto.submajorPk }</td>
-		<td><input type="text" name="submajornameid" value="${subMajorDto.submajorName }" size="20"> </td>
+		<td><input type="text" readonly="readonly" name="submajornameid" value="${subMajorDto.submajorName }" size="20"> </td>
 		<td><a href="adminSubMajorUpdateView.do?submajorpk=${subMajorDto.submajorPk}" 
 		onclick="window.open(this.href, '_blank', 'width=200, height=50'); return false;">
 					수정
@@ -119,8 +130,9 @@ button.now {
 		<td><input type="button" value="삭제" class="confirmation" onclick="location.href='adminSubmajorDeleteAction.do?submajorpk=${subMajorDto.submajorPk }&majorname=<%=request.getParameter("majorname") %>&majorpk=<%=request.getParameter("majorpk") %>'"> </td>
 		</tr>
 		</c:forEach>
+		</tbody>
 		<tr>
-		<td colspan="2"><a href="adminManagementSubMajorInsertPage.jsp?majorpk=<%=request.getParameter("majorpk") %>&majorname=<%=request.getParameter("majorname")%>">세부전공 추가</a></td>
+		<td colspan="3"><a href="adminManagementSubMajorInsertPage.jsp?majorpk=<%=request.getParameter("majorpk") %>&majorname=<%=request.getParameter("majorname")%>">세부전공 추가</a></td>
 		</tr>
 		</table>
 </article>
@@ -132,9 +144,24 @@ button.now {
  	<button type="button" onclick="location.href='adminQnaList.do' ">QnA</button>
  	<button type="button" onclick="location.href='adminPageShowPayResult.do' ">결제 내역 관리</button>
 </nav>
-<aside></aside>
   </div>
-<footer></footer>
+  <footer>
+   <div class="row">
+            <p>
+                <a href="#none" class="footer">회사소개</a>
+                <a href="#none" class="footer">사업분야</a>
+                <a href="#none" class="footer">갤러리</a>
+                <a href="#none" class="footer">온라인문의</a>
+                <a href="#none" class="footer">고객센터</a>
+            </p>
+            <p><span>주소 : 부산광역시 해운대구 좌동 273-10</span> <span class="hide"> / </span> <span>상호 : 디자인선사인</span> <span
+                    class="hide"> / </span>사업자등록번호 : 123-456-7890<br>
+                <a href="tel:070-7155-19749" class="footer">Tel : 070-7155-19749</a> <span class="hide"> / </span><span>Fax :
+                    02-2139-1142</span> <span class="hide"> / </span><a href="mailto:gijung23@nate.com" class="footer">E-mail :
+                    gijung23@nate.com</a></p>
+            <p>Copyright &copy; Sunsine.com All Rights Reserved.</p>
+        </div>
+  </footer>
   
 </body>
 	<script type="text/javascript">

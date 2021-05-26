@@ -45,7 +45,7 @@ public class AdminReviewDao {
 			int offset = requestPage - 1;
 			try {
 				connection = dataSource.getConnection();
-				String query = "select * from review as r "
+				String query = "select r.reviewpk, u.username, p.title, r.reviewtitle, reviewtext, r.reviewscore, r.indate, r.outdate from review as r "
 						+ "inner join user as u on u.userpk = r.user_userpk "
 						+ "inner join payment as py on py.paymentpk = r.payment_paymentpk "
 						+ "inner join schedule as s on s.schedulepk=py.schedule_schedulepk "

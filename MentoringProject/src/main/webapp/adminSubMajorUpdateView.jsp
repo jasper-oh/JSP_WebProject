@@ -24,6 +24,7 @@
 </c:choose>
 <meta charset="UTF-8">
 <title>Major Name을 변경하세요</title>
+
 </head>
 <body>
 
@@ -35,8 +36,10 @@
 		<tr>
 			<td align="left"><input type="text" size="20" name="submajorname" value="${Submajor.submajorName }"></td>
 		</tr>
-</table>
+		<td align="center">
 <input type="button" value="수정" onclick="result()"> <input type="button" value="취소" onclick="self.close()">
+</td>
+</table>
 </form>
 </body>
 <script type="text/javascript">
