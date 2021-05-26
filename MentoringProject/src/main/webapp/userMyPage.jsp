@@ -18,7 +18,31 @@
         href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico">
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/slick.min.js"></script>
+    <script type="text/javascript">
+    	function checkForm(){
+    		if($('#userphone').val() == ""){
+    			alert("핸드폰 번호를 입력해 주시기 바랍니다.");
+    			
+    			return false;
+    		}
+    		
+    		if($('#useremail').val() == ""){
+    			alert("이메일을 입력해 주시기 바랍니다.");
+    			
+    			return false;
+    		}
+    		
+    		$('menteeInfoForm').submit();
+    		alert("업데이트가 완료 되었습니다.");
+    		
+    	}
+    
+    
+    
+    
+    </script>
 </head>
+
 
 <body>
  <header id="header">
@@ -39,15 +63,15 @@
                         </path>
     	                <h2>Take Your Time</h2>
                     </svg> -->
-                <h1><a href="/MentoringProject/userHomePage.do">LOGO</a></h1>
-            </div>
-            <nav>
-                <ul>
-                  		<li><a href="userBeMentorPage.jsp">마스터가 되어보세요</a></li> 
-                        <li><a href="helpPage.jsp">도움말</a></li>
-                        <li><a href="/MentoringProject/menteeMyPageOpen.do">마이페이지</a></li>
-                        <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
-                </ul>
+            <h1><a href="/MentoringProject/userHomePage.do">LOGO</a></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="userBeMentorPage.jsp">마스터가 되어보세요</a></li> 
+                <li><a href="/MentoringProject/help.do">도움말</a></li>
+                <li><a href="/MentoringProject/menteeMyPageOpen.do">마이페이지</a></li>
+                <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
+            </ul>
             </nav>
         </div>
     </header>
@@ -60,21 +84,20 @@
     <br>
     <br>
     
-    <h1>유저의 마이페이지 입니다.</h1>
-	 	<nav>
-            <div class="menu">
-                <ul>
-                  	<li><a href="/MentoringProject/menteeBookingList.do">예약 신청 내역</a></li>
-					<li><a href="/MentoringProject/menteeMentoringList.do">멘토링 결제 내역 확인</a></li>
-                </ul>
-            </div>
-        </nav>
-        
+    
+	 	
         <section>
         
 		<article class="subpage">
 			<div class="row">
                 <div class="mpagebox">
+                <div class="MenteeMentoringListNav">  
+                	<h2> 제다이 기본 정보</h2>
+						<div class="MenteeMentoringListNav subTitle">
+			                <h4><a href="/MentoringProject/menteeBookingList.do">예약 신청 내역</a></h4>
+							<h4><a href="/MentoringProject/menteeMentoringList.do">멘토링 결제 내역 확인</a></h4>         
+		                 </div>
+                </div>
                     <div class="card">
                 <c:forEach items="${MenteeMyPageOpen }" var="userInfo">
                         <div class="flip-card">
@@ -84,15 +107,15 @@
                                         <li><img src="img/starwars5.jpg" alt="제다이 이미지입니다."></li>
                                     </ul>
                                 </div>
-               					<form action="/MentoringProject/menteeMyPageModify.do" method="post" >
+               					<form action="/MentoringProject/menteeMyPageModify.do" method="post" id="menteeInfoForm">
                                 <div class="flip-card-back">
                                     <ul>
-                                        <li>아이디 : <input type="text" value="${userInfo.userid }" name="userid" ></li>
-                                        <li>이름 : <input type="email" value="${userInfo.username }" name="useremail"></li>
-                                        <li>전화 번호 : <input type="text" value="${userInfo.userphone }" name="userphone"></li>
-                                        <li>이메일 : <input type="text" value="${userInfo.useremail }" id="address" name="mentoraddress" size="50"></li>
+                                        <li>아이디 : <input type="text" value="${userInfo.userid }" name="userid" readonly="readonly"></li>
+                                        <li>이름 : <input type="email" value="${userInfo.username }" name="username" readonly="readonly"></li>
+                                        <li>전화 번호 : <input type="tel" value="${userInfo.userphone }" id="userphone" name="userphone"></li>
+                                        <li>이메일 : <input type="email" value="${userInfo.useremail }" id="useremail" name="useremail" size="50"></li>
                                     </ul>                                    
-                                    <input type="submit" value="저장 하기">
+                                    <input type="button" value="저장 하기" onclick="checkForm();">
                                 </div>
 				                </form>
                             </div>

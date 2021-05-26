@@ -23,7 +23,8 @@ function goPopup(){
 	var pop = window.open("/MentoringProject/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 }
 function jusoCallBack(roadFullAddr){
-	var addressEI = document.querySelector("#address");
+	console.log(roadFullAddr);
+	var addressEI = document.querySelector("#mentoraddress");
 	addressEI.value = roadFullAddr;
 }
 function setThumbnail(event) {
@@ -35,7 +36,57 @@ function setThumbnail(event) {
 					}; 
 			reader.readAsDataURL(event.target.files[0]); 
 			}
+			
+function checkForm(){
 
+    var userEmail = $('#useremail').val();
+	console.log(userEmail);
+    
+    var imgFile = $('#mentorImage').val();
+    var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+    var maxSize = 5 * 1024 * 1024;
+    var fileSize;
+    console.log(imgFile);
+    
+    
+    if($('#mentorImage').val() == "" ){
+    	var confirmImage = confirm("현재 이미지를 계속 사용 하시나요?");
+    	
+    	if(confirmImage == true){
+			var currentImage = $('#currentImage').attr("src");
+    		alert("당신의 사진 파일 경로 " + currentImage + " 입니다. 직접 추가 해주세요 !" );
+    		return false;
+    	}else if(confirmImage ==false){
+    		alert("사진을 등록해 주시기 바랍니다.");
+	    	return false;
+    	}
+    }
+	
+	if(!updateInfoForm.useremail.value){
+			
+		/* updateInfoForm.useremail.focus(); */
+		alert("이메일을 입력해 주세요 !");
+		
+		return false;
+	}
+	
+	if(!updateInfoForm.userphone.value){
+		
+		alert("전화 번호를 입력해 주세요 !");
+		
+		return false;
+	}
+	
+	if(!updateInfoForm.mentoraddress.value){
+		
+		alert("주소를 입력해 주세요 !");
+		
+		return false;
+	}
+	
+	$('#updateInfoForm').submit();
+	alert("업데이트가 완료 되었습니다.");
+}
 
 </script>
 <body>
@@ -57,7 +108,7 @@ function setThumbnail(event) {
                         </path>
     	                <h2>Take Your Time</h2>
                     </svg> -->
-                <h1><a href="/MentoringProject/userHomePage.do">LOGO</a></h1>
+                <h1><a href="/MentoringProject/mentorHomePage.do">LOGO</a></h1>
             </div>
             <nav>
                 <ul>
@@ -65,7 +116,7 @@ function setThumbnail(event) {
                     <li><a href="/MentoringProject/help.do">도움말</a></li>
                     <li><a href="/MentoringProject/showMentorMyPage.do">마이페이지</a></li>
                     <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
-                </ul>
+                </ul>        	
             </nav>
         </div>
     </header>
@@ -80,48 +131,48 @@ function setThumbnail(event) {
     <br>
     <br>
     
-	<h1>멘토의 마이페이지 입니다.</h1>
-	 	<nav>
-            <div class="menu">
-                <ul>
-                <li><a href="/MentoringProject/menteeBookingList.do">예약 신청 내역</a></li>
-					<li><a href="/MentoringProject/menteeMentoringList.do">멘토링 결제 내역 확인</a></li>
-                    <li><a href="/MentoringProject/mentorProductList.do">포스 관리</a></li>
-                    <li><a href="/MentoringProject/mentorScheduledList.do">예약관리</a></li>
-                   	<li> <a href="/MentoringProject/mentorPayReceiveList.do">정산완료내역</a></li>
-					<li><a href="/MentoringProject/mentorReviewView.do">리뷰 보기</a></li>
-                </ul>
-            </div>
-        </nav>
+	
+	 	
         
         <section>
         
 		<article class="subpage">
 			<div class="row">
                 <div class="mpagebox">
+                <div class="MenteeMentoringListNav">                
+					<h2> 마스터 기본 정보</h2>
+						<div class="MenteeMentoringListNav subTitle">
+			                <h4><a href="/MentoringProject/mentorBookingList.do">예약 신청 내역</a></h4>
+							<h4><a href="/MentoringProject/mentorMentoringList.do">포터링 결제 내역 확인</a></h4>
+		                    <h4><a href="/MentoringProject/mentorProductList.do">포스 관리</a></h4>
+		                    <h4><a href="/MentoringProject/mentorScheduledList.do">예약관리</a></h4>
+		                   	<h4><a href="/MentoringProject/mentorPayReceiveList.do">정산완료내역</a></h4>
+							<h4><a href="/MentoringProject/mentorReviewView.do">리뷰 보기</a></h4>           
+		                 </div>
+                 	</div>
                     <div class="card">
                 <c:forEach items="${mentorMyPageInfo }" var="userInfo">
                         <div class="flip-card">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front">
                                     <ul>
-                                        <li><img src="${userInfo.mentorimage }" alt="멘토 이미지입니다."></li>
+                                        <li><img src="${userInfo.mentorimage }" alt="멘토 이미지입니다." id="currentImage"></li>
                                     </ul>
                                 </div>
-               					<form action="/MentoringProject/mentorInfoUpdate.do" method="post" enctype="multipart/form-data">
+               					<form action="/MentoringProject/mentorInfoUpdate.do" method="post" enctype="multipart/form-data" id="updateInfoForm">
                                 <div class="flip-card-back">
                                     <ul>
-                                        <li>아이디 : <input type="text" value="${userInfo.userid }" name="userid" ></li>
-                                        <li>이메일 : <input type="email" value="${userInfo.useremail }" name="useremail"></li>
-                                        <li>전화 번호 : <input type="text" value="${userInfo.userphone }" name="userphone"></li>
-                                        <li>주소 : <input type="text" value="${userInfo.mentoraddress }" id="address" name="mentoraddress" size="50"></li>
+                                        <li>아이디 : <input type="text" value="${userInfo.userid }" name="userid" readonly="readonly" ></li>
+                                        <li>이메일 : <input type="email" value="${userInfo.useremail }" id="useremail" name="useremail"></li>
+                                        <li>전화 번호 : <input type="text" value="${userInfo.userphone }" id="userphone" name="userphone"></li>
+                                        <li>주소 : <input type="text" value="${userInfo.mentoraddress }" id="mentoraddress" name="mentoraddress" size="50"></li>
                                         <li><input type="button" onClick="goPopup();" value="주소 검색"/></li>
                                     </ul>
                                     <span>바꿀 이미지</span><div id="image_container"></div>
-                                    <input type="file" name="mentorimage" id="image" accept="image/*" onchange="setThumbnail(event);">
+                                    <input type="file" name="mentorimage" id="mentorImage" accept="image/*" onchange="setThumbnail(event);">
                                     <input type="text" value="${userInfo.userpk }" hidden="true" name="userpk">
                                     <input type="text" value="${userInfo.mentorpk }" hidden="true" name="mentorpk">
-                                    <input type="submit" value="저장 하기">
+                                    <input type="button" value="저장 하기" onclick="checkForm();">
                                 </div>
 				                </form>
                             </div>

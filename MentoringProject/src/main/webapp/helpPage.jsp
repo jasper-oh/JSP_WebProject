@@ -38,7 +38,7 @@
 		<br>
 		<br>
 		
-		<h1>마스터즈</h1>
+		
  
 		<div class="tab">
 		  <button class="tablinks active" onclick="openTab(event, 'tab1')">도움말</button>

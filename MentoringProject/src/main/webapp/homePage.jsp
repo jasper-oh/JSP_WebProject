@@ -54,7 +54,7 @@
                         </path>
     	                <h2>Take Your Time</h2>
                     </svg> -->
-                <h1><a href="home.html">LOGO</a></h1>
+                <h1><a href="/MentoringProject/userHomePage.do">LOGO</a></h1>
             </div>
             <nav>
                 <ul>

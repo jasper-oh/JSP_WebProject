@@ -10,6 +10,7 @@
 	<% out.println(session.getAttribute("userid")); %>
 	<%out.println(session.getAttribute("userpk")); %>
 	<%out.println(session.getAttribute("userCheck")); %>
+	<%out.println(session.getAttribute("username")); %>
 
 </body>
 </html>

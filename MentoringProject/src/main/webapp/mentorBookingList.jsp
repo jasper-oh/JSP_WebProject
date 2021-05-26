@@ -44,17 +44,18 @@ text-align:center;
                         </path>
     	                <h2>Take Your Time</h2>
                     </svg> -->
-	        <h1><a href="/MentoringProject/userHomePage.do">LOGO</a></h1>
-	        </div>
-	        <nav>
-	            <ul>
-	                <li><a href="userBeMentorPage.jsp">마스터가 되어보세요</a></li> 
-	                <li><a href="/MentoringProject/help.do">도움말</a></li>
-	                <li><a href="/MentoringProject/menteeMyPageOpen.do">마이페이지</a></li>
-	                <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
-	            </ul>
+                <h1><a href="/MentoringProject/mentorHomePage.do">LOGO</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    	<li><a href="mentorBeAnotherMentor2.jsp">포스정보 추가등록</a></li> 
+                        <li><a href="/MentoringProject/help.do">도움말</a></li>
+                		<li><a href="/MentoringProject/showMentorMyPage.do">마이페이지</a></li>
+                		<li><a href="/MentoringProject/logout.do">로그아웃</a></li>
+                        
+                </ul>
                 <!-- 멘토가 들어왔을때랑 멘티가 들어왔을때랑 달라짐 -->
-                
+               
                 <!-- 멘토가 들어왔을때랑 멘티가 들어왔을때랑 달라짐 -->
             </nav>
         </div>
@@ -65,13 +66,17 @@ text-align:center;
 		<article class="subpage">
 			<div class="row">
 				<div class="bookinglist">
-					<div class="MenteeMentoringListNav">  
+				<div class="MenteeMentoringListNav">
 					<h2>나의 예약대기 내역</h2>
-						<div class="MenteeMentoringListNav subTitle">
-			                <h4><a href="/MentoringProject/menteeBookingList.do">예약 신청 내역</a></h4>
-							<h4><a href="/MentoringProject/menteeMentoringList.do">멘토링 결제 내역 확인</a></h4>         
+					<div class="MenteeMentoringListNav subTitle">
+			                <h4><a href="/MentoringProject/mentorBookingList.do">예약 신청 내역</a></h4>
+							<h4><a href="/MentoringProject/mentorMentoringList.do">포터링 결제 내역 확인</a></h4>
+		                    <h4><a href="/MentoringProject/mentorProductList.do">포스 관리</a></h4>
+		                    <h4><a href="/MentoringProject/mentorScheduledList.do">예약관리</a></h4>
+		                   	<h4><a href="/MentoringProject/mentorPayReceiveList.do">정산완료내역</a></h4>
+							<h4><a href="/MentoringProject/mentorReviewView.do">리뷰 보기</a></h4>           
 		                 </div>
-                	</div>
+		                 </div>
 					<div class="info cf">
 						<ul>
 							<li>
@@ -163,7 +168,7 @@ text-align:center;
 
 	<script type="text/javascript">
 		function getClick(event) {
-		  location.href="menteeBookingList.do?booking="+event.target.value;}
+		  location.href="mentorBookingList.do?booking="+event.target.value;}
 	</script>
 	
 </body>

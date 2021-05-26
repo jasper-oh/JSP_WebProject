@@ -53,7 +53,7 @@
             <nav>
                 <ul>
                     <!-- <li><a href="userBeMentorPage.jsp">마스터가 되어보세요</a></li> -->
-                        <li><a href="/MentoringProject/help.do">도움말</a></li>
+                        <li><a href="visitorShowHelpPage.jsp">도움말</a></li>
                         <li><a href="userSignUpPage.jsp">회원가입</a></li>
                         <li><a href="userLoginPage.jsp">로그인</a></li>
                         <!-- <li><a href="#article2">Force</a></li>

@@ -256,11 +256,11 @@ public class FrontController extends HttpServlet {
 				
 				String userId = request.getParameter("userid");
 				String userpk = UserLoginDao.userPk;
-					
+				String userName = UserLoginDao.userName;	
 				HttpSession session = request.getSession();
 				session.setAttribute("userid", userId);
 				session.setAttribute("userpk", userpk);
-				
+				session.setAttribute("username", userName);
 				
 				
 				System.out.println("로그인 성공! ");
@@ -327,9 +327,11 @@ public class FrontController extends HttpServlet {
 			
 			if(signUpResult == 1) {
 				
+				request.setAttribute("signUpResult", signUpResult);
 				viewPage = "visitorPage.jsp";
 				
 			}else {
+				request.setAttribute("signUpResult", signUpResult);
 				viewPage = "userSignUpPage.jsp";
 			}
 			
@@ -444,8 +446,19 @@ public class FrontController extends HttpServlet {
 				viewPage = "userBeMentorPage.jsp";
 			}
 			break;
+		case("/mentorBookingList.do"):
+			System.out.println("멘티(멘토)예약리스트로가기");
+			command = new MenteeBookinglistCommand();
+			command.execute(request, response);
+			viewPage = "mentorBookingList.jsp";
+			break;
 			
-	
+		case("/mentorMentoringList.do"):
+			System.out.println("멘티(멘토)예약완료리스트로가기");
+			command = new MenteeMentoringListCommand();
+			command.execute(request, response);
+			viewPage = "mentorMentoringList.jsp";
+			break;
 			
 		
 		case("/mentorProfileMajor.do"):

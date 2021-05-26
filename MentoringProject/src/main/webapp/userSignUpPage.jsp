@@ -17,6 +17,10 @@
 </head>
 <script type="text/javascript">
 	function check(){
+		if(checkPassword(document.loginform.userpw.value , document.loginform.userpw2.value)){
+			alert("비밀번호가 틀립니다.");
+			return false;
+		}
 		if(!document.loginform.userid.value){
 			alert("ID 를 입력해 주세요");
 			return false;
@@ -47,10 +51,8 @@
 			alert("번호을 입력해 주세요");
 			return false;
 		}
-		if(!checkPassword(loginform.userid.value,loginform.userpw.value , loginform.userpw2.value)){
-			alert("비밀번호가 틀립니다.");
-			return false;
-		}
+		
+		toastr.success("로그인 성공");
 		return true;
 		
 	}
@@ -64,7 +66,7 @@
 		open(url , "confirm","toolbar=no,location=no,status=no,scrollbar=no,resizable=no,width=300,height=200");
 		
 	}
-	function checkPassword(id,userpw,userpw2){
+	function checkPassword(userpw,userpw2){
 		var re = /^[a-zA-Z0-9]{4,12}$/;
 		if(!password1RegExp.test(userpw)){
 			alert("비밀번호는 영문 대소문자와 숫자 4~12 자리로 입력해주셔야 합니다.");
@@ -84,8 +86,13 @@
 		return true;
 	}
 
+}
+
+
+
 
 </script>
+
 <body>
  <header id="header">
         <div class="topmenu">
@@ -110,7 +117,7 @@
             <nav>
                 <ul>
                     <!-- <li><a href="userBeMentorPage.jsp">마스터가 되어보세요</a></li> -->
-                        <li><a href="/MentoringProject/help.do">도움말</a></li>
+                        <li><a href="visitorShowHelpPage.jsp">도움말</a></li>
                         <li><a href="userSignUpPage.jsp">회원가입</a></li>
                         <li><a href="userLoginPage.jsp">로그인</a></li>
                         <!-- <li><a href="#article2">Force</a></li>
@@ -147,11 +154,11 @@
 			
 			<tr>
 				<th><label for="pwbox">비밀번호</label></th>
-				<td> <input type="password" id="pwbox" name="userpw" placeholder="비밀번호를 입력해 주세요"></td>
+				<td> <input type="password" id="pwbox" name="userpw" placeholder="비밀번호를 입력해 주세요" size="20"></td>
 			</tr>
 			<tr>
 				<th><label for="pwbox">비밀번호 재입력</label></th>
-				<td> <input type="password" id= "pwbox" name="userpw2" placeholder="비밀번호를 한번더 입력해 주세요"></td>
+				<td> <input type="password" id= "pwbox2" name="userpw2" placeholder="비밀번호를 한번더 입력해 주세요" size="30"></td>
 			</tr>
 			<tr>
 				<th><label for="irum">이름</label></th>

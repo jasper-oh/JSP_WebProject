@@ -13,8 +13,6 @@
 <body>
 <h3>원하는 날짜를 선택하세요</h3>
 <jsp:include page="customCalendar.jsp" flush="true"/>
-	
-<form  action="paymentDatatView.do" method="get">
 	<table>		
 <tr >
 			<th>번호</th>
@@ -32,13 +30,12 @@
     <input type="text" size="3" value="${dto.endtime }" name="endtime" readonly="readonly"/></td>
     <td align="center"><input type="text" size="8" value="${dto.totalprice }" name="totalprice" readonly="readonly"/></td>
     <td align="center"><input type="hidden" name=schedulepk value="${dto.schedulepk}"/>
-<input type="radio" name="schedulepk" value="${dto.schedulepk}" ></td>
-		
+		<input type="button" value="선택" onclick="location.href='paymentDatatView.do?schedulepk=${dto.schedulepk}'"></td>
 		</tr>
 	</c:forEach>
 		</table>
-		<input type="submit" value="선택">
 		</form>
-
 </body>
+<script type="text/javascript">
+</script>
 </html>

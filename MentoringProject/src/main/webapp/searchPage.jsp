@@ -55,7 +55,7 @@
                     </path>
                     <h2>Take Your Time</h2>
                 </svg> -->
-            <h1><a href="home.html">LOGO</a></h1>
+            <h1><a href="/MentoringProject/mentorHomePage.do">LOGO</a></h1>
         </div>
         <nav>
             <ul>
@@ -89,13 +89,13 @@
                     </path>
                     <h2>Take Your Time</h2>
                 </svg> -->
-            <h1><a href="home.html">LOGO</a></h1>
+            <h1><a href="/MentoringProject/userHomePage.do">LOGO</a></h1>
         </div>
         <nav>
             <ul>
                 <li><a href="userBeMentorPage.jsp">마스터가 되어보세요</a></li> 
                 <li><a href="/MentoringProject/help.do">도움말</a></li>
-                <li><a href="userMyPage.jsp">마이페이지</a></li>
+                <li><a href="/MentoringProject/menteeMyPageOpen.do">마이페이지</a></li>
                 <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
             </ul>
         </nav>
@@ -122,11 +122,11 @@
                     </path>
                     <h2>Take Your Time</h2>
                 </svg> -->
-            <h1><a href="home.html">LOGO</a></h1>
+            <h1><a href="home.do">LOGO</a></h1>
         </div>
         <nav>
             <ul>
-                <li><a href="/MentoringProject/help.do">도움말</a></li>
+                <li><a href="visitorShowHelpPage.jsp">도움말</a></li>
                 <li><a href="userSignUpPage.jsp">회원가입</a></li>
                 <li><a href="userLoginPage.jsp">로그인</a></li>
             </ul>

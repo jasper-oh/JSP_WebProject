@@ -14,6 +14,7 @@ public class LogoutCommand implements Command {
 		HttpSession session = request.getSession();
 		session.removeAttribute("userid");
 		session.removeAttribute("userpk");
+		session.removeAttribute("usename");
 		session.setAttribute("userCheck", -1);
 		
 		
