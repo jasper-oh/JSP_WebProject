@@ -26,7 +26,7 @@ public class AdminAnnouncementListDao {
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
 		ArrayList<AdminAnnouncementListDto> dtos=new ArrayList<AdminAnnouncementListDto>();
-		String query = "SELECT * FROM notice where outdate is null ORDER BY noticepk DESC LIMIT ?, ?";
+		String query = "SELECT * FROM notice where outdate is null ORDER BY indate DESC LIMIT ?, ?";
 		int offset = requestPage - 1;
 		try {
 			connection=datasource.getConnection();
@@ -101,7 +101,7 @@ public class AdminAnnouncementListDao {
 		System.out.println("작성완료");
 		try {
 			connection=datasource.getConnection();
-			String query="insert into notice (admin_adminpk,noticetitle,noticetext,indate) values (?,?,?,now())";
+			String query="insert into notice (admin_adminpk,noticetitle,noticetext,indate) values (4,?,?,now())";
 			preparedStatement=connection.prepareStatement(query);
 			preparedStatement.setInt(1, admin_adminpk);
 			preparedStatement.setString(2, noticetitle);

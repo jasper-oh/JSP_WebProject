@@ -108,17 +108,17 @@ a.footer{
 			<td align="left">제목</td><td> ${QuestionData.questiontitle }</td>
 		</tr>
 		<tr>
-			<td colspan="2"><textarea rows="40">${QuestionData.questiontext }</textarea> </td>
+			<td colspan="2"><textarea rows="15">${QuestionData.questiontext }</textarea> </td>
 		</tr>
 </table>
 <div id="adminanswerlist">
-<table border="1">
+<table>
 <c:forEach items="${AnswerList }" var="dto2">
 
 		<tr>
-			<td style="visibility:hidden">${dto2.questionpk }</td><td>${dto2.username }</td>
-			<td><fmt:formatDate value="${dto2.indate }" pattern="yyyy.MM.dd HH:mm:ss" /></td>
-			<td><fmt:formatDate value="${dto2.outdate }" pattern="yyyy.MM.dd HH:mm:ss" /></td>
+			<td style="visibility:hidden">${dto2.questionpk }</td><td class="l">${dto2.username }</td>
+			<td class="l"><fmt:formatDate value="${dto2.indate }" pattern="yyyy.MM.dd HH:mm:ss" /></td>
+			<td class="l"><fmt:formatDate value="${dto2.outdate }" pattern="yyyy.MM.dd HH:mm:ss" /></td>
 			<td><c:if test="${empty dto2.outdate }">
 			       <a href="/MentoringProject/adminAnswerBlock.do?answerpk=${dto2.questionpk }&check=0">삭제</a>
 			    </c:if>
@@ -128,7 +128,7 @@ a.footer{
 			</td>
 			</tr>
 			<tr>
-			<td colspan="4">
+			<td></td><td colspan="3" class="l">
 		    <c:if test="${!empty dto2.outdate }">
 			      <del>${dto2.questiontitle }</del>
 		    </c:if>
@@ -138,7 +138,7 @@ a.footer{
 			</td>
 			<td>
 	       <a href="adminAnswerUpdateView.do?answerpk=${dto2.questionpk }" 
-				onclick="window.open(this.href, '_blank', 'width=600, height=200'); return false;">
+				onclick="window.open(this.href, '_blank', 'width=460, height=150'); return false;">
 				수정
 			</a>
 			<td align="left" hidden="">${QuestionData.questionpk }</td>

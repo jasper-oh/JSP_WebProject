@@ -23,7 +23,7 @@ public class AdminAnswerUpdateViewCommand implements Command {
 		int answerpk = Integer.parseInt(request.getParameter("answerpk"));
 		QnaDao dao = new QnaDao();
 		QnaDto dto = dao.AdminAnswerView(answerpk);
-		request.setAttribute("QuestionList", dto);
+		request.setAttribute("AnswerData", dto);
 	}
 
 }

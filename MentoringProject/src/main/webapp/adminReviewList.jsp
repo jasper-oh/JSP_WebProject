@@ -13,21 +13,17 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  margin: 0;a
+  margin: 0;
 }
 #main {
   display: flex;
-  flex: 1;
+  flex: 3;
 }
 #main > article {
 	text-align: center;
-  flex: 1;
+  flex: 3;
 }
-#main > nav {
-  flex: 0 0 0vw;
-  background: ;
-
-}
+#main > nav, 
 #main > aside {
   flex: 0 0 17vw;
   background: ;

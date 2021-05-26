@@ -98,7 +98,7 @@ a.footer{
 
  <th>제목</th>
 
- <td><input type="text" name="noticetitle" size="50"></td>
+ <td class="l"><input type="text" name="noticetitle" size="50"></td>
  </tr>
  <tr>
  <th>내용</th>

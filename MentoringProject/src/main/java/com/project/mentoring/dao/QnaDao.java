@@ -178,7 +178,7 @@ public class QnaDao {
 			connection = dataSource.getConnection();
 			String query = "insert into answer(admin_adminpk, question_questionpk, answertext, indate) values (?,?,?,now())";
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, adminpk);
+			preparedStatement.setInt(1, 4);
 			preparedStatement.setInt(2, ShareVar.questionpk);
 			preparedStatement.setString(3, answertext);
 			preparedStatement.executeUpdate();
