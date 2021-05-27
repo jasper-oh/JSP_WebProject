@@ -697,7 +697,71 @@ table {
 	align-content: center;
 }
 
-
+/* -----------------------------------토큰 입력후 창----------------------------------------- */
+       section .ch1 {border: 10px solid rgb(30, 63, 2); max-width: 800px; 
+       padding: 70x 50px; margin: 0 auto;}
+       section .ch1 > .row {text-align: center; padding: 100px 30px;}
+       section .ch1 > .row h2 {padding-bottom: 25px; font-weight: 700;}
+       section .ch1 > .row h4 {padding: 3px 0;}
+              /* -----------------------------------pamentdatat----------------------------------------- */
+              #section .payment {border: 10px solid #000; max-width: 800px; 
+                     padding: 70x 50px; margin: 0 auto;}
+              #section .payment > .row {text-align: center; padding: 100px 30px;}
+              #section .payment > .row h3 {padding-bottom: 25px; font-weight: 700;}
+              #section .payment > .row h4 {padding: 3px 0;}
+              #section {margin: 150px 0 120px}
+              .payment table {margin: 0 auto; max-width: 600px; border: 1px solid #000;}
+              .payment table col:nth-child(1) {width: 40%; background: rgb(250, 250, 250); }
+              .payment table col:nth-child(2) {width: 60%;}
+              .payment table tr td {padding: 6px;}
+              .radiobtn {width: 60%;  margin: 30px auto; padding: 30px 0;
+                border-top: 1px dotted #000; border-bottom: 1px dotted #000;}
+              .radiobtn > div {padding: 5px 0;}
+              .radiobtn button {margin-top: 20px; margin-right: 8px; padding: 3px 7px;}
+              .radiobtn button:hover {background: rgb(70, 167, 70); color: #fff;}
+              /* -----------------------------------appointment----------------------------------------- */
+              #section {margin: 150px 0 120px}
+              #section .appointment {border: 10px solid #000; max-width: 800px; 
+                                    padding: 70px 30px; margin: 0 auto;}
+              #section .appointment > .row {text-align: center; padding: 100px 30px;}
+              #section .appointment > .row h3 {padding-bottom: 25px; font-weight: 700;}
+              .appointment table {margin: 0 auto; max-width: 700px;  border-bottom: 1px solid #000;
+                              border-top: 1px solid #000;}
+              .appointment table col:nth-child(1) {width: 40%; background: rgb(250, 250, 250); }
+              .appointment table col:nth-child(2) {width: 60%;}
+              .appointment table tr td {padding: 6px;}
+              .radiobtn {width: 60%;  margin: 30px auto; padding: 30px 0;
+                              border-top: 1px dotted #000; border-bottom: 1px dotted #000;}
+              .radiobtn > div {padding: 5px 0;}
+              .radiobtn button {margin-top: 20px; margin-right: 8px; padding: 3px 7px;}
+              .radiobtn button:hover {background: rgb(70, 167, 70); color: #fff;}
+                /* -----------------------------------appointment----------------------------------------- */
+                #section .success {border: 10px solid #000; max-width: 800px; 
+                      padding: 70px 30px; margin: 0 auto;}
+                      #section .success > .row {text-align: center; padding: 100px 30px;}
+                      #section .success > .row h1 {padding-bottom: 25px ; font-weight: bold; font-size: 25px;}
+                      #section .success > .row h3 {padding-bottom: 15px; font-weight: 700;}
+                      .success table {margin: 0 auto;  border-bottom: 1px solid #000;
+                                          border-top: 1px solid #000;}
+                      .success table col:nth-child(1) {width: 40%; background: rgb(250, 250, 250); }
+                      .success table col:nth-child(2) {width: 60%;}
+                      .success table tr td {padding: 6px;}
+                      .success table .scbtn a {padding: 5px 20px; background: green; border-radius: 5px; 
+                                                  color: #fff;}
+          /* -----------------------------------paymentScheduleSelect----------------------------------------- */
+                #section {margin: 120px 0;}
+                #section .schedules {max-width: 1000px;  padding: 70px 30px; margin: 0 auto;}
+               #section .schedules > .row {text-align: center; padding: 100px 30px;}
+               #section .schedules > .row h1 {padding-bottom: 25px ; font-weight: bold; font-size: 25px;}
+               #section .schedules > .row h3 {padding-bottom: 15px; font-weight: 700;}
+               .schedules table {margin: 0 auto;  border-bottom: 1px solid #000; border-top: 1px solid #000; }
+               .schedules table col:nth-child(1) {width: 8%; }
+              .schedules table col:nth-child(2) {width: 30%;}
+               .schedules table col:nth-child(3) {width: auto }
+              .schedules table col:nth-child(4) {width: 26%; }
+              .schedules table col:nth-child(5) {width: 8%; }
+               .schedules table tr td {padding: 6px;}
+               .schedules table tr th {background: yellow; padding: 5px 0;}
 
 
 

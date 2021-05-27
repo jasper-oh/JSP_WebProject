@@ -21,7 +21,7 @@
     <script src="js/slick.min.js"></script>
 </head>
 <body>
-	<c:if test="${ loginResult == -1 || loginResult == 0 }">
+	<c:if test= "${userid == '' } && ${ !empty loginResult}">
 	
 		<script>
 		

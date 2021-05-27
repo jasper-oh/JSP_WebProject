@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.project.mentoring.dao.UserFindIdDao;
 
-public class UserFindIdByEmailCommand implements IntCommand {
+public class UserFindIdByEmailCommand implements Command {
 
 	@Override
-	public int execute(HttpServletRequest request, HttpServletResponse response) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		String userName = request.getParameter("username");
 		String userEmail = request.getParameter("useremail");
 		
@@ -19,12 +19,12 @@ public class UserFindIdByEmailCommand implements IntCommand {
 		UserFindIdDao userFindIdByEmailDao = new UserFindIdDao();
 		String userFindId = userFindIdByEmailDao.userFindId(userName,userEmail);
 		
-		if(userFindId.equals("")) {
-			return 0;
-		}else {
+		if(userFindId.equals("0")) {
+			request.setAttribute("findIdResult", userFindId);
 			
-			request.setAttribute("userid", userFindId);
-			return 1;
+		}else {
+			request.setAttribute("findIdResult", userFindId);
+			
 		}
 		
 		

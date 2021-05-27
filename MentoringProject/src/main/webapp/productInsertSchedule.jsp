@@ -74,7 +74,7 @@
     <div class="MenteeMentoringListNav">
     <h2>스케쥴 데이터를 입력하세요</h2>
     	<div class="MenteeMentoringListNav subTitle">
-    		<h4><a href="">돌아가기</a></h4>
+    		<h4><a href=“javascript:history.back()“>돌아가기</a></h4>
     	</div>
     </div>
     <div class="calendarDesign" >

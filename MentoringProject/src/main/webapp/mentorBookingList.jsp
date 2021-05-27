@@ -133,7 +133,7 @@ text-align:center;
 								<td>${dto.paymenttoken }</td>
 								<td>
 									<c:if test="${empty dto.paymentcanceldate }">
-					       				<a href="/MentoringProject/menteeBookingCancel.do?paymentpk=${dto.paymentpk }">예약취소</a>
+					       				<a href="/MentoringProject/menteeBookingCancel.do?paymentpk=${dto.paymentpk }" class="confirmation">예약취소</a>
 					    			</c:if>
 								</td> 
 							</tr>		
@@ -167,9 +167,17 @@ text-align:center;
     <div class="gotop"><a href="#"><i class="fas fa-angle-up"></i><br><span>top</span></a></div>
 
 	<script type="text/javascript">
-		function getClick(event) {
-		  location.href="mentorBookingList.do?booking="+event.target.value;}
-	</script>
+		
+		var elems = document.getElementsByClassName('confirmation');
+		var confirmIt = function (e) {
+		    if (!confirm('정말 예약을 취소하시겠습니까?')) e.preventDefault();
+		};
+		for (var i = 0, l = elems.length; i < l; i++) {
+		    elems[i].addEventListener('click', confirmIt, false);
+		}
+			function getClick(event) {
+			  location.href="menteeBookingList.do?booking="+event.target.value;}
+		</script>
 	
 </body>
 </html>
