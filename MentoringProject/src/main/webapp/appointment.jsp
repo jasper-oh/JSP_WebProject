@@ -60,33 +60,33 @@
                     <col>
                     </colgroup>
                     <tr>
-						<th>멘토이름</th><td>${Appointment.username }</td>
+						<th>마스터 이름</th><td>${Appointment.username }</td>
 					</tr>
 					<tr>
-						<th>전공이름</th><td>${Appointment.majorname }</td>
+						<th>메인 포스 이름</th><td>${Appointment.majorname }</td>
 					</tr>
 					<tr>
-						<th>세부전공이름</th><td>${Appointment.submajorname }</td>
+						<th>세부 포스 이름</th><td>${Appointment.submajorname }</td>
 					</tr>
 					<tr>
-						<th>멘토성별</th><td>${Appointment.mentorgender }</td>
+						<th>마스터 성별</th><td>${Appointment.mentorgender }</td>
 					</tr>
 					<tr>
-						<th>멘토주소</th><td>${Appointment.mentoraddress }</td>
+						<th>마스터 주소</th><td>${Appointment.mentoraddress }</td>
 					</tr>
 					<tr>
-						<th>멘토생년월일</th><td>${Appointment.mentorbirth }</td>	
+						<th>마스터 생년월일</th><td>${Appointment.mentorbirth }</td>	
 					</tr>
 					<tr>
 						<td colspan="6"><a href="/MentoringProject/paymentScheduleSelect.do?productpk=<%=request.getParameter("productpk") %>">가능날짜보러가기</a> </td>
 					</tr>
                     </table>
-                    <!-- <div class="radiobtn">
+                    <%-- <div class="radiobtn">
                         <div><label><input type="radio" name="method" value="카드" checked/>신용카드</label></div>
                         <div><label><input type="radio" name="method" value="가상계좌" checked/>가상계좌</label></div>
                       <button id="payment-button" >결제하기</button>
                     <a href="/MentoringProject/paymentScheduleSelect.do?productpk=<%=ShareVar.productpk %>">돌아가기</a>
-                    </div> -->
+                    </div>  --%>
             </div>
         </div>
     </section>

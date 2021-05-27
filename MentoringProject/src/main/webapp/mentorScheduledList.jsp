@@ -112,7 +112,7 @@
 			                    <td>${dto.scheduledSubMajor }</td>
                                 <td>${dto.scheduledPrice }</td>
                                 <td><a href="/MentoringProject/mentorScheduledCompleteList.do?paymentPk=${dto.paymentPk }" class="confirmationB" >예약 확정 하기</a></td>
-                                <td><a href="/MentoringProject/menteeBookingCancel.do" class="confirmationA">예약 취소</a></td>
+                                <td><a href="/MentoringProject/mentorBookingCancel.do?paymentpk=${dto.paymentPk }" class="confirmationA">예약 취소</a></td>
 							</tr>		
 							</c:forEach>
 						</tbody>

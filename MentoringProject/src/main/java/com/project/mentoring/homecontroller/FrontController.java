@@ -827,6 +827,14 @@ public class FrontController extends HttpServlet {
 			
 			//
 			
+		case("/mentorBookingCancel.do"):
+			System.out.println("멘토가 예약 취소");
+			command = new MenteeBookingCancelCommand();
+			command.execute(request, response);
+			viewPage="mentorScheduledList.do";
+			break;
+		
+			//
 		case("/menteeMentoringList.do"):
 			System.out.println("멘티예약완료리스트로가기");
 			command = new MenteeMentoringListCommand();

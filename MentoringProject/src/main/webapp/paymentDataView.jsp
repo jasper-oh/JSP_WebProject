@@ -70,10 +70,10 @@
                         <th>금액</th><td>${Paymentdata.totalprice }</td>
                     </tr>
                     <tr>
-                        <th>전공/부전공</th><td>${Paymentdata.majorname }/${Paymentdata.submajorname }</td>
+                        <th>메인 포스 / 서브 포스</th><td>${Paymentdata.majorname }/${Paymentdata.submajorname }</td>
                     </tr>
                     <tr>
-                        <th>Mentor 이름</th><td>${Paymentdata.username }</td>
+                        <th>마스터 이름</th><td>${Paymentdata.username }</td>
                     </tr>
                     </table>
                     <div class="radiobtn">

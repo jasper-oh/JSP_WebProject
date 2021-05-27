@@ -1,20 +1,26 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%> --%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>스케쥴 데이터를 입력하세요</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/reset.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TakeYourTime</title>
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/subpage.css">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="css/common.css">
-        <link rel="stylesheet" href="css/subpage.css">
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <link rel="shortcut icon" sizes="76x76" type="image/x-icon"
+        href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/slick.min.js"></script>
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-        <script>
+     <script>
             $(function () {
             	$("#datepicker1").datepicker({ dateFormat: "yy-mm-dd" }).val()
                 $("#datepicker1").datepicker();
@@ -24,8 +30,8 @@
                 $("#datepicker2").datepicker();
             });
         </script>
-    </head>
-    <body>
+</head>
+<body>
     <header id="header">
         <div class="topmenu">
             <div class="row">
@@ -66,61 +72,67 @@
             </nav>
         </div>
         </header>
-    
-    <section>
-    <article class="subpage">
-    <div class="row">
-    <div class="mentorschedulelist">
-    <div class="MenteeMentoringListNav">
-    <h2>스케쥴 데이터를 입력하세요</h2>
-    	<div class="MenteeMentoringListNav subTitle">
-    		<h4><a href=“javascript:history.back()“>돌아가기</a></h4>
-    	</div>
-    </div>
-    <div class="calendarDesign" >
-    	<jsp:include page="customCalendar.jsp" flush="true"/>
-    </div>
-    <div class="calendarForm">
-	     <form action="insertScheduleAction.do?" method="get">
-	      <span>멘토링 가능날짜를 선택하세요</span>
-	      <table>
-		      <tr> 
-			      <td>
-	            	<label for="datepicker" />
-	                <input type="text" name="startday" id="datepicker1">
-	                
-			      </td>
-			      <td>
-	            	<label for="datepicker" />
-	                <input type="text" name="endday" id="datepicker2">
-			      </td>
-		      </tr>
-	      
-	      </table>
-	
-	 
-			</select> <select name="starttime">
-	    <%
-	    for(int i = 10;i<22;i++) { %>
-	        <option value= <%= i %> > <%= i %></option>
-	    <% } %>
-	</select> ~
-			</select> <select name="endtime">
-	    <%for(int i = 10 ;i<22;i++) { %>
-	        <option value= <%= i %> > <%= i %></option>
-	    <% } %>
-	</select>
-	
-	            <td colspan="2"><input type="submit" value="입력">
-	       </form>
-       </div>
-       </div>
-       </div>
-       </article>
-       </section>
         
-             	<footer id="footer">
-        	<div class="row">
+    <section id="section">
+        <div class="schedules">
+            <div class="row">
+              <h3>포터링 가능날짜를 선택하세요</h3>
+		         <div class="calendarDesign" >
+		    	<jsp:include page="customCalendar.jsp" flush="true"/>
+		    	</div>
+              <div class="MenteeMentoringListNav subTitle">
+            </div>
+              <form action="insertScheduleAction.do?" method="get">
+                  <table>      
+                    <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    </colgroup>
+                    <tr >
+                          <th>시작 날짜</th>
+                          <th>끝 날짜</th>
+                          <th>시작시간</th>
+                          <th>끝시간</th>
+                    </tr>
+                    <tr> 
+                        <td>
+                          <label for="datepicker" />
+                          <input type="text" name="startday" id="datepicker1" autocomplete="off">
+                        </td>
+                        <td>
+                          <label for="datepicker" />
+                          <input type="text" name="endday" id="datepicker2" autocomplete="off">
+                        </td>
+                        <td>
+                          <select name="starttime">
+                              <%
+                              for(int i = 10;i<22;i++) { %>
+                                  <option value= <%= i %> > <%= i %></option>
+                              <% } %>
+                              </select>                         
+                        </td>
+                        <td>
+                          <select name="endtime">
+                              <%for(int i = 10 ;i<22;i++) { %>
+                                  <option value= <%= i %> > <%= i %></option>
+                              <% } %>
+                          </select>  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="javascript:history.back()">Back</a></td>
+                        <td colspan="2"> </td>
+                        <td><input type="submit" value="입력"></td>
+                    </tr>
+                </table>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer id="footer">
+        <div class="row">
             <p>
                 <a href="#none">회사소개</a>
                 <a href="#none">사업분야</a>
@@ -136,7 +148,6 @@
             <p>Copyright &copy; Sunsine.com All Rights Reserved.</p>
         </div>
     </footer>
-        
-        
-    </body>
+    <div class="gotop"><a href="#"><i class="fas fa-angle-up"></i><br><span>top</span></a></div>
+</body>
 </html>

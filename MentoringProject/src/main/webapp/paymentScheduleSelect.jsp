@@ -74,8 +74,8 @@
                           <th>가격</th>
                           <th>선택</th>
                     </tr>
-                        <tr>
                           <c:forEach var="dto" items="${ScheduleSelect }" varStatus="status" >
+                        <tr>
                           <td align="center"><input type="text" size="3" value="${status.count }" name="count" readonly="readonly"/></td>
                           <td align="center"><input type="text" size="10" value="${dto.startday }" name="startday" readonly="readonly"/></td>
                           <td align="center">
@@ -84,8 +84,8 @@
                           <td align="center"><input type="text" size="8" value="${dto.totalprice }" name="totalprice" readonly="readonly"/></td>
                           <td align="center"><input type="hidden" name=schedulepk value="${dto.schedulepk}"/>
                           <input type="button" value="선택" onclick="location.href='paymentDatatView.do?schedulepk=${dto.schedulepk}'"></td>
-	                      </c:forEach>
                         </tr>
+	                      </c:forEach>
                         </table>
                       <a href="/MentoringProject/appointment.do?productpk=<%=ShareVar.productpk %>">돌아가기</a>
                 </form>

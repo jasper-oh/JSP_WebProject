@@ -100,7 +100,7 @@ text-align:center;
 							<col>
 							<col>
 							<col>
-							<col>
+							<%-- <col> --%>
 							</colgroup>
 							<thead>
 								<tr>
@@ -111,7 +111,7 @@ text-align:center;
 									<th>세부포스명</th> 
 									<th>금액</th>
 									<th>멘토링 완료</th>			
-									<th>예약 취소하기</th>		
+									<!-- <th>예약 취소하기</th> -->		
 								</tr>
 							</thead>
 							<tbody>
@@ -123,8 +123,8 @@ text-align:center;
 										<td>${dto.scheduledMajor }</td>
 										<td>${dto.scheduledSubMajor }</td>
 										<td>${dto.scheduledPrice }</td>
-										<td><a href="mentorMentoringComplete.jsp?scheduledpk=${dto.scheduledPk }" >멘토링 완료</a></td>
-										<td><a href="#" >취소</a></td>
+										<td><a href="mentorMentoringComplete.jsp?scheduledpk=${dto.scheduledPk }" >멘토링 완료</a></td>										
+										<%-- <td><a href="/MentoringProject/mentorBookingCancel.do?paymentpk=${dto.paymentPk }" class="confirmationA">취소</a></td> --%>
 									</tr>	
 								</c:forEach>
 							</tbody>	
@@ -155,6 +155,22 @@ text-align:center;
 <script type="text/javascript">
 	function getClick(event) {
 	  location.href="menteeBookingList.do?booking="+event.target.value;}
+</script>
+<script type="text/javascript">
+var elems = document.getElementsByClassName('confirmationA');
+var confirmIt = function (e) {
+    if (!confirm('정말 예약을 취소하시겠습니까?')) e.preventDefault();
+};
+for (var i = 0, l = elems.length; i < l; i++) {
+    elems[i].addEventListener('click', confirmIt, false);
+}
+var elems = document.getElementsByClassName('confirmationB');
+var confirmIt = function (e) {
+    if (!confirm('예약을 승인하시겠습니까?')) e.preventDefault();
+};
+for (var i = 0, l = elems.length; i < l; i++) {
+    elems[i].addEventListener('click', confirmIt, false);
+}
 </script>
 </body>
 </html>
