@@ -51,8 +51,14 @@ public class QnaDao {
 		ResultSet resultSet = null;
 		try {
 			connection = dataSource.getConnection();
-			String query = "select * from question as q "
-					+ "inner join user as u on u.userpk = q.user_userpk ORDER BY questionpk DESC LIMIT ?, ?";
+			String query = "select q.questionpk, u.username, q.questiontitle, q.indate, q.outdate, '답변완료' result from question as q inner join answer as a "
+					+ "on q.questionpk = a.question_questionpk "
+					+ "inner join user as u on u.userpk = q.user_userpk "
+					+ "union "
+					+ "select q.questionpk, u.username, q.questiontitle, q.indate, q.outdate, '답변없음' result from question as q left join answer as a "
+					+ "on q.questionpk = a.question_questionpk "
+					+ "inner join user as u on u.userpk = q.user_userpk "
+					+ "where a.question_questionpk is null ORDER BY questionpk DESC LIMIT ?, ?";
 			int offset = requestPage - 1;
 //			switch (button) {
 //			case "Block":
@@ -81,8 +87,9 @@ public class QnaDao {
 				String questiontitle = resultSet.getString("questiontitle");
 				Timestamp indate = resultSet.getTimestamp("indate");
 				Timestamp outdate = resultSet.getTimestamp("outdate");
+				String result = resultSet.getString("result");
 			
-				QnaDto dto = new QnaDto(questionpk, username, questiontitle, indate, outdate);
+				QnaDto dto = new QnaDto(questionpk, username, questiontitle, indate, outdate, result);
 				dtos.add(dto);
 			}
 		}catch(Exception e) {

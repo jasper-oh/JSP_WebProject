@@ -20,10 +20,9 @@ public class UserLoginPageSelectCommand implements IntCommand{
 		UserLoginDao userLoginDao = new UserLoginDao();
 		
 		int loginProcess = userLoginDao.userLogin(userId, userPw);
-		
+	
 		
 		return loginProcess;
-		
 		
 	}
 	

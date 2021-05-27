@@ -24,7 +24,8 @@ public class AdminMajorUpdateActionCommand implements Command {
 		int majorpk = Integer.parseInt(request.getParameter("majorpk"));
 		String majorname = request.getParameter("majorname");
 		AdminMajorListDao dao = new AdminMajorListDao();
-		dao.adminMajorUpdateAction(majorpk, majorname);
+		int result = dao.adminMajorUpdateAction(majorpk, majorname);
+		request.setAttribute("result", result);
 	}
 
 }

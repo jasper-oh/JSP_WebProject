@@ -7,7 +7,7 @@ import com.project.mentoring.dao.AdminUserListDao;
 import com.project.mentoring.dto.AdminUserListDto;
 public class AdminPageUserListShowCommand implements Command {
 	//페이지당 표시할 게시글의 수
-	int numOfTuplesPerPage = 15;
+	int numOfTuplesPerPage = 10;
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		//사용자가 요청한 페이지 번호 초기값은 가장 최신글을 보여주는 1

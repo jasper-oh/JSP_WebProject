@@ -10,7 +10,7 @@ public class MentorSelectMentorPkCommand implements IntCommand {
 
 	@Override
 	public int execute(HttpServletRequest request, HttpServletResponse response) {
-		
+		System.out.println("dfsfsd");
 		String strUserPk = UserLoginDao.userPk;
 		
 		int userPk = Integer.parseInt(strUserPk);

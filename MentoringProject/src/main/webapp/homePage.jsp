@@ -334,6 +334,9 @@
     <div class="gotop"><a href="#"><i class="fas fa-angle-up"></i><br><span>top</span></a></div>
 
     <script src="js/index.js"></script>
+    <script type="text/javascript">
+
+</script>
 </body>
 
 </html>

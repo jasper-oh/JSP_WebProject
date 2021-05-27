@@ -38,96 +38,96 @@ public class AdminReviewDao {
 	 * @return
 	 */
 	public ArrayList<AdminReviewDto> AdminReviewList(String button, String where, String keyword, int requestPage, int numOfTuplePerPage) {
-			ArrayList<AdminReviewDto> dtos = new ArrayList<AdminReviewDto>();
-			Connection connection = null;
-			PreparedStatement preparedStatement = null;
-			ResultSet resultSet = null;
-			int offset = requestPage - 1;
-			try {
-				connection = dataSource.getConnection();
-				String query = "select * from review as r "
-						+ "inner join user as u on u.userpk = r.user_userpk "
-						+ "inner join payment as py on py.paymentpk = r.payment_paymentpk "
-						+ "inner join schedule as s on s.schedulepk=py.schedule_schedulepk "
-						+ "inner join product as p on p.productpk = s.product_productpk ";
-				//+ "where r.outdate is null and productpk = ?";
-				switch (button) {
-				case "Block":
-					query = query+"where not r.outdate is null";
+		ArrayList<AdminReviewDto> dtos = new ArrayList<AdminReviewDto>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int offset = requestPage - 1;
+		try {
+			connection = dataSource.getConnection();
+			String query = "select r.reviewpk, u.username, p.title, r.reviewtitle, reviewtext, r.reviewscore, r.indate, r.outdate from review as r "
+					+ "inner join user as u on u.userpk = r.user_userpk "
+					+ "inner join payment as py on py.paymentpk = r.payment_paymentpk "
+					+ "inner join schedule as s on s.schedulepk=py.schedule_schedulepk "
+					+ "inner join product as p on p.productpk = s.product_productpk ";
+			//+ "where r.outdate is null and productpk = ?";
+			switch (button) {
+			case "Block":
+				query = query+"where not r.outdate is null";
+				break;
+			case "General":
+				query = query+"where r.outdate is null";
+				break;
+			case "All":
+			default:
+				break;
+			}
+			if(button == "All") {
+				switch (where) {
+				case "username":
+					query = query+" where username like '%"+keyword+"%'";
 					break;
-				case "General":
-					query = query+"where r.outdate is null";
+				case "review":
+					query = query+" where reviewtitle like '%"+keyword+"%' or reviewtext like '%"+keyword+"%'";
 					break;
-				case "All":
+				case "title":
+					query = query+" where title like '%"+keyword+"%'";
+					break;
+				case "null":
 				default:
 					break;
 				}
-				if(button == "All") {
-					switch (where) {
-					case "username":
-						query = query+" where username like '%"+keyword+"%'";
-						break;
-					case "review":
-						query = query+" where reviewtitle like '%"+keyword+"%' or reviewtext like '%"+keyword+"%'";
-						break;
-					case "title":
-						query = query+" where title like '%"+keyword+"%'";
-						break;
-					case "null":
-					default:
-						break;
-					}
-				}else {
-					switch (where) {
-					case "username":
-						query = query+" and username like '%"+keyword+"%'";
-						break;
-					case "review":
-						query = query+" and reviewtitle like '%"+keyword+"%' or reviewtext like '%"+keyword+"%'";
-						break;
-					case "title":
-						query = query+" and title like '%"+keyword+"%'";
-						break;
-					case "null":
-					default:
-						break;
-					}
-				}
-				query = query + " ORDER BY r.indate DESC LIMIT ?, ? ;";
-				System.out.println(query);
-				preparedStatement = connection.prepareStatement(query);
-				if (offset  == 0) {
-					preparedStatement.setInt(1, offset);
-				} else {
-					preparedStatement.setInt(1, offset*numOfTuplePerPage);
-				}
-				preparedStatement.setInt(2, numOfTuplePerPage);
-				resultSet = preparedStatement.executeQuery();
-				while(resultSet.next()) {
-					int reviewpk = resultSet.getInt("reviewpk");
-					String username = resultSet.getString("username");
-					String title = resultSet.getString("title");
-					String reviewtitle = resultSet.getString("reviewtitle");
-					String reviewtext = resultSet.getString("reviewtext");
-					int reviewscore = resultSet.getInt("reviewscore");
-					Date indate = resultSet.getDate("indate");
-					Date outdate = resultSet.getDate("outdate");
-					AdminReviewDto dto = new AdminReviewDto(reviewpk, username, title, reviewtitle, reviewtext, reviewscore, indate, outdate);
-					dtos.add(dto);
-				}
-			}catch(Exception e) {
-				e.printStackTrace();
-			}finally {
-				try {
-					if(resultSet != null) resultSet.close(); 
-					if(preparedStatement != null) preparedStatement.close();
-					if(connection != null) connection.close();
-				}catch(Exception e) {
-					e.printStackTrace();
+			}else {
+				switch (where) {
+				case "username":
+					query = query+" and username like '%"+keyword+"%'";
+					break;
+				case "review":
+					query = query+" and reviewtitle like '%"+keyword+"%' or reviewtext like '%"+keyword+"%'";
+					break;
+				case "title":
+					query = query+" and title like '%"+keyword+"%'";
+					break;
+				case "null":
+				default:
+					break;
 				}
 			}
-			return dtos;
-	}
+			query = query + " ORDER BY r.indate DESC LIMIT ?, ? ;";
+			System.out.println(query);
+			preparedStatement = connection.prepareStatement(query);
+			if (offset  == 0) {
+				preparedStatement.setInt(1, offset);
+			} else {
+				preparedStatement.setInt(1, offset*numOfTuplePerPage);
+			}
+			preparedStatement.setInt(2, numOfTuplePerPage);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				int reviewpk = resultSet.getInt("reviewpk");
+				String username = resultSet.getString("username");
+				String title = resultSet.getString("title");
+				String reviewtitle = resultSet.getString("reviewtitle");
+				String reviewtext = resultSet.getString("reviewtext");
+				int reviewscore = resultSet.getInt("reviewscore");
+				Date indate = resultSet.getDate("indate");
+				Date outdate = resultSet.getDate("outdate");
+				AdminReviewDto dto = new AdminReviewDto(reviewpk, username, title, reviewtitle, reviewtext, reviewscore, indate, outdate);
+				dtos.add(dto);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(resultSet != null) resultSet.close(); 
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return dtos;
+}
 	/**
 	 * 
 	 * 1. MethodName        : AdminReviewBlind

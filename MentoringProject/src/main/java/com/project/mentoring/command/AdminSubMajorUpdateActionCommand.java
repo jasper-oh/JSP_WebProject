@@ -23,7 +23,9 @@ public class AdminSubMajorUpdateActionCommand implements Command {
 		int submajorpk = Integer.parseInt(request.getParameter("submajorpk"));
 		String submajorname = request.getParameter("submajorname");
 		AdminSubMajorListDao dao = new AdminSubMajorListDao();
-		dao.adminSubMajorUpdateAction(submajorpk, submajorname);
+		int result = dao.adminSubMajorUpdateAction(submajorpk, submajorname);
+
+		request.setAttribute("result", result);
 	}
 
 }

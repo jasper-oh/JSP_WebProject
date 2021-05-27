@@ -33,6 +33,7 @@
 		<input type="button" value="선택" onclick="location.href='paymentDatatView.do?schedulepk=${dto.schedulepk}'"></td>
 		</tr>
 	</c:forEach>
+	<a href="/MentoringProject/appointment.do?productpk=<%=ShareVar.productpk %>">돌아가기</a>
 		</table>
 		</form>
 </body>

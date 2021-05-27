@@ -103,7 +103,7 @@ public class AdminAnnouncementListDao {
 			connection=datasource.getConnection();
 			String query="insert into notice (admin_adminpk,noticetitle,noticetext,indate) values (?,?,?,now())";
 			preparedStatement=connection.prepareStatement(query);
-			preparedStatement.setInt(1, admin_adminpk);
+			preparedStatement.setInt(1, 4);
 			preparedStatement.setString(2, noticetitle);
 			preparedStatement.setString(3, noticetext);
 			preparedStatement.executeUpdate();

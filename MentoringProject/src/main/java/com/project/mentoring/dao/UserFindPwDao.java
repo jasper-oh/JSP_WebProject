@@ -19,13 +19,13 @@ public class UserFindPwDao {
 		}
 	}
 		
-	public String userFindPw(String userId ,String userName, String userPhone) {
+public String userFindPw(String userId ,String userName, String userPhone) {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		
-		String userPw ="";
+		String userPw ="0";
 		
 		try {
 			connection = dataSource.getConnection();

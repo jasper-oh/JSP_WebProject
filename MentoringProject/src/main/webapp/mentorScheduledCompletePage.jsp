@@ -153,7 +153,7 @@ text-align:center;
 										<td>${dto.scheduledMajor }</td>
 										<td>${dto.scheduledSubMajor }</td>
 										<td>${dto.scheduledPrice }</td>
-										<td><a href="mentorMentoringComplete.jsp" >멘토링 완료</a></td>
+										<td><a href="mentorMentoringComplete.jsp?scheduledpk=${dto.scheduledPk }" >멘토링 완료</a></td>
 										<td><a href="#" >취소</a></td>
 									</tr>	
 								</c:forEach>

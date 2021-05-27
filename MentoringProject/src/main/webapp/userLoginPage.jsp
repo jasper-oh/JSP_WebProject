@@ -15,14 +15,13 @@
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
     <link rel="stylesheet" href="css/common.css">
-	<link rel="stylesheet" href="css/subpage.css">
     <link rel="shortcut icon" sizes="76x76" type="image/x-icon"
         href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico">
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/slick.min.js"></script>
 </head>
 <body>
-	<c:if test="${ loginResult == -1 || loginResult == 0 }">
+	<c:if test= "${userid == '' } && ${ !empty loginResult}">
 	
 		<script>
 		
@@ -76,11 +75,35 @@
     	<br>
     	<br>
     	
+    	<div class="container">
+        <div class="login-details">
+            <h2>May the Force Be With You</h2>
+            <p>Enter your personal detail to login </p>
+        </div>
+        <div class="login-box">
+                <div class="user-box">
+                    <span>Take</span><br>
+                    <span>Your</span><br>
+                    <span>Force</span><br>
+                    <!-- 상단 내용 -->
+                </div>
+                <form action="userLoginPage.do" method="post" name="loginForm">
+                    
+                    <input type="text" name="userid" placeholder="아이디를 입력해 주세요!">
+                    
+                    <input type="password" name="userpw" placeholder="비밀번호를 입력해 주세요!">   
+                    <input type="submit" name="submit" value="login">
+                      <a href="userSignUpPage.jsp">회원가입하기</a>
+                      <a href="userFindId.jsp">Forget ID</a>
+                      <a href="userFindPw.jsp">Forget PW</a>
+                </form>
+            </div>
+    </div>
 
-		  <div class="cont">
-		  <div class="slogan">
+		  <!-- <div class="slogan">
     		The force <br>&nbsp;&nbsp;&nbsp; are<br> awaken
-    	</div>
+    		</div>
+		  <div class="cont">
 	        <div class="demo">
 	          <div class="login">
 	            <div class="login__check">
@@ -110,7 +133,7 @@
 	            </form>
 	          </div>
 	          </div>
-	     	</div>
+	     	</div> -->
 	     	
 	     	
 	     	<footer id="footer">
