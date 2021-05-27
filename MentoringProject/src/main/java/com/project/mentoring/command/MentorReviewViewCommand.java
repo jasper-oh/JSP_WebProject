@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.project.mentoring.dao.MentorReviewViewDao;
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 import com.project.mentoring.dto.MentorReviewViewDto;
 
 public class MentorReviewViewCommand implements Command {
@@ -15,7 +18,10 @@ public class MentorReviewViewCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 		MentorReviewViewDao dao = new MentorReviewViewDao();
 		
 		HttpSession session = request.getSession();
@@ -29,7 +35,13 @@ public class MentorReviewViewCommand implements Command {
 		request.setAttribute("mentorReviewView", dto);
 		
 		System.out.println("out");
+<<<<<<< HEAD
 
 	}
 
 }
+=======
+	}
+
+}
+>>>>>>> master

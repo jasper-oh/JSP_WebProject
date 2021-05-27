@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 public class UserLoginDao {
 	DataSource dataSource;
 	public static String userPk;
+	public static String userName;
 	
 	public UserLoginDao() {
 		try {
@@ -33,7 +34,7 @@ public class UserLoginDao {
 			
 			connection = dataSource.getConnection();
 			
-			String userSignUpQuery = " select userpk, userpw from user where userid = ?";
+			String userSignUpQuery = " select userpk, username, userpw from user where userid = ?";
 			preparedStatement = connection.prepareStatement(userSignUpQuery);
 			
 			preparedStatement.setString(1, userId);
@@ -45,6 +46,7 @@ public class UserLoginDao {
 			if(resultSet.next()) {
 				if(resultSet.getString("userpw").equals(userPw)) {
 					userPk = resultSet.getString("userpk");
+					userName = resultSet.getString("username");
 					
 					return 1;
 				}else {

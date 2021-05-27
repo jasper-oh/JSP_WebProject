@@ -12,6 +12,10 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import com.project.mentoring.dto.PaymentDto;
 import com.project.mentoring.dto.ScheduleDto;
+<<<<<<< HEAD
+=======
+import com.project.mentoring.dto.ShareVar;
+>>>>>>> master
 
 public class MentorScheduleActionDao {
 	DataSource dataSource;
@@ -38,13 +42,18 @@ public class MentorScheduleActionDao {
 	 * @param productpk
 	 * @return
 	 */
+<<<<<<< HEAD
 	public ArrayList<ScheduleDto> ScheduleListView(int productpk) {
+=======
+	public ArrayList<ScheduleDto> ScheduleListView(int productpk, int requestPage, int numOfTuplePerPage) {
+>>>>>>> master
 		// TODO Auto-generated method stub
 			ArrayList<ScheduleDto> dtos=new ArrayList<ScheduleDto>();
 			System.out.println(productpk);
 			Connection connection=null;
 			PreparedStatement preparedStatement=null;
 			ResultSet resultSet=null;
+<<<<<<< HEAD
 			
 			try {		
 				connection=dataSource.getConnection();
@@ -52,6 +61,16 @@ public class MentorScheduleActionDao {
 						+ "where not schedulepk = any(select schedule_schedulepk from payment) and product_productpk = ? ORDER BY DATE(startday)";
 				preparedStatement=connection.prepareStatement(query);
 				preparedStatement.setInt(1, productpk);
+=======
+			try {		
+				connection=dataSource.getConnection();
+				String query="select schedulepk, product_productpk, startday, starttime, endtime, totalprice from schedule "
+						+ "where not schedulepk = any(select schedule_schedulepk from payment) and product_productpk = ? ORDER BY DATE(startday) DESC LIMIT ?, ?";
+				preparedStatement=connection.prepareStatement(query);
+				preparedStatement.setInt(1, productpk);
+				preparedStatement.setInt(2, requestPage);
+				preparedStatement.setInt(3, numOfTuplePerPage);
+>>>>>>> master
 				resultSet=preparedStatement.executeQuery();
 					while(resultSet.next()) {
 						int schedulepk=resultSet.getInt("schedulepk");
@@ -107,6 +126,39 @@ public class MentorScheduleActionDao {
 			}
 		}
 	}
+<<<<<<< HEAD
+=======
+	public int countTuple() {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		String query = "SELECT COUNT(*) FROM schedule where product_productpk = ?";
+		try {
+			conn = dataSource.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setInt(1, ShareVar.productpk);  
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+//				System.out.println("list-count success");
+			}			
+		} catch (Exception e) {
+//			System.out.println("list-count fail");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(psmt != null) psmt.close();
+				if(conn != null) conn.close();
+//				System.out.println("< rs, psmt, conn close success>");
+			} catch (Exception e) {
+//				System.out.println("< rs, psmt, conn close Fail>");
+			}
+		}
+		return count;
+	}
+>>>>>>> master
 	
 	
 }

@@ -27,7 +27,7 @@ public class UserCheckSelectCommandDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		int userCheck = 0;
+		int userCheck = -1;
 		try {
 			connection = dataSource.getConnection();
 			

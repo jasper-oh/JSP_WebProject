@@ -27,6 +27,10 @@
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<<<<<<< HEAD
+=======
+    <link rel="stylesheet" href="css/common.css">
+>>>>>>> master
     <link rel="stylesheet" href="css/styles.css">
     <link rel="shortcut icon" sizes="76x76" type="image/x-icon"
         href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico">
@@ -53,14 +57,24 @@
                         </path>
     	                <h2>Take Your Time</h2>
                     </svg> -->
+<<<<<<< HEAD
                 <h1><a href="home.html">LOGO</a></h1>
+=======
+                <h1><a href="/MentoringProject/userHomePage.do">LOGO</a></h1>
+>>>>>>> master
             </div>
             <nav>
                 <ul>
                     	<li><a href="userBeMentorPage.jsp">마스터가 되어보세요</a></li> 
+<<<<<<< HEAD
                         <li><a href="helpPage.jsp">도움말</a></li>  
                       <li><a href="/MentoringProject/menteeMyPageOpen.do">마이페이지</a></li>
                         <li><a href="visitorPage.jsp">로그아웃</a></li>
+=======
+                        <li><a href="/MentoringProject/help.do">도움말</a></li>
+                        <li><a href="/MentoringProject/menteeMyPageOpen.do">마이페이지</a></li>
+                        <li><a href="/MentoringProject/logout.do">로그아웃</a></li>
+>>>>>>> master
                         
                 </ul>
             </nav>
@@ -149,7 +163,11 @@
                         <div class="imgbox">
                             <img src="./img/banner01.jpg" alt="">
                             <div class="sbox">
+<<<<<<< HEAD
                                  <a href="/MentoringProject/HompageCategorySearch.do?majornum=1"><p>소프트웨어개발</p></a>
+=======
+                                <a href="/MentoringProject/HompageCategorySearch.do?majornum=1"><p>소프트웨어개발</p></a>
+>>>>>>> master
                             </div>
                             <div class="line">
                                 <div class="topline"></div>
@@ -163,7 +181,11 @@
                         <div class="imgbox">
                             <img src="./img/banner02.jpg" alt="">
                             <div class="sbox">
+<<<<<<< HEAD
                                 <a href="/MentoringProject/HompageCategorySearch.do?majornum=2"><p>비즈니스</p></a>
+=======
+                                <a href="/MentoringProject/HompageCategorySearch.do?majornum=2"><p>디자인</p></a>
+>>>>>>> master
                             </div>
                             <div class="line">
                                 <div class="topline"></div>
@@ -177,7 +199,11 @@
                         <div class="imgbox">
                             <img src="./img/banner03.jpg" alt="">
                             <div class="sbox">
+<<<<<<< HEAD
                                 <a href="/MentoringProject/HompageCategorySearch.do?majornum=3"><p>운동</p></a>
+=======
+                                <a href="/MentoringProject/HompageCategorySearch.do?majornum=3"><p>예술</p></a>
+>>>>>>> master
                             </div>
                             <div class="line">
                                 <div class="topline"></div>
@@ -191,7 +217,11 @@
                         <div class="imgbox">
                             <img src="./img/banner01.jpg" alt="">
                             <div class="sbox">
+<<<<<<< HEAD
                                 <a href="/MentoringProject/HompageCategorySearch.do?majornum=4"><p>디자인</p></a>
+=======
+                                <a href="/MentoringProject/HompageCategorySearch.do?majornum=4"><p>운동</p></a>
+>>>>>>> master
                             </div>
                             <div class="line">
                                 <div class="topline"></div>

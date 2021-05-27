@@ -1,7 +1,11 @@
 package com.project.mentoring.dto;
+<<<<<<< HEAD
 
 public class HompageCategorySearchDto {
 
+=======
+public class HompageCategorySearchDto {
+>>>>>>> master
 	String mentorImage;
 	String mentorMajor;
 	String mentorTitle;
@@ -9,7 +13,10 @@ public class HompageCategorySearchDto {
 	String productPk;
 	String mentorName;
 	String mentorPrice;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> master
 	public HompageCategorySearchDto(String mentorImage, String mentorMajor, String mentorTitle, String subMajor,
 			String productPk, String mentorName, String mentorPrice) {
 		super();
@@ -21,7 +28,10 @@ public class HompageCategorySearchDto {
 		this.mentorName = mentorName;
 		this.mentorPrice = mentorPrice;
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> master
 	public String getMentorImage() {
 		return mentorImage;
 	}
@@ -64,9 +74,13 @@ public class HompageCategorySearchDto {
 	public void setMentorPrice(String mentorPrice) {
 		this.mentorPrice = mentorPrice;
 	}
+<<<<<<< HEAD
 	
 	
 	
 	
 }
 
+=======
+}
+>>>>>>> master

@@ -4,7 +4,7 @@
     https://github.com/jujumuncher/caleandar
   -->
   <head>
-    <title>Hello</title>
+    <title>CustomCalendar</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link rel="stylesheet" href="css/calendar.css"/>
   </head>

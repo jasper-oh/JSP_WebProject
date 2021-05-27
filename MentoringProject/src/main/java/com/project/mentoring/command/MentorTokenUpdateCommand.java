@@ -15,8 +15,8 @@ public class MentorTokenUpdateCommand implements IntCommand {
 		String token = randomToken();
 		
 
-		String strPaymentPk = request.getParameter("paymentPk");
-		int paymentPk = Integer.parseInt(strPaymentPk);
+		String paymentPk = request.getParameter("paymentPk");
+		
 		
 		MentorTokenUpdateDao mentorTokenUpdateDao = new MentorTokenUpdateDao();
 		int tokenUpdateResult = mentorTokenUpdateDao.tokenUpdate(token, paymentPk);

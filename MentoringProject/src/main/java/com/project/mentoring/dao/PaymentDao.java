@@ -348,19 +348,19 @@ public class PaymentDao {
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
 		int count = 0;
-		
+		int count2 = 0;
 		try {
 			connection=dataSource.getConnection();
-			String select="SELECT DATEDIFF(?, ?)";
+			String select="SELECT DATEDIFF(?, ?), DATEDIFF(?, curdate())";
 			preparedStatement=connection.prepareStatement(select);
 			preparedStatement.setString(1, endday);
 			preparedStatement.setString(2, startday);
+			preparedStatement.setString(3, startday);
 			resultSet=preparedStatement.executeQuery();
-			
 			if(resultSet.next()){
-				  count = resultSet.getInt(1);
+				 count = resultSet.getInt(1);
+				 count2 = resultSet.getInt(2);
 				}
-			System.out.println(count);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -371,16 +371,21 @@ public class PaymentDao {
 				e.printStackTrace();
 			}
 		}
-		
 		Connection conn=null;
 		PreparedStatement ps=null;	
 			try {
 				conn=dataSource.getConnection();
 				String query = "insert into schedule (product_productpk, startday, starttime, endtime, totalprice) values "
+<<<<<<< HEAD
 						+ "("+productpk+", DATE_ADD(curdate(), INTERVAL 0 DAY), "+starttime+", "+endtime+", (select price from product where productpk = "+productpk+" )*("+endtime+" - "+starttime+")) ";
 				String a = "";
 				
 				for (int i=1; i<count; i++) {
+=======
+						+ "("+productpk+", DATE_ADD(curdate(), INTERVAL "+count2+" DAY), "+starttime+", "+endtime+", (select price from product where productpk = "+productpk+" )*("+endtime+" - "+starttime+")) ";
+				String a = "";
+				for (int i=count2+1; i<=count2+count; i++) {
+>>>>>>> master
 					a = a+", ("+productpk+", DATE_ADD(curdate(), INTERVAL "+i+" DAY), "+starttime+", "+endtime+", (select price from product where productpk = "+productpk+" )*("+endtime+" - "+starttime+")) ";
 				}
 				ps=conn.prepareStatement(query+a);
@@ -396,7 +401,6 @@ public class PaymentDao {
 					e.printStackTrace();
 				}
 			}
-	
 	}
 	
 	/**

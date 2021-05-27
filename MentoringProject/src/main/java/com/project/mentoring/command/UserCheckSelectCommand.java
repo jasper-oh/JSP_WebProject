@@ -16,6 +16,8 @@ public class UserCheckSelectCommand implements IntCommand {
 		
 		String strUserPk = (String)session.getAttribute("userpk");
 		
+		
+		
 		int userPk = Integer.parseInt(strUserPk);
 		
 		UserCheckSelectCommandDao userCheckSelectCommandDao = new UserCheckSelectCommandDao();
